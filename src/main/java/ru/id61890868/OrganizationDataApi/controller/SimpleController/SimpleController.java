@@ -1,6 +1,7 @@
-package ru.id61890868.OrganizationDataApi.controller.ping;
+package ru.id61890868.OrganizationDataApi.controller.SimpleController;
 
 import io.swagger.annotations.ApiOperation;
+import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,16 +17,12 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 @Validated
 @RestController
 @RequestMapping(value = "/", produces = APPLICATION_JSON_VALUE)
-public class PingController {
+public class SimpleController {
 
     @ApiOperation("Проверка доступности приложения")
-    @RequestMapping(value = "/ping", method = {GET, POST})
-    public String ping() {
-        return "pong";
+    @RequestMapping(value = "/simple", method = {GET, POST})
+    public String simple() {
+        return "simple_response";
     }
 
-    /*@GetMapping("/test/{test}")
-    public String test(@PathVariable @Size(min = 5, max = 100) String test) {
-        return "OK";
-    }*/
 }
