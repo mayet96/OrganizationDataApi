@@ -67,7 +67,6 @@ public class Organization {
     private Boolean isActive;
 
 
-
     public Long getId() {
         return id;
     }
