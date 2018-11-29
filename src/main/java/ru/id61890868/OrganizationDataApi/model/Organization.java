@@ -10,10 +10,9 @@ import javax.persistence.*;
 public class Organization {
 
 
-
     @Id
-    @GeneratedValue
-    @Column(name = "id")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(name = "id", columnDefinition = "serial")
     private Long id;
 
 
@@ -65,6 +64,20 @@ public class Organization {
      */
     @Column(name = "is_active", length = 15, nullable = true)
     private Boolean isActive;
+
+    public Organization(){
+
+    }
+
+    public Organization(String name, String fullName, String inn, String kpp, String address){
+        this.name = name;
+        this.fullName = fullName;
+        this.inn = inn;
+        this.kpp = kpp;
+        this.address = address;
+    }
+
+
 
 
     public Long getId() {

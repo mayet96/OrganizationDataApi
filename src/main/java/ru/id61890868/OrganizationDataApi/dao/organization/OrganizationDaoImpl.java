@@ -1,6 +1,7 @@
 package ru.id61890868.OrganizationDataApi.dao.organization;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import ru.id61890868.OrganizationDataApi.model.Organization;
 
 import javax.persistence.EntityManager;
@@ -10,13 +11,15 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.List;
 
-public class OrganizationImpl implements OrganizationDao {
+
+@Repository
+public class OrganizationDaoImpl implements OrganizationDao {
 
     private final EntityManager em;
 
 
     @Autowired
-    public OrganizationImpl(EntityManager em) {
+    public OrganizationDaoImpl(EntityManager em) {
         this.em = em;
     }
 

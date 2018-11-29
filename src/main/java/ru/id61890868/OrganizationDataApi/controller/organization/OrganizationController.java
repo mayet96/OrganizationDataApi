@@ -8,6 +8,8 @@ import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ru.id61890868.OrganizationDataApi.model.Organization;
+import ru.id61890868.OrganizationDataApi.service.organization.OrganizationService;
+import ru.id61890868.OrganizationDataApi.view.OrganizationView;
 
 import java.util.List;
 
@@ -15,7 +17,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @Api(value = "OrganizationController", description = "Управление информацией о организациях")
 @RestController
-@RequestMapping(value = "/", produces = APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/api", produces = APPLICATION_JSON_VALUE)
 public class OrganizationController {
 
     private final OrganizationService orgService;
@@ -25,18 +27,18 @@ public class OrganizationController {
         this.orgService = orgService;
     }
 
-    @ApiOperation(value = "Добавить нового человека", httpMethod = "POST")
+    @ApiOperation(value = "Добавить одну организацию", httpMethod = "POST")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Success", response = String.class),
             @ApiResponse(code = 404, message = "Not Found"),
             @ApiResponse(code = 500, message = "Failure")})
-    @PostMapping("/organization")
+    @PostMapping("/organization/add")
     public void person(@RequestBody OrganizationView org) {
         orgService.add(org);
     }
 
     @ApiOperation(value = "Получить список всех организаций", httpMethod = "GET")
-    @GetMapping("/organization")
+    @GetMapping("/organizations")
     public List<OrganizationView> persons() {
         return orgService.organizations();
     }

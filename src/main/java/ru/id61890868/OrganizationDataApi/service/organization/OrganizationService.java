@@ -1,21 +1,30 @@
 package ru.id61890868.OrganizationDataApi.service.organization;
 
+import org.springframework.validation.annotation.Validated;
+import ru.id61890868.OrganizationDataApi.model.Organization;
+import ru.id61890868.OrganizationDataApi.view.OrganizationView;
+
 import javax.validation.Valid;
 import java.util.List;
 
+@Validated
 public interface OrganizationService {
 
     /**
      * Добавить новую организацию в БД
      *
-     * @param organization
+     * @param org
      */
-    void add(@Valid PersonView person);
+    void add(@Valid OrganizationView org);
 
     /**
-     * Получить список людей
+     * Получить список организаций
      *
-     * @return {@Person}
+     * @return {@OrganizationView}
      */
-    List<PersonView> persons();
+    List<OrganizationView> organizations();
+
+
+
+    OrganizationView loadById(long id);
 }
