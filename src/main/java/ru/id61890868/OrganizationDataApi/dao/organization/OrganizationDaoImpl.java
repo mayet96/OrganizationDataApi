@@ -1,5 +1,8 @@
 package ru.id61890868.OrganizationDataApi.dao.organization;
 
+import org.hibernate.cfg.annotations.QueryBinder;
+import org.hibernate.query.Query;
+import org.hibernate.query.criteria.internal.CriteriaBuilderImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import ru.id61890868.OrganizationDataApi.model.Organization;
@@ -8,6 +11,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.util.List;
 
@@ -37,10 +41,18 @@ public class OrganizationDaoImpl implements OrganizationDao {
      */
     @Override
     public List<Organization> all() {
-        TypedQuery<Organization> query = em.createQuery(
+        /*TypedQuery<Organization> query = em.createQuery(
                 "SELECT id, name, full_name FROM organization", Organization.class
         );
-        return query.getResultList();
+        return query.getResultList();*/
+
+        CriteriaBuilder qb = em.getCriteriaBuilder();
+        CriteriaQuery<Organization> c = qb.createQuery(Organization.class);
+        Root<Organization> p = c.from(Organization.class);
+        //Predicate condition = qb.gt(p.get(Person_.age), 20);
+        //c.where(condition);
+        TypedQuery<Organization> q = em.createQuery(c);
+        return q.getResultList();
     }
 
     /**

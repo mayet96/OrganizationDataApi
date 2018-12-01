@@ -33,8 +33,9 @@ public class OrganizationController {
             @ApiResponse(code = 404, message = "Not Found"),
             @ApiResponse(code = 500, message = "Failure")})
     @PostMapping("/organization/add")
-    public void person(@RequestBody OrganizationView org) {
+    public void getOrganization(@RequestBody OrganizationView org) {
         orgService.add(org);
+        //return "{\"status\": \"Success\"}"
     }
 
     @ApiOperation(value = "Получить список всех организаций", httpMethod = "GET")
