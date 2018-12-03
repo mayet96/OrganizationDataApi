@@ -39,8 +39,15 @@ public class OrganizationController {
     }
 
     @ApiOperation(value = "Получить список всех организаций", httpMethod = "GET")
-    @GetMapping("/organizations")
-    public List<OrganizationView> persons() {
+    @GetMapping("/organization")
+    public List<OrganizationView> organizations(){
         return orgService.organizations();
     }
+
+    @ApiOperation(value = "Получить организацию по id", httpMethod = "GET")
+    @GetMapping("/organization/{id:[\\d]+}")
+    public OrganizationView organiation(@PathVariable("id")long orgId) {
+        return orgService.loadById(orgId);
+    }
+
 }
