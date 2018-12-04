@@ -12,13 +12,13 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Service
-public class OrganizationServiceImpl implements OrganizationService{
+public class OrganizationServiceImpl implements OrganizationService {
 
     private OrganizationDao dao;
     private MapperFacade mapperFacade;
 
     @Autowired
-    OrganizationServiceImpl(OrganizationDao dao, MapperFacade mapperFacade){
+    public OrganizationServiceImpl(OrganizationDao dao, MapperFacade mapperFacade){
         this.dao = dao;
         this.mapperFacade = mapperFacade;
     }

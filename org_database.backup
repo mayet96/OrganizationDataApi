@@ -5,8 +5,6 @@
 -- Dumped from database version 9.6.9
 -- Dumped by pg_dump version 9.6.9
 
--- Started on 2018-12-01 15:18:02
-
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 SET idle_in_transaction_session_timeout = 0;
@@ -18,29 +16,6 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
--- TOC entry 2194 (class 1262 OID 24576)
--- Name: org_database; Type: DATABASE; Schema: -; Owner: postgres
---
-
-CREATE DATABASE org_database WITH TEMPLATE = template0 ENCODING = 'UTF8' LC_COLLATE = 'Russian_Russia.1251' LC_CTYPE = 'Russian_Russia.1251';
-
-
-ALTER DATABASE org_database OWNER TO postgres;
-
-\connect org_database
-
-SET statement_timeout = 0;
-SET lock_timeout = 0;
-SET idle_in_transaction_session_timeout = 0;
-SET client_encoding = 'UTF8';
-SET standard_conforming_strings = on;
-SELECT pg_catalog.set_config('search_path', '', false);
-SET check_function_bodies = false;
-SET client_min_messages = warning;
-SET row_security = off;
-
---
--- TOC entry 1 (class 3079 OID 12387)
 -- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
 --
 
@@ -48,8 +23,6 @@ CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 
 
 --
--- TOC entry 2196 (class 0 OID 0)
--- Dependencies: 1
 -- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
 --
 
@@ -61,7 +34,6 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- TOC entry 196 (class 1259 OID 25053)
 -- Name: country; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -75,7 +47,6 @@ CREATE TABLE public.country (
 ALTER TABLE public.country OWNER TO postgres;
 
 --
--- TOC entry 195 (class 1259 OID 25051)
 -- Name: country_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -90,8 +61,6 @@ CREATE SEQUENCE public.country_id_seq
 ALTER TABLE public.country_id_seq OWNER TO postgres;
 
 --
--- TOC entry 2197 (class 0 OID 0)
--- Dependencies: 195
 -- Name: country_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
@@ -99,7 +68,6 @@ ALTER SEQUENCE public.country_id_seq OWNED BY public.country.id;
 
 
 --
--- TOC entry 190 (class 1259 OID 25020)
 -- Name: doc; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -116,7 +84,6 @@ CREATE TABLE public.doc (
 ALTER TABLE public.doc OWNER TO postgres;
 
 --
--- TOC entry 189 (class 1259 OID 25018)
 -- Name: doc_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -131,8 +98,6 @@ CREATE SEQUENCE public.doc_id_seq
 ALTER TABLE public.doc_id_seq OWNER TO postgres;
 
 --
--- TOC entry 2199 (class 0 OID 0)
--- Dependencies: 189
 -- Name: doc_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
@@ -140,7 +105,6 @@ ALTER SEQUENCE public.doc_id_seq OWNED BY public.doc.id;
 
 
 --
--- TOC entry 194 (class 1259 OID 25042)
 -- Name: doc_type; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -154,7 +118,6 @@ CREATE TABLE public.doc_type (
 ALTER TABLE public.doc_type OWNER TO postgres;
 
 --
--- TOC entry 193 (class 1259 OID 25040)
 -- Name: doc_type_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -169,8 +132,6 @@ CREATE SEQUENCE public.doc_type_id_seq
 ALTER TABLE public.doc_type_id_seq OWNER TO postgres;
 
 --
--- TOC entry 2201 (class 0 OID 0)
--- Dependencies: 193
 -- Name: doc_type_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
@@ -178,7 +139,6 @@ ALTER SEQUENCE public.doc_type_id_seq OWNED BY public.doc_type.id;
 
 
 --
--- TOC entry 186 (class 1259 OID 24998)
 -- Name: employee; Type: TABLE; Schema: public; Owner: spring_user
 --
 
@@ -197,7 +157,6 @@ CREATE TABLE public.employee (
 ALTER TABLE public.employee OWNER TO spring_user;
 
 --
--- TOC entry 185 (class 1259 OID 24996)
 -- Name: employee_id_seq; Type: SEQUENCE; Schema: public; Owner: spring_user
 --
 
@@ -212,8 +171,6 @@ CREATE SEQUENCE public.employee_id_seq
 ALTER TABLE public.employee_id_seq OWNER TO spring_user;
 
 --
--- TOC entry 2204 (class 0 OID 0)
--- Dependencies: 185
 -- Name: employee_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: spring_user
 --
 
@@ -221,15 +178,14 @@ ALTER SEQUENCE public.employee_id_seq OWNED BY public.employee.id;
 
 
 --
--- TOC entry 192 (class 1259 OID 25031)
 -- Name: office; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.office (
-    id integer NOT NULL,
-    name character varying NOT NULL,
-    address character varying NOT NULL,
-    phone character varying,
+    id bigint NOT NULL,
+    name character varying(50) NOT NULL,
+    address character varying(50) NOT NULL,
+    phone character varying(15),
     is_active boolean,
     ogr_id integer NOT NULL
 );
@@ -238,7 +194,6 @@ CREATE TABLE public.office (
 ALTER TABLE public.office OWNER TO postgres;
 
 --
--- TOC entry 191 (class 1259 OID 25029)
 -- Name: office_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -253,8 +208,6 @@ CREATE SEQUENCE public.office_id_seq
 ALTER TABLE public.office_id_seq OWNER TO postgres;
 
 --
--- TOC entry 2207 (class 0 OID 0)
--- Dependencies: 191
 -- Name: office_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
@@ -262,7 +215,6 @@ ALTER SEQUENCE public.office_id_seq OWNED BY public.office.id;
 
 
 --
--- TOC entry 188 (class 1259 OID 25009)
 -- Name: organization; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -282,7 +234,6 @@ CREATE TABLE public.organization (
 ALTER TABLE public.organization OWNER TO postgres;
 
 --
--- TOC entry 187 (class 1259 OID 25007)
 -- Name: organization_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -297,8 +248,6 @@ CREATE SEQUENCE public.organization_id_seq
 ALTER TABLE public.organization_id_seq OWNER TO postgres;
 
 --
--- TOC entry 2210 (class 0 OID 0)
--- Dependencies: 187
 -- Name: organization_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
@@ -306,7 +255,6 @@ ALTER SEQUENCE public.organization_id_seq OWNED BY public.organization.id;
 
 
 --
--- TOC entry 2042 (class 2604 OID 25056)
 -- Name: country id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -314,7 +262,6 @@ ALTER TABLE ONLY public.country ALTER COLUMN id SET DEFAULT nextval('public.coun
 
 
 --
--- TOC entry 2039 (class 2604 OID 25023)
 -- Name: doc id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -322,7 +269,6 @@ ALTER TABLE ONLY public.doc ALTER COLUMN id SET DEFAULT nextval('public.doc_id_s
 
 
 --
--- TOC entry 2041 (class 2604 OID 25045)
 -- Name: doc_type id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -330,7 +276,6 @@ ALTER TABLE ONLY public.doc_type ALTER COLUMN id SET DEFAULT nextval('public.doc
 
 
 --
--- TOC entry 2037 (class 2604 OID 25001)
 -- Name: employee id; Type: DEFAULT; Schema: public; Owner: spring_user
 --
 
@@ -338,7 +283,6 @@ ALTER TABLE ONLY public.employee ALTER COLUMN id SET DEFAULT nextval('public.emp
 
 
 --
--- TOC entry 2040 (class 2604 OID 25034)
 -- Name: office id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -346,7 +290,6 @@ ALTER TABLE ONLY public.office ALTER COLUMN id SET DEFAULT nextval('public.offic
 
 
 --
--- TOC entry 2038 (class 2604 OID 25087)
 -- Name: organization id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -354,8 +297,6 @@ ALTER TABLE ONLY public.organization ALTER COLUMN id SET DEFAULT nextval('public
 
 
 --
--- TOC entry 2188 (class 0 OID 25053)
--- Dependencies: 196
 -- Data for Name: country; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -364,8 +305,6 @@ COPY public.country (id, name, code) FROM stdin;
 
 
 --
--- TOC entry 2212 (class 0 OID 0)
--- Dependencies: 195
 -- Name: country_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -373,8 +312,6 @@ SELECT pg_catalog.setval('public.country_id_seq', 1, false);
 
 
 --
--- TOC entry 2182 (class 0 OID 25020)
--- Dependencies: 190
 -- Data for Name: doc; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -383,8 +320,6 @@ COPY public.doc (id, name, doc_type, date, country_id, "is_Identified") FROM std
 
 
 --
--- TOC entry 2213 (class 0 OID 0)
--- Dependencies: 189
 -- Name: doc_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -392,8 +327,6 @@ SELECT pg_catalog.setval('public.doc_id_seq', 1, false);
 
 
 --
--- TOC entry 2186 (class 0 OID 25042)
--- Dependencies: 194
 -- Data for Name: doc_type; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -402,8 +335,6 @@ COPY public.doc_type (id, code, name) FROM stdin;
 
 
 --
--- TOC entry 2214 (class 0 OID 0)
--- Dependencies: 193
 -- Name: doc_type_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -411,8 +342,6 @@ SELECT pg_catalog.setval('public.doc_type_id_seq', 1, false);
 
 
 --
--- TOC entry 2178 (class 0 OID 24998)
--- Dependencies: 186
 -- Data for Name: employee; Type: TABLE DATA; Schema: public; Owner: spring_user
 --
 
@@ -421,8 +350,6 @@ COPY public.employee (id, first_name, second_name, middle_name, "position", phon
 
 
 --
--- TOC entry 2215 (class 0 OID 0)
--- Dependencies: 185
 -- Name: employee_id_seq; Type: SEQUENCE SET; Schema: public; Owner: spring_user
 --
 
@@ -430,34 +357,30 @@ SELECT pg_catalog.setval('public.employee_id_seq', 1, false);
 
 
 --
--- TOC entry 2184 (class 0 OID 25031)
--- Dependencies: 192
 -- Data for Name: office; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.office (id, name, address, phone, is_active, ogr_id) FROM stdin;
+5	OMEGA office_1	г. Зеленый д 22	8651223125	t	1
+6	ALPHA office_1	г. Зеленый д 23	8651223126	t	2
+7	ALPHA office_2	г. Зеленый д 24	8651223127	f	2
 \.
 
 
 --
--- TOC entry 2216 (class 0 OID 0)
--- Dependencies: 191
 -- Name: office_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.office_id_seq', 1, false);
+SELECT pg_catalog.setval('public.office_id_seq', 7, true);
 
 
 --
--- TOC entry 2180 (class 0 OID 25009)
--- Dependencies: 188
 -- Data for Name: organization; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.organization (id, name, full_name, address, phone, is_active, version, inn, kpp) FROM stdin;
 1	OMEGA	OMEGA org.	гор. Город, проспект Уличный, д21 	\N	\N	0	123541221	9845122214
 2	ALPHA	ALPHA org.	гор. Город, проспект Уличный, д221 	\N	\N	0	128767421	987842574
-3	ALPHA	ALPHA org.	гор. Город, проспект Уличный, д221 	\N	\N	0	128767421	987842574
 4	BETA	BETA org.	гор. Город, проспект Проспектов, д3	\N	\N	0	145112421	9856321574
 5	BETA1	BETA1 org.	гор. Город, проспект Проспектов, д4	\N	\N	0	123112421	923321574
 6	PETA2	PETA2 org.	гор. Город, проспект Проспектов, д5	\N	\N	0	1654522421	94223521574
@@ -466,12 +389,11 @@ COPY public.organization (id, name, full_name, address, phone, is_active, versio
 9	PETA3	PETA3 org.	гор. Город, проспект Проспектов, д7	\N	\N	0	1111322421	9115521574
 10	PETA3	PETA3 org.	гор. Город, проспект Проспектов, д7	+7885223354	\N	0	1111322421	9115521574
 11	HETA3	HETA3 org.	гор. Город, проспект Проспектов, д8	+8885223354	f	0	12322421	93521574
+3	ALPHA1	ALPHA1 org.	гор. Город, проспект Уличный, д221 	\N	\N	0	128767421	987842574
 \.
 
 
 --
--- TOC entry 2217 (class 0 OID 0)
--- Dependencies: 187
 -- Name: organization_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -479,7 +401,6 @@ SELECT pg_catalog.setval('public.organization_id_seq', 11, true);
 
 
 --
--- TOC entry 2054 (class 2606 OID 25061)
 -- Name: country country_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -488,7 +409,6 @@ ALTER TABLE ONLY public.country
 
 
 --
--- TOC entry 2048 (class 2606 OID 25028)
 -- Name: doc doc_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -497,7 +417,6 @@ ALTER TABLE ONLY public.doc
 
 
 --
--- TOC entry 2052 (class 2606 OID 25050)
 -- Name: doc_type doc_type_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -506,7 +425,6 @@ ALTER TABLE ONLY public.doc_type
 
 
 --
--- TOC entry 2044 (class 2606 OID 25006)
 -- Name: employee employee_pk; Type: CONSTRAINT; Schema: public; Owner: spring_user
 --
 
@@ -515,7 +433,6 @@ ALTER TABLE ONLY public.employee
 
 
 --
--- TOC entry 2050 (class 2606 OID 25039)
 -- Name: office office_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -524,7 +441,6 @@ ALTER TABLE ONLY public.office
 
 
 --
--- TOC entry 2046 (class 2606 OID 25089)
 -- Name: organization organization_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -533,7 +449,6 @@ ALTER TABLE ONLY public.organization
 
 
 --
--- TOC entry 2057 (class 2606 OID 25072)
 -- Name: doc doc_fk0; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -542,7 +457,6 @@ ALTER TABLE ONLY public.doc
 
 
 --
--- TOC entry 2058 (class 2606 OID 25077)
 -- Name: doc doc_fk1; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -551,7 +465,6 @@ ALTER TABLE ONLY public.doc
 
 
 --
--- TOC entry 2055 (class 2606 OID 25062)
 -- Name: employee employee_fk0; Type: FK CONSTRAINT; Schema: public; Owner: spring_user
 --
 
@@ -560,7 +473,6 @@ ALTER TABLE ONLY public.employee
 
 
 --
--- TOC entry 2056 (class 2606 OID 25067)
 -- Name: employee employee_fk1; Type: FK CONSTRAINT; Schema: public; Owner: spring_user
 --
 
@@ -569,7 +481,6 @@ ALTER TABLE ONLY public.employee
 
 
 --
--- TOC entry 2059 (class 2606 OID 25090)
 -- Name: office office_fk0; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -578,8 +489,6 @@ ALTER TABLE ONLY public.office
 
 
 --
--- TOC entry 2198 (class 0 OID 0)
--- Dependencies: 195
 -- Name: SEQUENCE country_id_seq; Type: ACL; Schema: public; Owner: postgres
 --
 
@@ -587,8 +496,6 @@ GRANT ALL ON SEQUENCE public.country_id_seq TO spring_user WITH GRANT OPTION;
 
 
 --
--- TOC entry 2200 (class 0 OID 0)
--- Dependencies: 189
 -- Name: SEQUENCE doc_id_seq; Type: ACL; Schema: public; Owner: postgres
 --
 
@@ -596,8 +503,6 @@ GRANT ALL ON SEQUENCE public.doc_id_seq TO spring_user WITH GRANT OPTION;
 
 
 --
--- TOC entry 2202 (class 0 OID 0)
--- Dependencies: 193
 -- Name: SEQUENCE doc_type_id_seq; Type: ACL; Schema: public; Owner: postgres
 --
 
@@ -605,8 +510,6 @@ GRANT ALL ON SEQUENCE public.doc_type_id_seq TO spring_user WITH GRANT OPTION;
 
 
 --
--- TOC entry 2203 (class 0 OID 0)
--- Dependencies: 186
 -- Name: TABLE employee; Type: ACL; Schema: public; Owner: spring_user
 --
 
@@ -615,8 +518,6 @@ GRANT ALL ON TABLE public.employee TO spring_user WITH GRANT OPTION;
 
 
 --
--- TOC entry 2205 (class 0 OID 0)
--- Dependencies: 185
 -- Name: SEQUENCE employee_id_seq; Type: ACL; Schema: public; Owner: spring_user
 --
 
@@ -625,8 +526,6 @@ GRANT ALL ON SEQUENCE public.employee_id_seq TO spring_user WITH GRANT OPTION;
 
 
 --
--- TOC entry 2206 (class 0 OID 0)
--- Dependencies: 192
 -- Name: TABLE office; Type: ACL; Schema: public; Owner: postgres
 --
 
@@ -634,8 +533,6 @@ GRANT ALL ON TABLE public.office TO spring_user WITH GRANT OPTION;
 
 
 --
--- TOC entry 2208 (class 0 OID 0)
--- Dependencies: 191
 -- Name: SEQUENCE office_id_seq; Type: ACL; Schema: public; Owner: postgres
 --
 
@@ -643,8 +540,6 @@ GRANT ALL ON SEQUENCE public.office_id_seq TO spring_user WITH GRANT OPTION;
 
 
 --
--- TOC entry 2209 (class 0 OID 0)
--- Dependencies: 188
 -- Name: TABLE organization; Type: ACL; Schema: public; Owner: postgres
 --
 
@@ -652,15 +547,11 @@ GRANT ALL ON TABLE public.organization TO spring_user WITH GRANT OPTION;
 
 
 --
--- TOC entry 2211 (class 0 OID 0)
--- Dependencies: 187
 -- Name: SEQUENCE organization_id_seq; Type: ACL; Schema: public; Owner: postgres
 --
 
 GRANT ALL ON SEQUENCE public.organization_id_seq TO spring_user WITH GRANT OPTION;
 
-
--- Completed on 2018-12-01 15:18:11
 
 --
 -- PostgreSQL database dump complete

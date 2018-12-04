@@ -1,8 +1,6 @@
 package ru.id61890868.OrganizationDataApi.dao.organization;
 
-import org.hibernate.cfg.annotations.QueryBinder;
-import org.hibernate.query.Query;
-import org.hibernate.query.criteria.internal.CriteriaBuilderImpl;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import ru.id61890868.OrganizationDataApi.model.Organization;
@@ -11,7 +9,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.util.List;
 

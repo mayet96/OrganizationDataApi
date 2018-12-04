@@ -17,19 +17,20 @@ public class OrganizationView {
     @ApiModelProperty(value = "Наименование", example = "OMEGA")
     public String name;
 
-    @NotNull(message = "age cannot be null")
+    @Size(max = 50)
+    @NotNull(message = "full name cannot be null")
     @ApiModelProperty(value = "Полное наименование", example = "OMEGA Org.")
     public String fullName;
 
-    @NotNull(message = "age cannot be null")
+    @NotNull(message = "inn cannot be null")
     @ApiModelProperty(value = "ИНН", example = "8912354123")
     public String inn;
 
-    @NotNull(message = "age cannot be null")
+    @NotNull(message = "kpp cannot be null")
     @ApiModelProperty(value = "КПП", example = "025496512684")
     public String kpp;
 
-    @NotNull(message = "age cannot be null")
+    @NotNull(message = "address cannot be null")
     @ApiModelProperty(value = "Адрес", example = "г. Смородинск, проспект Орки, дом 23")
     public String address;
 
@@ -41,9 +42,9 @@ public class OrganizationView {
 
     @Override
     public String toString() {
-        return "{id:" + id + "name:" + name  + ";full_name:" + fullName
+        return "{id:" + id + ";name:" + name  + ";fullName:" + fullName
                 + ";inn:" + inn + ";kpp:" + kpp + ";address:" + address
-                + ";phone:" + phone  + ";is_active:" + isActive + "}";
+                + ";phone:" + phone  + ";isActive:" + isActive + "}";
     }
 
 }

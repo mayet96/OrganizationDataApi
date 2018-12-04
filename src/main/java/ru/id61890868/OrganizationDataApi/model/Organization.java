@@ -54,7 +54,7 @@ public class Organization {
     private String address;
 
     /**
-     * Телефон
+     * Телефон организации
      */
     @Column(name = "phone", length = 15, nullable = true)
     private String phone;
@@ -62,7 +62,7 @@ public class Organization {
     /**
      * Действительность
      */
-    @Column(name = "is_active", length = 15, nullable = true)
+    @Column(name = "is_active", nullable = true)
     private Boolean isActive;
 
     public Organization(){
@@ -79,10 +79,6 @@ public class Organization {
         this.phone = phone;
         this.isActive = isActive;
     }
-
-
-
-
 
     public Long getId() {
         return id;

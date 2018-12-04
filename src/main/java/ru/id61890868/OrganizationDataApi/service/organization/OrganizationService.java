@@ -24,7 +24,10 @@ public interface OrganizationService {
      */
     List<OrganizationView> organizations();
 
-
-
+    /**
+     * Получить организацию по id
+     *
+     * @return {@OrganizationView}
+     */
     OrganizationView loadById(long id);
 }
