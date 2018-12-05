@@ -2,6 +2,7 @@ package ru.id61890868.OrganizationDataApi.model;
 
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * Организация
@@ -139,4 +140,5 @@ public class Organization {
     public void setActive(Boolean active) {
         isActive = active;
     }
+
 }

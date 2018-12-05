@@ -40,7 +40,7 @@ public class OrganizationController {
             @ApiResponse(code = 404, message = "Not Found"),
             @ApiResponse(code = 500, message = "Failure")})
     @PostMapping("/save")
-    public void getOrganization(@RequestBody OrganizationView org) {
+    public void saveOrganization(@RequestBody OrganizationView org) {
         orgService.add(org);
     }
 

@@ -38,9 +38,8 @@ public class Office {
     /**
      * id организации владельца
      */
-    @Column(name = "ogr_id", nullable = false)
+    @Column(name = "org_id", nullable = false)
     private Long orgId;
-
 
     public Office(){
 
@@ -94,4 +93,13 @@ public class Office {
     public void setActive(Boolean active) {
         isActive = active;
     }
+
+    public Long getOrgId() {
+        return orgId;
+    }
+
+    public void setOrgId(Long orgId) {
+        this.orgId = orgId;
+    }
+
 }

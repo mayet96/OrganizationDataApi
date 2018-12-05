@@ -38,18 +38,13 @@ public class OrganizationDaoImpl implements OrganizationDao {
      */
     @Override
     public List<Organization> all() {
-        /*TypedQuery<Organization> query = em.createQuery(
-                "SELECT id, name, full_name FROM organization", Organization.class
-        );
-        return query.getResultList();*/
 
         CriteriaBuilder qb = em.getCriteriaBuilder();
         CriteriaQuery<Organization> c = qb.createQuery(Organization.class);
         Root<Organization> p = c.from(Organization.class);
-        //Predicate condition = qb.gt(p.get(Person_.age), 20);
-        //c.where(condition);
         TypedQuery<Organization> q = em.createQuery(c);
-        return q.getResultList();
+        List<Organization> l = q.getResultList();
+        return l;
     }
 
     /**
