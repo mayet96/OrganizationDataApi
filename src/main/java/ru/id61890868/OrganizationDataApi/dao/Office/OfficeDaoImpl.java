@@ -50,6 +50,9 @@ public class OfficeDaoImpl implements OfficeDao {
         em.persist(office);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void update(Office office) throws Exception {
         if(office.getId() == null){

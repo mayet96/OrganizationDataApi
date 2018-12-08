@@ -55,6 +55,9 @@ public class OrganizationDaoImpl implements OrganizationDao {
         em.persist(organization);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void update(Organization org) throws Exception {
         if(org.getId() == null){

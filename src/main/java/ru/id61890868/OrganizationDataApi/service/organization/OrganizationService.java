@@ -35,6 +35,10 @@ public interface OrganizationService {
      */
     OrganizationView loadById(long id);
 
-    @Transactional
+    /**
+     * обновить организацию
+     *
+     * @return {@OrganizationView}
+     */
     void update(@Valid OrganizationView view) throws Exception;
 }

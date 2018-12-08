@@ -30,5 +30,10 @@ public interface OfficeService {
      */
     OfficeView loadById(long id);
 
+    /**
+     * обновить офис
+     *
+     * @return {@OfficeView}
+     */
     void update(@Valid OfficeView view) throws Exception;
 }

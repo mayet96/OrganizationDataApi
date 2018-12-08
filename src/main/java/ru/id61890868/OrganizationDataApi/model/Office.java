@@ -3,6 +3,9 @@ package ru.id61890868.OrganizationDataApi.model;
 
 import javax.persistence.*;
 
+/**
+ * Офис
+ */
 @Entity(name = "office")
 public class Office {
 

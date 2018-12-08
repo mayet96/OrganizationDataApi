@@ -23,6 +23,9 @@ public class OrganizationServiceImpl implements OrganizationService {
         this.mapperFacade = mapperFacade;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @Transactional
     public void add(@Valid OrganizationView org) {
@@ -31,7 +34,9 @@ public class OrganizationServiceImpl implements OrganizationService {
         dao.save(newOrg);
     }
 
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @Transactional
     public List<OrganizationView> organizations() {
@@ -39,12 +44,18 @@ public class OrganizationServiceImpl implements OrganizationService {
         return mapperFacade.mapAsList(l, OrganizationView.class);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @Transactional
     public OrganizationView loadById(long id) {
         return mapperFacade.map(dao.loadById(id), OrganizationView.class);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @Transactional
     public void update(@Valid OrganizationView view) throws Exception {

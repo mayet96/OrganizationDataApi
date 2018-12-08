@@ -24,6 +24,9 @@ public class OfficeServiceImpl implements OfficeService {
         this.mapperFacade = mapperFacade;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @Transactional
     public void add(@Valid OfficeView officeView) {
@@ -32,6 +35,9 @@ public class OfficeServiceImpl implements OfficeService {
         dao.save(newOffice);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @Transactional
     public List<OfficeView> offices() {
@@ -39,12 +45,18 @@ public class OfficeServiceImpl implements OfficeService {
         return mapperFacade.mapAsList(l, OfficeView.class);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @Transactional
     public OfficeView loadById(long id) {
         return mapperFacade.map(dao.loadById(id), OfficeView.class);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @Transactional
     public void update(@Valid OfficeView view) throws Exception {
