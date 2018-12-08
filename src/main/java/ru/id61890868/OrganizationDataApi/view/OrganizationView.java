@@ -10,7 +10,7 @@ public class OrganizationView {
 
     //@NotEmpty(message = "id - пуст!")
     @ApiModelProperty(value = "Уникальный идентификатор", hidden = true, example = "1")
-    public String id;
+    public Long id;
 
     @Size(max = 50)
     @NotEmpty(message = "name cannot be null")

@@ -34,4 +34,5 @@ public interface OrganizationDao {
      */
     void save(Organization organization);
 
+    //void update(int id, Organization organization);
 }

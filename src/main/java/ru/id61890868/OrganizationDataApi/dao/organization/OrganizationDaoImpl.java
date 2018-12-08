@@ -54,4 +54,9 @@ public class OrganizationDaoImpl implements OrganizationDao {
     public void save(Organization organization) {
         em.persist(organization);
     }
+
+    /*@Override
+    public void update(int id, Organization organization) {
+        em.persist(organization);
+    }*/
 }
