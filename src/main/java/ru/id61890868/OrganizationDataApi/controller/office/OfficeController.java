@@ -77,4 +77,18 @@ public class OfficeController {
         }
     }
 
+
+    @ApiOperation(value = "Изменить данные офиса", httpMethod = "POST")
+    @PostMapping("/update")
+    public ResponseEntity<?> updateOffice(@RequestBody OfficeView officeView) {
+        try{
+            officeService.update(officeView);
+            return new ResponseEntity<>("{\"result\":\"success\"}", HttpStatus.OK);
+        }catch(Exception e){
+            //e.printStackTrace();
+            return new ResponseEntity<>("{\"error\":,\"" + e.getMessage()
+                    +"\"}", HttpStatus.BAD_REQUEST);
+        }
+    }
+
 }

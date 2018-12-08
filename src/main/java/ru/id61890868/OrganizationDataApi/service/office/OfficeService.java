@@ -29,4 +29,6 @@ public interface OfficeService {
      * @return {@OrganizationView}
      */
     OfficeView loadById(long id);
+
+    void update(@Valid OfficeView view) throws Exception;
 }

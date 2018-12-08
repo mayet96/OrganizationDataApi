@@ -6,8 +6,6 @@ import java.util.List;
 
 public interface OrganizationDao {
 
-
-
     /**
      * Получить организацию по id
      *
@@ -34,5 +32,16 @@ public interface OrganizationDao {
      */
     void save(Organization organization);
 
-    //void update(int id, Organization organization);
+
+    /**
+     * Изменить организацию
+     *
+     * @param org
+     *
+     * @throws Exception при org.id == null
+     *
+     * @return
+     */
+    void update(Organization org) throws Exception;
+
 }

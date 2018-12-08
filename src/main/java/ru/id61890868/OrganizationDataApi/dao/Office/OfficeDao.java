@@ -1,7 +1,6 @@
 package ru.id61890868.OrganizationDataApi.dao.Office;
 
 import ru.id61890868.OrganizationDataApi.model.Office;
-import ru.id61890868.OrganizationDataApi.model.Organization;
 
 import java.util.List;
 
@@ -33,5 +32,15 @@ public interface OfficeDao {
      */
     void save(Office office);
 
+    /**
+     * Изменить офис
+     *
+     * @param office
+     *
+     * @throws Exception при office.id == null
+     *
+     * @return
+     */
+    void update(Office office) throws Exception;
 
 }

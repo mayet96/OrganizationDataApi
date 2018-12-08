@@ -38,8 +38,6 @@ public class OfficeDaoImpl implements OfficeDao {
         CriteriaBuilder qb = em.getCriteriaBuilder();
         CriteriaQuery<Office> c = qb.createQuery(Office.class);
         Root<Office> p = c.from(Office.class);
-        //Predicate condition = qb.gt(p.get(Person_.age), 20);
-        //c.where(condition);
         TypedQuery<Office> q = em.createQuery(c);
         return q.getResultList();
     }
@@ -52,5 +50,12 @@ public class OfficeDaoImpl implements OfficeDao {
         em.persist(office);
     }
 
+    @Override
+    public void update(Office office) throws Exception {
+        if(office.getId() == null){
+            throw new Exception("OfficeDao: id can not be null");
+        }
+        em.merge(office);
+    }
 
 }

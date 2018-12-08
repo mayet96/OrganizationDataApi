@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ru.id61890868.OrganizationDataApi.model.Organization;
 import ru.id61890868.OrganizationDataApi.service.organization.OrganizationService;
 import ru.id61890868.OrganizationDataApi.view.OrganizationView;
 
@@ -77,6 +78,19 @@ public class OrganizationController {
                     +"\"}", HttpStatus.BAD_REQUEST);
         }
 
+    }
+
+    @ApiOperation(value = "Изменить данные организации", httpMethod = "POST")
+    @PostMapping("/update")
+    public ResponseEntity<?> updateOrg(@RequestBody OrganizationView orgView) {
+        try{
+            orgService.update(orgView);
+            return new ResponseEntity<>("{\"result\":\"success\"}", HttpStatus.OK);
+        }catch(Exception e){
+            //e.printStackTrace();
+            return new ResponseEntity<>("{\"error\":,\"" + e.getMessage()
+                    +"\"}", HttpStatus.BAD_REQUEST);
+        }
     }
 
 }

@@ -45,13 +45,23 @@ public class Office {
 
     }
 
-    public Office( String name, String address,
+    public Office(String name, String address,
                   String phone, Boolean isActive, Long orgId) {
         this.orgId = orgId;
         this.name = name;
         this.address = address;
         this.phone = phone;
         this.isActive = isActive;
+    }
+
+    public Office(Long id, String name, String address,
+                  String phone, Boolean isActive, Long orgId) {
+        this.id = id;
+        this.name = name;
+        this.address = address;
+        this.phone = phone;
+        this.isActive = isActive;
+        this.orgId = orgId;
     }
 
     public Long getId() {

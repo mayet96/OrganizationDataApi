@@ -34,4 +34,7 @@ public interface OrganizationService {
      * @return {@OrganizationView}
      */
     OrganizationView loadById(long id);
+
+    @Transactional
+    void update(@Valid OrganizationView view) throws Exception;
 }

@@ -55,8 +55,11 @@ public class OrganizationDaoImpl implements OrganizationDao {
         em.persist(organization);
     }
 
-    /*@Override
-    public void update(int id, Organization organization) {
-        em.persist(organization);
-    }*/
+    @Override
+    public void update(Organization org) throws Exception {
+        if(org.getId() == null){
+            throw new Exception("OrgDao: id can not be null");
+        }
+        em.merge(org);
+    }
 }

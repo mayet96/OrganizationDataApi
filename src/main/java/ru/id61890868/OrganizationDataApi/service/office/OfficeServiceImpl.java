@@ -44,4 +44,12 @@ public class OfficeServiceImpl implements OfficeService {
     public OfficeView loadById(long id) {
         return mapperFacade.map(dao.loadById(id), OfficeView.class);
     }
+
+    @Override
+    @Transactional
+    public void update(@Valid OfficeView view) throws Exception {
+        Office upOffice = new Office(view.id, view.name, view.address,
+                view.phone, view.isActive, view.orgId);
+        dao.update(upOffice);
+    }
 }

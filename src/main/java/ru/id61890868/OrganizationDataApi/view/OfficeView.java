@@ -11,8 +11,9 @@ import javax.validation.constraints.Size;
 @ApiModel(description = "Офис")
 public class OfficeView {
 
+    //@NotNull(message = "id cannot be null")
     @ApiModelProperty(value = "Уникальный идентификатор", hidden = true, example = "1")
-    public String id;
+    public Long id;
 
     @NotNull(message = "orgId cannot be null")
     @ApiModelProperty(value = "id владеющей организации")
