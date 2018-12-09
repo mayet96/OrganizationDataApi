@@ -1,9 +1,11 @@
 package ru.id61890868.OrganizationDataApi.service.office;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.id61890868.OrganizationDataApi.dao.Office.OfficeDao;
+import ru.id61890868.OrganizationDataApi.dao.office.OfficeDao;
 import ru.id61890868.OrganizationDataApi.model.Office;
 import ru.id61890868.OrganizationDataApi.model.mapper.MapperFacade;
 import ru.id61890868.OrganizationDataApi.view.OfficeView;
@@ -13,6 +15,8 @@ import java.util.List;
 
 @Service
 public class OfficeServiceImpl implements OfficeService {
+
+    private static final Logger log = LoggerFactory.getLogger("OfficeServiceImpl");
 
     private OfficeDao dao;
     private MapperFacade mapperFacade;
@@ -50,7 +54,7 @@ public class OfficeServiceImpl implements OfficeService {
      */
     @Override
     @Transactional
-    public OfficeView loadById(long id) {
+    public OfficeView loadById(long id) throws Exception {
         return mapperFacade.map(dao.loadById(id), OfficeView.class);
     }
 
@@ -62,6 +66,7 @@ public class OfficeServiceImpl implements OfficeService {
     public void update(@Valid OfficeView view) throws Exception {
         Office upOffice = new Office(view.id, view.name, view.address,
                 view.phone, view.isActive, view.orgId);
+        log.info("service: update - new Office(" + view.toString()+")");
         dao.update(upOffice);
     }
 }

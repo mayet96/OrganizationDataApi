@@ -16,13 +16,6 @@ public class Organization {
     @Column(name = "id", columnDefinition = "serial")
     private Long id;
 
-
-    /**
-     * Служебное поле hibernate
-     */
-    @Version
-    private Integer version;
-
     /**
      * Наименование
      */

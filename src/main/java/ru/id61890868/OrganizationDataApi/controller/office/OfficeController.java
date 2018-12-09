@@ -66,13 +66,9 @@ public class OfficeController {
     @GetMapping("/{id:[\\d]+}")
     public ResponseEntity<?> getOfficeById(@PathVariable("id")long officeId) {
         try{
-            OfficeView o = officeService.loadById(officeId);
-            if(o == null){
-                throw new Exception("not found");
-            }
-            return new ResponseEntity<>(o, HttpStatus.OK);
+            return new ResponseEntity<>(officeService.loadById(officeId), HttpStatus.OK);
         }catch (Exception e){
-            return new ResponseEntity<>("{\"error\":,\"" + e.getMessage()
+            return new ResponseEntity<>("{\"error\":\"" + e.getMessage()
                     +"\"}", HttpStatus.BAD_REQUEST);
         }
     }
@@ -85,9 +81,11 @@ public class OfficeController {
             officeService.update(officeView);
             return new ResponseEntity<>("{\"result\":\"success\"}", HttpStatus.OK);
         }catch(Exception e){
-            //e.printStackTrace();
-            return new ResponseEntity<>("{\"error\":,\"" + e.getMessage()
-                    +"\"}", HttpStatus.BAD_REQUEST);
+            e.printStackTrace();
+            return new ResponseEntity<>(
+                    "{\"error\":\"" + e.getMessage()
+                    +"\"}", HttpStatus.BAD_REQUEST
+            );
         }
     }
 

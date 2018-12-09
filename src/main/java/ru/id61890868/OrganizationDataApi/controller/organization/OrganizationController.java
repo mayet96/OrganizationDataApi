@@ -88,8 +88,10 @@ public class OrganizationController {
             return new ResponseEntity<>("{\"result\":\"success\"}", HttpStatus.OK);
         }catch(Exception e){
             //e.printStackTrace();
-            return new ResponseEntity<>("{\"error\":,\"" + e.getMessage()
-                    +"\"}", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(
+                    "{\"error\":,\"" + e.getMessage()
+                    +"\"}", HttpStatus.BAD_REQUEST
+            );
         }
     }
 

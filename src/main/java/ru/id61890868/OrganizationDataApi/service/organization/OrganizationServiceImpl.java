@@ -1,5 +1,7 @@
 package ru.id61890868.OrganizationDataApi.service.organization;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,6 +15,8 @@ import java.util.List;
 
 @Service
 public class OrganizationServiceImpl implements OrganizationService {
+
+    private static final Logger log = LoggerFactory.getLogger("OrganizationServiceImpl");
 
     private OrganizationDao dao;
     private MapperFacade mapperFacade;
@@ -61,6 +65,7 @@ public class OrganizationServiceImpl implements OrganizationService {
     public void update(@Valid OrganizationView view) throws Exception {
         Organization upOrg = new Organization(view.id, view.name, view.fullName,
                 view.inn, view.kpp, view.address, view.phone, view.isActive);
+        log.info("service: update - new Org(" + view.toString()+")");
         dao.update(upOrg);
     }
 }

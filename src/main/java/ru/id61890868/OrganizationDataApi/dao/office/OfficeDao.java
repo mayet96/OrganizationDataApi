@@ -1,4 +1,4 @@
-package ru.id61890868.OrganizationDataApi.dao.Office;
+package ru.id61890868.OrganizationDataApi.dao.office;
 
 import ru.id61890868.OrganizationDataApi.model.Office;
 
@@ -13,7 +13,7 @@ public interface OfficeDao {
      *
      * @return
      */
-    Office loadById(Long id);
+    Office loadById(Long id) throws Exception;
 
 
     /**
@@ -43,4 +43,14 @@ public interface OfficeDao {
      */
     void update(Office office) throws Exception;
 
+    /**
+     * Перезаписать офис
+     *
+     * @param office
+     *
+     * @throws Exception при office.id == null
+     *
+     * @return
+     */
+    void override(Office office) throws Exception;
 }

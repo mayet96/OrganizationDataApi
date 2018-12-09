@@ -28,7 +28,7 @@ public interface OfficeService {
      *
      * @return {@OrganizationView}
      */
-    OfficeView loadById(long id);
+    OfficeView loadById(long id) throws Exception;
 
     /**
      * обновить офис

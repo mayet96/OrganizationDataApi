@@ -39,6 +39,6 @@ public class OfficeView {
     public String toString() {
         return "{id:" + id + ";orgId:" + orgId + ";name:" + name
                 + ";address:" + address + ";phone:" + phone
-                + ";isActive:" + isActive;
+                + ";isActive:" + isActive + "}";
     }
 }

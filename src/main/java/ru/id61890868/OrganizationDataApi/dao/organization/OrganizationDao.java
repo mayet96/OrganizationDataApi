@@ -44,4 +44,14 @@ public interface OrganizationDao {
      */
     void update(Organization org) throws Exception;
 
+    /**
+     * Перезаписать организацию
+     *
+     * @param org
+     *
+     * @throws Exception при org.id == null
+     *
+     * @return
+     */
+    void override(Organization org) throws Exception;
 }

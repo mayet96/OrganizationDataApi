@@ -61,8 +61,32 @@ public class OrganizationDaoImpl implements OrganizationDao {
     @Override
     public void update(Organization org) throws Exception {
         if(org.getId() == null){
+            throw new Exception("OfficeDao: id can not be null");
+        }
+        Organization upOrg = loadById(org.getId());
+        if(org == null){
+            throw new Exception("OfficeDao: office not found");
+        }
+        upOrg.setActive(org.getActive());
+        upOrg.setAddress(org.getAddress());
+        upOrg.setName(org.getName());
+        upOrg.setFullName(org.getFullName());
+        upOrg.setPhone(org.getPhone());
+        upOrg.setInn(org.getInn());
+        upOrg.setKpp(org.getKpp());
+        em.flush();
+    }
+
+    /**
+     * {@inheritDoc}
+     * не используется
+     */
+    @Override
+    public void override(Organization org) throws Exception {
+        if(org.getId() == null){
             throw new Exception("OrgDao: id can not be null");
         }
         em.merge(org);
     }
+
 }
