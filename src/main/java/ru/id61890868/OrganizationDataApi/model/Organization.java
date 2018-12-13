@@ -17,6 +17,13 @@ public class Organization {
     private Long id;
 
     /**
+     * Служебное поле Hibernate
+     */
+    @Version
+    private Integer version;
+
+
+    /**
      * Наименование
      */
     @Column(name = "name", length = 50, nullable = false)
@@ -91,10 +98,6 @@ public class Organization {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getName() {
         return name;
     }
@@ -119,7 +122,7 @@ public class Organization {
         return phone;
     }
 
-    public Boolean getActive() {
+    public Boolean getIsActive() {
         return isActive;
     }
 
@@ -147,7 +150,7 @@ public class Organization {
         this.phone = phone;
     }
 
-    public void setActive(Boolean active) {
+    public void setIsActive(Boolean active) {
         isActive = active;
     }
 

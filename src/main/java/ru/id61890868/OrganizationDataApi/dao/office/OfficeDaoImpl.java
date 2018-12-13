@@ -68,8 +68,8 @@ public class OfficeDaoImpl implements OfficeDao {
         if(upOffice == null){
             throw new Exception("OfficeDao: office not found");
         }
-        if(office.getActive() != null){
-            upOffice.setActive(office.getActive());
+        if(office.getIsActive() != null){
+            upOffice.setIsActive(office.getIsActive());
         }
         if(office.getAddress() != null){
             upOffice.setAddress(office.getAddress());

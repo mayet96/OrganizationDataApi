@@ -67,8 +67,8 @@ public class OrganizationDaoImpl implements OrganizationDao {
         if(upOrg == null){
             throw new Exception("OrgDao: office not found");
         }
-        if(org.getActive() != null){
-            upOrg.setActive(org.getActive());
+        if(org.getIsActive() != null){
+            upOrg.setIsActive(org.getIsActive());
         }
         if(org.getAddress() != null){
             upOrg.setAddress(org.getAddress());
