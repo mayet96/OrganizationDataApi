@@ -65,14 +65,25 @@ public class OfficeDaoImpl implements OfficeDao {
             throw new Exception("OfficeDao: id can not be null");
         }
         Office upOffice = loadById(office.getId());
-        if(office == null){
+        if(upOffice == null){
             throw new Exception("OfficeDao: office not found");
         }
-        upOffice.setActive(office.getActive());
-        upOffice.setAddress(office.getAddress());
-        upOffice.setName(office.getName());
-        upOffice.setOrgId(office.getOrgId());
-        upOffice.setPhone(office.getPhone());
+        if(office.getActive() != null){
+            upOffice.setActive(office.getActive());
+        }
+        if(office.getAddress() != null){
+            upOffice.setAddress(office.getAddress());
+        }
+        if(office.getName() != null){
+            upOffice.setName(office.getName());
+        }
+        if(office.getOrgId() != null){
+            upOffice.setOrgId(office.getOrgId());
+        }
+        if(office.getPhone() != null){
+            upOffice.setPhone(office.getPhone());
+        }
+
         em.flush();
     }
 
