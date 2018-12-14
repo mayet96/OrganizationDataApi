@@ -1,7 +1,8 @@
 package ru.id61890868.OrganizationDataApi.service.office;
 
 import org.springframework.validation.annotation.Validated;
-import ru.id61890868.OrganizationDataApi.view.OfficeView;
+import ru.id61890868.OrganizationDataApi.view.office.OfficeView;
+import ru.id61890868.OrganizationDataApi.view.response.ResultView;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -14,7 +15,7 @@ public interface OfficeService {
      *
      * @param officeView
      */
-    void add(@Valid OfficeView officeView);
+    ResultView add(@Valid OfficeView officeView) throws Exception;
 
     /**
      * Получить список офисов
@@ -30,10 +31,12 @@ public interface OfficeService {
      */
     OfficeView loadById(long id) throws Exception;
 
+    OfficeView loadByIdTest(long id) throws Exception;
+
     /**
      * обновить офис
      *
      * @return {@OfficeView}
      */
-    void update(@Valid OfficeView view) throws Exception;
+    ResultView update(@Valid OfficeView view) throws Exception;
 }

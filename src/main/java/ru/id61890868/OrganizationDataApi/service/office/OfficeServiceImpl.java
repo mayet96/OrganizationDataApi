@@ -6,10 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.id61890868.OrganizationDataApi.dao.office.OfficeDao;
+import ru.id61890868.OrganizationDataApi.dao.organization.OrganizationDao;
 import ru.id61890868.OrganizationDataApi.model.Office;
+import ru.id61890868.OrganizationDataApi.model.Organization;
 import ru.id61890868.OrganizationDataApi.model.mapper.MapperFacade;
-import ru.id61890868.OrganizationDataApi.view.OfficeView;
+import ru.id61890868.OrganizationDataApi.view.office.OfficeView;
+import ru.id61890868.OrganizationDataApi.view.response.ResultView;
 
+import javax.swing.text.View;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -20,12 +24,20 @@ public class OfficeServiceImpl implements OfficeService {
 
     private OfficeDao dao;
     private MapperFacade mapperFacade;
+    private OrganizationDao organizationDao;
 
 
-    @Autowired
-    public OfficeServiceImpl(OfficeDao dao, MapperFacade mapperFacade) {
+
+    /*public OfficeServiceImpl(OfficeDao dao, MapperFacade mapperFacade) {
         this.dao = dao;
         this.mapperFacade = mapperFacade;
+    }*/
+
+    @Autowired
+    public OfficeServiceImpl(OfficeDao dao, MapperFacade mapperFacade, OrganizationDao organizationDao) {
+        this.dao = dao;
+        this.mapperFacade = mapperFacade;
+        this.organizationDao = organizationDao;
     }
 
     /**
@@ -33,10 +45,14 @@ public class OfficeServiceImpl implements OfficeService {
      */
     @Override
     @Transactional
-    public void add(@Valid OfficeView officeView) {
-        Office newOffice = new Office(officeView.name, officeView.address,
-                officeView.phone, officeView.isActive, officeView.orgId);
+    public ResultView add(@Valid OfficeView officeView) throws Exception {
+        //Office newOffice = new Office(officeView.name, officeView.address,
+                //officeView.phone, officeView.isActive);
+        Organization org = organizationDao.loadById(officeView.orgId);
+        Office newOffice = mapperFacade.map(officeView, Office.class);
+        newOffice.setOrganization(org);
         dao.save(newOffice);
+        return new ResultView();
     }
 
     /**
@@ -55,7 +71,18 @@ public class OfficeServiceImpl implements OfficeService {
     @Override
     @Transactional
     public OfficeView loadById(long id) throws Exception {
-        return mapperFacade.map(dao.loadById(id), OfficeView.class);
+        Office office = dao.loadById(id);
+        OfficeView view = mapperFacade.map(office, OfficeView.class);
+        view.orgId = office.getOrganization().getId();
+        return view;
+    }
+
+    @Override
+    public OfficeView loadByIdTest(long id) throws Exception {
+        Office office = dao.loadById(id);
+        OfficeView view = mapperFacade.map(office, OfficeView.class);
+        view.orgId = office.getOrganization().getId();
+        return view;
     }
 
     /**
@@ -63,10 +90,10 @@ public class OfficeServiceImpl implements OfficeService {
      */
     @Override
     @Transactional
-    public void update(@Valid OfficeView view) throws Exception {
+    public ResultView update(@Valid OfficeView view) throws Exception {
         Office upOffice = new Office(view.id, view.name, view.address,
-                view.phone, view.isActive, view.orgId);
-        log.info("service: update - new Office(" + view.toString()+")");
+                view.phone, view.isActive);
         dao.update(upOffice);
+        return new ResultView();
     }
 }

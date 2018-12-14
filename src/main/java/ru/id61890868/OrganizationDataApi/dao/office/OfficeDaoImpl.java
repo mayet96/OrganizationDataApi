@@ -3,11 +3,9 @@ package ru.id61890868.OrganizationDataApi.dao.office;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import ru.id61890868.OrganizationDataApi.model.Office;
-import ru.id61890868.OrganizationDataApi.view.OfficeView;
 
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityNotFoundException;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -52,8 +50,14 @@ public class OfficeDaoImpl implements OfficeDao {
      * {@inheritDoc}
      */
     @Override
-    public void save(Office office) {
-        em.persist(office);
+    public void save(Office office) throws Exception {
+        try{
+            em.persist(office);
+        }catch(Exception e){
+            e.printStackTrace();
+            throw new Exception("on save error");
+        }
+
     }
 
     /**
@@ -77,13 +81,9 @@ public class OfficeDaoImpl implements OfficeDao {
         if(office.getName() != null){
             upOffice.setName(office.getName());
         }
-        if(office.getOrgId() != null){
-            upOffice.setOrgId(office.getOrgId());
-        }
         if(office.getPhone() != null){
             upOffice.setPhone(office.getPhone());
         }
-
         em.flush();
     }
 
@@ -93,10 +93,11 @@ public class OfficeDaoImpl implements OfficeDao {
      */
     @Override
     public void override(Office office) throws Exception {
-        if(office.getId() == null){
-            throw new Exception("OfficeDao: id can not be null");
+        if(office.getId() == null) {
+            em.merge(office);
+        }else{
+            throw new Exception("OfficeDao: office not found");
         }
-        em.merge(office);
     }
 
 }

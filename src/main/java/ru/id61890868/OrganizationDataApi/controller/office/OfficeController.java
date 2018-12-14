@@ -2,16 +2,13 @@ package ru.id61890868.OrganizationDataApi.controller.office;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.id61890868.OrganizationDataApi.model.Office;
 import ru.id61890868.OrganizationDataApi.service.office.OfficeService;
-import ru.id61890868.OrganizationDataApi.view.OfficeView;
-import ru.id61890868.OrganizationDataApi.view.OrganizationView;
+import ru.id61890868.OrganizationDataApi.view.office.OfficeView;
+import ru.id61890868.OrganizationDataApi.view.response.ResultView;
 
 import java.util.List;
 
@@ -43,50 +40,35 @@ public class OfficeController {
             return new ResponseEntity<>("{\"error\":,\"" + e.getMessage()
                     +"\"}", HttpStatus.BAD_REQUEST);
         }
-        //return officeService.offices();
     }
 
     @ApiOperation(value = "Добавить офис", httpMethod = "POST")
-    /*@ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Success", response = String.class),
-            @ApiResponse(code = 404, message = "Not Found"),
-            @ApiResponse(code = 500, message = "Failure")})*/
     @PostMapping("/save")
-    public ResponseEntity<?> saveOffice(@RequestBody OfficeView officeView) {
-        try{
-            officeService.add(officeView);
-            return new ResponseEntity<>("{\"result\":\"success\"}", HttpStatus.OK);
-        }catch(Exception e){
-            return new ResponseEntity<>("{\"error\":,\"" + e.getMessage()
-                    +"\"}", HttpStatus.BAD_REQUEST);
-        }
+    public ResultView saveOffice(@RequestBody OfficeView officeView) throws Exception {
+        return officeService.add(officeView);
+
     }
 
     @ApiOperation(value = "Получить организацию по id", httpMethod = "GET")
     @GetMapping("/{id:[\\d]+}")
-    public ResponseEntity<?> getOfficeById(@PathVariable("id")long officeId) {
-        try{
-            return new ResponseEntity<>(officeService.loadById(officeId), HttpStatus.OK);
-        }catch (Exception e){
-            return new ResponseEntity<>("{\"error\":\"" + e.getMessage()
-                    +"\"}", HttpStatus.BAD_REQUEST);
-        }
+    public OfficeView getOfficeById(@PathVariable("id")long officeId) throws Exception {
+        return officeService.loadById(officeId);
+
     }
 
 
     @ApiOperation(value = "Изменить данные офиса", httpMethod = "POST")
     @PostMapping("/update")
-    public ResponseEntity<?> updateOffice(@RequestBody OfficeView officeView) {
-        try{
-            officeService.update(officeView);
-            return new ResponseEntity<>("{\"result\":\"success\"}", HttpStatus.OK);
-        }catch(Exception e){
-            e.printStackTrace();
-            return new ResponseEntity<>(
-                    "{\"error\":\"" + e.getMessage()
-                    +"\"}", HttpStatus.BAD_REQUEST
-            );
-        }
+    public ResultView updateOffice(@RequestBody OfficeView officeView) throws Exception {
+        return officeService.update(officeView);
+
+    }
+
+    @ApiOperation(value = "Получить организацию по id", httpMethod = "GET")
+    @GetMapping("/test/{id:[\\d]+}")
+    public ResponseEntity<?> test(@PathVariable("id")long officeId) throws Exception {
+        return new ResponseEntity<>((officeService.loadByIdTest(officeId)), HttpStatus.OK);
+
     }
 
 }

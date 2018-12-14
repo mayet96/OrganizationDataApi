@@ -1,4 +1,4 @@
-package ru.id61890868.OrganizationDataApi.view;
+package ru.id61890868.OrganizationDataApi.view.office;
 
 
 import io.swagger.annotations.ApiModel;

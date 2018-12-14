@@ -46,18 +46,18 @@ public class Office {
     private Boolean isActive;
 
     /**
-     * id организации владельца
+     * Связь с таблицей организаций
      */
-    @Column(name = "org_id", nullable = false)
-    private Long orgId;
+    @ManyToOne
+    @JoinColumn(name = "org_id", nullable = false)
+    private Organization organization;
 
     public Office(){
 
     }
 
     public Office(String name, String address,
-                  String phone, Boolean isActive, Long orgId) {
-        this.orgId = orgId;
+                  String phone, Boolean isActive) {
         this.name = name;
         this.address = address;
         this.phone = phone;
@@ -65,13 +65,12 @@ public class Office {
     }
 
     public Office(Long id, String name, String address,
-                  String phone, Boolean isActive, Long orgId) {
+                  String phone, Boolean isActive) {
         this.id = id;
         this.name = name;
         this.address = address;
         this.phone = phone;
         this.isActive = isActive;
-        this.orgId = orgId;
     }
 
     public Long getId() {
@@ -110,12 +109,11 @@ public class Office {
         isActive = active;
     }
 
-    public Long getOrgId() {
-        return orgId;
+    public Organization getOrganization() {
+        return organization;
     }
 
-    public void setOrgId(Long orgId) {
-        this.orgId = orgId;
+    public void setOrganization(Organization organization) {
+        this.organization = organization;
     }
-
 }

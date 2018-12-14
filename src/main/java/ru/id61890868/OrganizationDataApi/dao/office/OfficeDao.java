@@ -30,7 +30,7 @@ public interface OfficeDao {
      *
      * @return
      */
-    void save(Office office);
+    void save(Office office) throws Exception;
 
     /**
      * Изменить офис
