@@ -98,6 +98,7 @@ public class OfficeServiceImpl implements OfficeService {
     }
 
     @Override
+    @Transactional
     public ResultView removeById(long officeId) throws Exception {
         dao.removeById(officeId);
         return new ResultView();

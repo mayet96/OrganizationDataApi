@@ -2,17 +2,13 @@ package ru.id61890868.OrganizationDataApiTest;
 
 
 import ma.glasnost.orika.impl.DefaultMapperFactory;
-import org.junit.Assert;
-import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -22,20 +18,15 @@ import ru.id61890868.OrganizationDataApi.OrganizationDataApi;
 import ru.id61890868.OrganizationDataApi.model.Office;
 import ru.id61890868.OrganizationDataApi.model.mapper.MapperFacade;
 import ru.id61890868.OrganizationDataApi.model.mapper.MapperFacadeImpl;
-import ru.id61890868.OrganizationDataApi.view.office.OfficeListInView;
 import ru.id61890868.OrganizationDataApi.view.office.OfficeListOutView;
 import ru.id61890868.OrganizationDataApi.view.office.OfficeView;
 import ru.id61890868.OrganizationDataApi.view.response.DataView;
 import ru.id61890868.OrganizationDataApi.view.response.ResultView;
 
-import javax.validation.Valid;
-
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = {OrganizationDataApi.class})
@@ -57,32 +48,34 @@ public class OfficeControllerTest {
      * Проверка на сохранение организации
      */
 
-    public void Init(){
+    public void Init() {
         expected =
                 new Office(
-                        "name","address","8622315652", false
+                        "name", "address", "8622315652", false
                 );
 
         mapperFacade = new MapperFacadeImpl(new DefaultMapperFactory.Builder().build());
     }
 
 
-
     /**
      * Проверка сохранения офиса
      */
     @Test
-    public void test0SaveOffice(){
+    public void test0SaveOffice() {
 
         Init();
 
-        OfficeView request = mapperFacade.map(expected, OfficeView.class);
+        OfficeView body = mapperFacade.map(expected, OfficeView.class);
 
-        ResponseEntity response = restTemplate.postForEntity(url + "/office/save", request, ResultView.class);
+        System.out.println("\n\n0 test:\n ");
+        System.out.println("request body:\n\t" + body.toString() + "\n");
+
+        ResponseEntity response = restTemplate.postForEntity(url + "/office/save", body, ResultView.class);
+
+        System.out.println("response:\n\t" + response.getBody().toString() + "\n\n");
         assertNotNull(response);
         assertEquals(200, response.getStatusCodeValue());
-
-        //getTest(request);
 
     }
 
@@ -90,15 +83,18 @@ public class OfficeControllerTest {
      * Проверка списка офисов по фильтру офиса
      */
     @Test
-    public void test1GetOffice(){
+    public void test1GetOffice() {
+
+        Init();
 
         ParameterizedTypeReference<DataView<List<OfficeListOutView>>> reference =
-                new ParameterizedTypeReference<DataView<List<OfficeListOutView>>>(){};
+                new ParameterizedTypeReference<DataView<List<OfficeListOutView>>>() {
+                };
 
         //RequestEntity<DataView<OfficeListOutView>> enitty
 
         ResponseEntity<DataView<List<OfficeListOutView>>> response = restTemplate.exchange(
-                url + "/office/list", HttpMethod.POST,null, reference
+                url + "/office/list", HttpMethod.POST, null, reference
         );
 
 
