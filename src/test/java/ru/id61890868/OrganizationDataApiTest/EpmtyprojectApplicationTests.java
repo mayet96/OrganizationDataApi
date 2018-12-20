@@ -1,4 +1,4 @@
-package ru8.EpmtyProject;
+package ru.id61890868.OrganizationDataApiTest;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

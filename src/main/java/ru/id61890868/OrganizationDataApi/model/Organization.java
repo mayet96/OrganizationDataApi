@@ -12,7 +12,7 @@ public class Organization {
 
 
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", columnDefinition = "serial")
     private Long id;
 
@@ -74,12 +74,12 @@ public class Organization {
     )
     private List<Office> offices;
 
-    public Organization(){
+    public Organization() {
 
     }
 
     public Organization(String name, String fullName, String inn, String kpp,
-                        String address, String phone, Boolean isActive){
+                        String address, String phone, Boolean isActive) {
         this.name = name;
         this.fullName = fullName;
         this.inn = inn;
@@ -161,8 +161,6 @@ public class Organization {
     public void setIsActive(Boolean active) {
         isActive = active;
     }
-
-
 
 
 }

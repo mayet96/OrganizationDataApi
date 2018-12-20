@@ -1,11 +1,13 @@
 package ru.id61890868.OrganizationDataApi.service.office;
 
 import org.springframework.validation.annotation.Validated;
+import ru.id61890868.OrganizationDataApi.view.office.OfficeListInView;
 import ru.id61890868.OrganizationDataApi.view.office.OfficeView;
+import ru.id61890868.OrganizationDataApi.view.office.OfficeViewNoOrgId;
+import ru.id61890868.OrganizationDataApi.view.response.DataView;
 import ru.id61890868.OrganizationDataApi.view.response.ResultView;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @Validated
 public interface OfficeService {
@@ -22,14 +24,22 @@ public interface OfficeService {
      *
      * @return {@OrganizationView}
      */
-    List<OfficeView> offices();
+    DataView offices();
+
+    /**
+     * Получить список офисов
+     * по заданному фильтру
+     *
+     * @return {@OrganizationView}
+     */
+    DataView getList(@Valid OfficeListInView filter) throws Exception;
 
     /**
      * Получить офис по id
      *
      * @return {@OrganizationView}
      */
-    OfficeView loadById(long id) throws Exception;
+    DataView loadById(long id) throws Exception;
 
     OfficeView loadByIdTest(long id) throws Exception;
 
@@ -38,5 +48,7 @@ public interface OfficeService {
      *
      * @return {@OfficeView}
      */
-    ResultView update(@Valid OfficeView view) throws Exception;
+    ResultView update(@Valid OfficeViewNoOrgId view) throws Exception;
+
+    ResultView removeById(long officeId) throws Exception;
 }

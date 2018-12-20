@@ -92,16 +92,6 @@ public class OrganizationDaoImpl implements OrganizationDao {
         em.flush();
     }
 
-    /**
-     * {@inheritDoc}
-     * не используется
-     */
-    @Override
-    public void override(Organization org) throws Exception {
-        if(org.getId() == null){
-            throw new Exception("OrgDao: id can not be null");
-        }
-        em.merge(org);
-    }
+
 
 }

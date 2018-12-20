@@ -10,8 +10,7 @@ public interface OfficeDao {
      * Получить офис по id
      *
      * @param id
-     *
-     * @return
+     * @return Office
      */
     Office loadById(Long id) throws Exception;
 
@@ -19,16 +18,23 @@ public interface OfficeDao {
     /**
      * Получить список всех офисов
      *
-     * @return
+     * @return List<Office>
      */
     List<Office> all();
+
+
+    /**
+     * Получить список всех офисов
+     * по фильтру
+     *
+     * @return List<Office>
+     */
+    List<Office> list(Office filter, Integer id) throws Exception;
 
     /**
      * Сохранить офис
      *
      * @param office
-     *
-     * @return
      */
     void save(Office office) throws Exception;
 
@@ -36,21 +42,9 @@ public interface OfficeDao {
      * Изменить офис
      *
      * @param office
-     *
      * @throws Exception при office.id == null
-     *
-     * @return
      */
     void update(Office office) throws Exception;
 
-    /**
-     * Перезаписать офис
-     *
-     * @param office
-     *
-     * @throws Exception при office.id == null
-     *
-     * @return
-     */
-    void override(Office office) throws Exception;
+    void removeById(long officeId) throws Exception;
 }

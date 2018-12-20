@@ -65,7 +65,7 @@ public class OrganizationServiceImpl implements OrganizationService {
     public void update(@Valid OrganizationView view) throws Exception {
         Organization upOrg = new Organization(view.id, view.name, view.fullName,
                 view.inn, view.kpp, view.address, view.phone, view.isActive);
-        log.info("service: update - new Org(" + view.toString()+")");
+        log.info("service: update - new Org(" + view.toString() + ")");
         dao.update(upOrg);
     }
 }

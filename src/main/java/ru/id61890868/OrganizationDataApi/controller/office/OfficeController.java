@@ -7,10 +7,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.id61890868.OrganizationDataApi.service.office.OfficeService;
+import ru.id61890868.OrganizationDataApi.view.office.OfficeListInView;
 import ru.id61890868.OrganizationDataApi.view.office.OfficeView;
+import ru.id61890868.OrganizationDataApi.view.office.OfficeViewNoOrgId;
+import ru.id61890868.OrganizationDataApi.view.response.DataView;
 import ru.id61890868.OrganizationDataApi.view.response.ResultView;
-
-import java.util.List;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
@@ -29,17 +30,14 @@ public class OfficeController {
 
     @ApiOperation(value = "Получить список всех офисов", httpMethod = "GET")
     @GetMapping("/")
-    public ResponseEntity<?> offices(){
-        try{
-            List<OfficeView> l = officeService.offices();
-            if(l == null){
-                throw new Exception("not found");
-            }
-            return new ResponseEntity<>(l, HttpStatus.OK);
-        }catch (Exception e){
-            return new ResponseEntity<>("{\"error\":,\"" + e.getMessage()
-                    +"\"}", HttpStatus.BAD_REQUEST);
-        }
+    public DataView offices() {
+        return officeService.offices();
+    }
+
+    @ApiOperation(value = "Получить список всех офисов по фильтру", httpMethod = "POST")
+    @PostMapping("/list")
+    public DataView getList(@RequestBody OfficeListInView filterView) throws Exception {
+        return officeService.getList(filterView);
     }
 
     @ApiOperation(value = "Добавить офис", httpMethod = "POST")
@@ -49,9 +47,9 @@ public class OfficeController {
 
     }
 
-    @ApiOperation(value = "Получить организацию по id", httpMethod = "GET")
+    @ApiOperation(value = "Получить офис по id", httpMethod = "GET")
     @GetMapping("/{id:[\\d]+}")
-    public OfficeView getOfficeById(@PathVariable("id")long officeId) throws Exception {
+    public DataView getOfficeById(@PathVariable("id") long officeId) throws Exception {
         return officeService.loadById(officeId);
 
     }
@@ -59,15 +57,23 @@ public class OfficeController {
 
     @ApiOperation(value = "Изменить данные офиса", httpMethod = "POST")
     @PostMapping("/update")
-    public ResultView updateOffice(@RequestBody OfficeView officeView) throws Exception {
-        return officeService.update(officeView);
+    public ResultView updateOffice(@RequestBody OfficeViewNoOrgId view) throws Exception {
+        return officeService.update(view);
 
     }
 
+
     @ApiOperation(value = "Получить организацию по id", httpMethod = "GET")
     @GetMapping("/test/{id:[\\d]+}")
-    public ResponseEntity<?> test(@PathVariable("id")long officeId) throws Exception {
+    public ResponseEntity<?> test(@PathVariable("id") long officeId) throws Exception {
         return new ResponseEntity<>((officeService.loadByIdTest(officeId)), HttpStatus.OK);
+
+    }
+
+    @ApiOperation(value = "Удалить офис по id", httpMethod = "DELETE")
+    @DeleteMapping("/{id:[\\d]+}")
+    public ResultView removeOfficeById(@PathVariable("id") long officeId) throws Exception {
+        return officeService.removeById(officeId);
 
     }
 

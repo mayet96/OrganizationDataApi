@@ -10,7 +10,7 @@ import javax.persistence.*;
 public class Office {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", columnDefinition = "serial")
     private Long id;
 
@@ -52,7 +52,7 @@ public class Office {
     @JoinColumn(name = "org_id", nullable = false)
     private Organization organization;
 
-    public Office(){
+    public Office() {
 
     }
 

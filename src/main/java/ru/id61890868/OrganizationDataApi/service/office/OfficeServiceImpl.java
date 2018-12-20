@@ -1,7 +1,5 @@
 package ru.id61890868.OrganizationDataApi.service.office;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,28 +8,22 @@ import ru.id61890868.OrganizationDataApi.dao.organization.OrganizationDao;
 import ru.id61890868.OrganizationDataApi.model.Office;
 import ru.id61890868.OrganizationDataApi.model.Organization;
 import ru.id61890868.OrganizationDataApi.model.mapper.MapperFacade;
+import ru.id61890868.OrganizationDataApi.view.office.OfficeListOutView;
+import ru.id61890868.OrganizationDataApi.view.office.OfficeListInView;
 import ru.id61890868.OrganizationDataApi.view.office.OfficeView;
+import ru.id61890868.OrganizationDataApi.view.office.OfficeViewNoOrgId;
+import ru.id61890868.OrganizationDataApi.view.response.DataView;
 import ru.id61890868.OrganizationDataApi.view.response.ResultView;
 
-import javax.swing.text.View;
 import javax.validation.Valid;
 import java.util.List;
 
 @Service
 public class OfficeServiceImpl implements OfficeService {
 
-    private static final Logger log = LoggerFactory.getLogger("OfficeServiceImpl");
-
     private OfficeDao dao;
     private MapperFacade mapperFacade;
     private OrganizationDao organizationDao;
-
-
-
-    /*public OfficeServiceImpl(OfficeDao dao, MapperFacade mapperFacade) {
-        this.dao = dao;
-        this.mapperFacade = mapperFacade;
-    }*/
 
     @Autowired
     public OfficeServiceImpl(OfficeDao dao, MapperFacade mapperFacade, OrganizationDao organizationDao) {
@@ -46,8 +38,6 @@ public class OfficeServiceImpl implements OfficeService {
     @Override
     @Transactional
     public ResultView add(@Valid OfficeView officeView) throws Exception {
-        //Office newOffice = new Office(officeView.name, officeView.address,
-                //officeView.phone, officeView.isActive);
         Organization org = organizationDao.loadById(officeView.orgId);
         Office newOffice = mapperFacade.map(officeView, Office.class);
         newOffice.setOrganization(org);
@@ -60,9 +50,20 @@ public class OfficeServiceImpl implements OfficeService {
      */
     @Override
     @Transactional
-    public List<OfficeView> offices() {
+    public DataView offices() {
+
         List<Office> l = dao.all();
-        return mapperFacade.mapAsList(l, OfficeView.class);
+        List<OfficeView> v = mapperFacade.mapAsList(l, OfficeView.class);
+        return new DataView(v);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public DataView getList(@Valid OfficeListInView filter) throws Exception {
+        Office _filter = mapperFacade.map(filter, Office.class);
+        return new DataView(mapperFacade.mapAsList(dao.list(_filter, filter.orgId), OfficeListOutView.class));
     }
 
     /**
@@ -70,11 +71,10 @@ public class OfficeServiceImpl implements OfficeService {
      */
     @Override
     @Transactional
-    public OfficeView loadById(long id) throws Exception {
+    public DataView loadById(long id) throws Exception {
         Office office = dao.loadById(id);
-        OfficeView view = mapperFacade.map(office, OfficeView.class);
-        view.orgId = office.getOrganization().getId();
-        return view;
+        OfficeViewNoOrgId view = mapperFacade.map(office, OfficeViewNoOrgId.class);
+        return new DataView(view);
     }
 
     @Override
@@ -90,10 +90,16 @@ public class OfficeServiceImpl implements OfficeService {
      */
     @Override
     @Transactional
-    public ResultView update(@Valid OfficeView view) throws Exception {
+    public ResultView update(@Valid OfficeViewNoOrgId view) throws Exception {
         Office upOffice = new Office(view.id, view.name, view.address,
                 view.phone, view.isActive);
         dao.update(upOffice);
+        return new ResultView();
+    }
+
+    @Override
+    public ResultView removeById(long officeId) throws Exception {
+        dao.removeById(officeId);
         return new ResultView();
     }
 }

@@ -12,9 +12,10 @@ public class ErrorView {
 
     /**
      * Передача текста исключения
+     *
      * @param errorText - текс исключения
      */
-    public ErrorView(String errorText){
+    public ErrorView(String errorText) {
         error = errorText;
     }
 

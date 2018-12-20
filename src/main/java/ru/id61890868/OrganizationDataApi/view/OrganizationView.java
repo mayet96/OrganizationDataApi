@@ -3,7 +3,9 @@ package ru.id61890868.OrganizationDataApi.view;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
-import javax.validation.constraints.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @ApiModel(description = "Организация")
 public class OrganizationView {
@@ -42,9 +44,9 @@ public class OrganizationView {
 
     @Override
     public String toString() {
-        return "{id:" + id + ";name:" + name  + ";fullName:" + fullName
+        return "{id:" + id + ";name:" + name + ";fullName:" + fullName
                 + ";inn:" + inn + ";kpp:" + kpp + ";address:" + address
-                + ";phone:" + phone  + ";isActive:" + isActive + "}";
+                + ";phone:" + phone + ";isActive:" + isActive + "}";
     }
 
 }

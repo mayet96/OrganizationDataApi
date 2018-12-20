@@ -1,9 +1,10 @@
 package ru.id61890868.OrganizationDataApi.dao.office;
 
+import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import ru.id61890868.OrganizationDataApi.dao.NotFoundException;
 import ru.id61890868.OrganizationDataApi.model.Office;
-
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -28,7 +29,7 @@ public class OfficeDaoImpl implements OfficeDao {
     @Override
     public Office loadById(Long id) throws Exception {
         Office o = em.find(Office.class, id);
-        if(o == null){
+        if (o == null) {
             throw new Exception("OfficeDao: not found");
         }
         return o;
@@ -46,14 +47,55 @@ public class OfficeDaoImpl implements OfficeDao {
         return q.getResultList();
     }
 
+    @Override
+    public List<Office> list(Office filter, Integer orgId) throws Exception {
+
+
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Office> cq = cb.createQuery(Office.class);
+        Root<Office> root = cq.from(Office.class);
+
+        try {
+            if (orgId != null) {
+                cq.where(cb.equal(root.get("organization"), orgId));
+            }
+            if (filter.getAddress() != null) {
+                cq.where(cb.equal(root.get("address"), filter.getAddress()));
+            }
+            if (filter.getIsActive() != null) {
+                cq.where(cb.equal(root.get("isActive"), filter.getIsActive()));
+            }
+            if (filter.getName() != null) {
+                cq.where(cb.equal(root.get("name"), filter.getName()));
+            }
+            if (filter.getPhone() != null) {
+                cq.where(cb.equal(root.get("phone"), filter.getPhone()));
+            }
+
+            TypedQuery<Office> query = em.createQuery(cq);
+            List<Office> result = query.getResultList();
+            if (result.isEmpty()) {
+                throw new NotFoundException();
+            }
+            return result;
+        } catch (NotFoundException e) {
+            throw e;
+        } catch (Exception e) {
+            Logger.getLogger(this.getClass()).error(e.getStackTrace());
+            throw new Exception("incorrect filter");
+        }
+
+    }
+
+
     /**
      * {@inheritDoc}
      */
     @Override
     public void save(Office office) throws Exception {
-        try{
+        try {
             em.persist(office);
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             throw new Exception("on save error");
         }
@@ -65,39 +107,37 @@ public class OfficeDaoImpl implements OfficeDao {
      */
     @Override
     public void update(Office office) throws Exception {
-        if(office.getId() == null){
+        if (office.getId() == null) {
             throw new Exception("OfficeDao: id can not be null");
         }
         Office upOffice = loadById(office.getId());
-        if(upOffice == null){
+        if (upOffice == null) {
             throw new Exception("OfficeDao: office not found");
         }
-        if(office.getIsActive() != null){
+        if (office.getIsActive() != null) {
             upOffice.setIsActive(office.getIsActive());
         }
-        if(office.getAddress() != null){
+        if (office.getAddress() != null) {
             upOffice.setAddress(office.getAddress());
         }
-        if(office.getName() != null){
+        if (office.getName() != null) {
             upOffice.setName(office.getName());
         }
-        if(office.getPhone() != null){
+        if (office.getPhone() != null) {
             upOffice.setPhone(office.getPhone());
         }
         em.flush();
     }
 
-    /**
-     * {@inheritDoc}
-     * не используется
-     */
     @Override
-    public void override(Office office) throws Exception {
-        if(office.getId() == null) {
-            em.merge(office);
-        }else{
-            throw new Exception("OfficeDao: office not found");
+    public void removeById(long officeId) throws Exception {
+
+        Office o = em.find(Office.class, officeId);
+        if (o == null) {
+            throw new Exception("OfficeDao: not found");
         }
+        em.remove(o);
+        em.flush();
     }
 
 }
