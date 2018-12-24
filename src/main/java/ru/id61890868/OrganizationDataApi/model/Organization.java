@@ -66,13 +66,6 @@ public class Organization {
     @Column(name = "is_active", nullable = true)
     private Boolean isActive;
 
-    @OneToMany(
-            mappedBy = "organization",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true,
-            fetch = FetchType.LAZY
-    )
-    private List<Office> offices;
 
     public Organization() {
 

@@ -29,7 +29,7 @@ public interface OfficeDao {
      *
      * @return List<Office>
      */
-    List<Office> list(Office filter, Integer id) throws Exception;
+    List<Office> list(Office filter, Long id) throws Exception;
 
     /**
      * Сохранить офис

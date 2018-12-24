@@ -31,4 +31,11 @@ public class OfficeViewNoOrgId {
     @ApiModelProperty(value = "Действительность", example = "true")
     public Boolean isActive;
 
+    @Override
+    public String toString() {
+        return "{id:" + id + ";name:" + name
+                + ";address:" + address + ";phone:" + phone
+                + ";isActive:" + isActive + "}";
+    }
+
 }

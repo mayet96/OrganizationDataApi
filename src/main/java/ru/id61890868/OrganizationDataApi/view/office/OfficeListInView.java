@@ -19,7 +19,7 @@ public class OfficeListInView {
      */
     @NotNull(message = "orgId cannot be null")
     @ApiModelProperty(value = "id владеющей организации")
-    public Integer orgId;
+    public Long orgId;
 
 
     /**
@@ -40,4 +40,12 @@ public class OfficeListInView {
      */
     @ApiModelProperty(value = "Действительность", example = "true")
     public String isActive;
+
+
+    @Override
+    public String toString() {
+        return "{orgId:" + orgId + ";name:" + name
+                 + ";phone:" + phone
+                + ";isActive:" + isActive + "}";
+    }
 }

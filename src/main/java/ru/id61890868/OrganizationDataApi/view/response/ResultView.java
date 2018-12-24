@@ -8,7 +8,7 @@ public class ResultView {
      * стандартный конструктор (статус: ОК)
      */
     public ResultView() {
-        result = "success";
+
     }
 
     /**

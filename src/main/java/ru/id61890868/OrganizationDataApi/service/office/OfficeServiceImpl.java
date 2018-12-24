@@ -42,7 +42,7 @@ public class OfficeServiceImpl implements OfficeService {
         Office newOffice = mapperFacade.map(officeView, Office.class);
         newOffice.setOrganization(org);
         dao.save(newOffice);
-        return new ResultView();
+        return new ResultView("success");
     }
 
     /**
@@ -94,13 +94,13 @@ public class OfficeServiceImpl implements OfficeService {
         Office upOffice = new Office(view.id, view.name, view.address,
                 view.phone, view.isActive);
         dao.update(upOffice);
-        return new ResultView();
+        return new ResultView("success");
     }
 
     @Override
     @Transactional
     public ResultView removeById(long officeId) throws Exception {
         dao.removeById(officeId);
-        return new ResultView();
+        return new ResultView("success");
     }
 }

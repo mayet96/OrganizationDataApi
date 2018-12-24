@@ -10,7 +10,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -48,30 +50,31 @@ public class OfficeDaoImpl implements OfficeDao {
     }
 
     @Override
-    public List<Office> list(Office filter, Integer orgId) throws Exception {
+    public List<Office> list(Office filter, Long orgId) throws Exception {
 
 
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Office> cq = cb.createQuery(Office.class);
         Root<Office> root = cq.from(Office.class);
+        List<Predicate> predicates = new ArrayList<>();
 
         try {
             if (orgId != null) {
-                cq.where(cb.equal(root.get("organization"), orgId));
+                predicates.add(cb.equal(root.get("organization"), orgId));
             }
             if (filter.getAddress() != null) {
-                cq.where(cb.equal(root.get("address"), filter.getAddress()));
+                predicates.add(cb.equal(root.get("address"), filter.getAddress()));
             }
             if (filter.getIsActive() != null) {
-                cq.where(cb.equal(root.get("isActive"), filter.getIsActive()));
+                predicates.add(cb.equal(root.get("isActive"), filter.getIsActive()));
             }
             if (filter.getName() != null) {
-                cq.where(cb.equal(root.get("name"), filter.getName()));
+                predicates.add(cb.equal(root.get("name"), filter.getName()));
             }
             if (filter.getPhone() != null) {
-                cq.where(cb.equal(root.get("phone"), filter.getPhone()));
+                predicates.add(cb.equal(root.get("phone"), filter.getPhone()));
             }
-
+            cq.where(predicates.toArray(new Predicate[predicates.size()]));
             TypedQuery<Office> query = em.createQuery(cq);
             List<Office> result = query.getResultList();
             if (result.isEmpty()) {

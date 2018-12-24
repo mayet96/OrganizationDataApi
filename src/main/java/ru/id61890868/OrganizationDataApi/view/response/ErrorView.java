@@ -19,6 +19,10 @@ public class ErrorView {
         error = errorText;
     }
 
+    public ErrorView(){
+
+    }
+
     @Override
     public String toString() {
         return "{\"error\":" + error + "}";
