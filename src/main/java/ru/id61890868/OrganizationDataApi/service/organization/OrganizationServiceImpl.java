@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.id61890868.OrganizationDataApi.dao.organization.OrganizationDao;
 import ru.id61890868.OrganizationDataApi.model.Organization;
-import ru.id61890868.OrganizationDataApi.model.mapper.MapperFacade;
+import ru.id61890868.OrganizationDataApi.model.mapper.*;
 import ru.id61890868.OrganizationDataApi.view.organization.OrganizationListFilterView;
 import ru.id61890868.OrganizationDataApi.view.organization.OrganizationListItemView;
 import ru.id61890868.OrganizationDataApi.view.organization.OrganizationView;

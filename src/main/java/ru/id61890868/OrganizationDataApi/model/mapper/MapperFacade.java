@@ -16,7 +16,7 @@ public interface MapperFacade {
      * @param <D>              тип объекта, к который надо преобразовать исходный объект
      * @return экземпляр класса D с данными из sourceObject
      */
-    <S, D> D map(S sourceObject, Class<D> destinationClass);
+    public <S, D> D map(S sourceObject, Class<D> destinationClass);
 
     /**
      * Запись занных из sourceObject в destinationObject
@@ -26,7 +26,7 @@ public interface MapperFacade {
      * @param <S>
      * @param <D>
      */
-    <S, D> void map(S sourceObject, D destinationObject);
+    public <S, D> void map(S sourceObject, D destinationObject);
 
     /**
      * Преобразование коллекции оъектов
@@ -37,5 +37,5 @@ public interface MapperFacade {
      * @param <D>
      * @return
      */
-    <S, D> List<D> mapAsList(Iterable<S> source, Class<D> destinationClass);
+    public <S, D> List<D> mapAsList(Iterable<S> source, Class<D> destinationClass);
 }

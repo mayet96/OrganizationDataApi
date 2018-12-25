@@ -6,7 +6,8 @@ import javax.persistence.*;
 /**
  * Офис
  */
-@Entity(name = "office")
+@Entity
+@Table(name = "office")
 public class Office {
 
     @Id

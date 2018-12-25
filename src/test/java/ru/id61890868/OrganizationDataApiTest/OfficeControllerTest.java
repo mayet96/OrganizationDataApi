@@ -1,6 +1,5 @@
 package ru.id61890868.OrganizationDataApiTest;
 
-
 import ma.glasnost.orika.impl.DefaultMapperFactory;
 import org.junit.Assert;
 import org.junit.FixMethodOrder;
@@ -16,8 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 import ru.id61890868.OrganizationDataApi.OrganizationDataApi;
 import ru.id61890868.OrganizationDataApi.model.Office;
-import ru.id61890868.OrganizationDataApi.model.mapper.MapperFacade;
-import ru.id61890868.OrganizationDataApi.model.mapper.MapperFacadeImpl;
+
+import ru.id61890868.OrganizationDataApi.model.mapper.*;
 import ru.id61890868.OrganizationDataApi.view.office.OfficeListFilterView;
 import ru.id61890868.OrganizationDataApi.view.office.OfficeListItemView;
 import ru.id61890868.OrganizationDataApi.view.office.OfficeView;

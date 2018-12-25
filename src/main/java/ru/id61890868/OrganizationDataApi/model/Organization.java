@@ -7,7 +7,8 @@ import java.util.List;
 /**
  * Организация
  */
-@Entity(name = "organization")
+@Entity
+@Table(name = "organization")
 public class Organization {
 
 
