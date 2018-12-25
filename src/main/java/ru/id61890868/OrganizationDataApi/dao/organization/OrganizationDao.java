@@ -13,15 +13,23 @@ public interface OrganizationDao {
      *
      * @return
      */
-    Organization loadById(Long id);
+    Organization loadById(Long id) throws Exception;
 
 
     /**
      * Получить список всех организаций
      *
-     * @return
+     * @return List<Organization>
      */
     List<Organization> all();
+
+
+    /**
+     * Получить список организаций по фильтру
+     *
+     * @return List<Organization>
+     */
+    List<Organization> list(Organization filter) throws Exception;
 
     /**
      * Сохранить организацию
@@ -30,7 +38,7 @@ public interface OrganizationDao {
      *
      * @return
      */
-    void save(Organization organization);
+    void save(Organization organization) throws Exception;
 
 
     /**
@@ -43,5 +51,8 @@ public interface OrganizationDao {
      * @return
      */
     void update(Organization org) throws Exception;
+
+    void removeById(long orgId) throws Exception;
+
 
 }

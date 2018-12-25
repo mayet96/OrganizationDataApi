@@ -11,7 +11,7 @@ import javax.validation.constraints.Size;
  * Представление выходных данных списка офисов
  */
 @ApiModel(description = "фильтр поиска офисов")
-public class OfficeListInView {
+public class OfficeListFilterView {
 
 
     /**

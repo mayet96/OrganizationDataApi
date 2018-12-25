@@ -2,6 +2,7 @@ package ru.id61890868.OrganizationDataApiTest;
 
 
 import ma.glasnost.orika.impl.DefaultMapperFactory;
+import org.junit.Assert;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,8 +18,8 @@ import ru.id61890868.OrganizationDataApi.OrganizationDataApi;
 import ru.id61890868.OrganizationDataApi.model.Office;
 import ru.id61890868.OrganizationDataApi.model.mapper.MapperFacade;
 import ru.id61890868.OrganizationDataApi.model.mapper.MapperFacadeImpl;
-import ru.id61890868.OrganizationDataApi.view.office.OfficeListInView;
-import ru.id61890868.OrganizationDataApi.view.office.OfficeListOutView;
+import ru.id61890868.OrganizationDataApi.view.office.OfficeListFilterView;
+import ru.id61890868.OrganizationDataApi.view.office.OfficeListItemView;
 import ru.id61890868.OrganizationDataApi.view.office.OfficeView;
 import ru.id61890868.OrganizationDataApi.view.office.OfficeViewNoOrgId;
 import ru.id61890868.OrganizationDataApi.view.response.DataView;
@@ -26,9 +27,9 @@ import ru.id61890868.OrganizationDataApi.view.response.ErrorView;
 import ru.id61890868.OrganizationDataApi.view.response.ResultView;
 
 import java.util.List;
-import java.util.Map;
 
 import static org.hamcrest.CoreMatchers.containsString;
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
@@ -109,16 +110,16 @@ public class OfficeControllerTest {
         //инициализация входных данных
 
         Office expected = getExpectedOffice();
-        OfficeListInView filter;
+        OfficeListFilterView filter;
         MapperFacade mapperFacade;
         mapperFacade = new MapperFacadeImpl(new DefaultMapperFactory.Builder().build());
 
-        filter = mapperFacade.map(expected, OfficeListInView.class);
+        filter = mapperFacade.map(expected, OfficeListFilterView.class);
         filter.orgId = 2L;
         ///////////////////////
 
         System.out.println("\tполучаем офис по пустому фильтру");
-        OfficeListInView request = new OfficeListInView();
+        OfficeListFilterView request = new OfficeListFilterView();
         ResponseEntity response = restTemplate.postForEntity(url + "/office/list", request, ErrorView.class);
 
         assertNotNull(response);
@@ -130,7 +131,7 @@ public class OfficeControllerTest {
 
 
         System.out.println("\tполучаем офис по корректному фильтру");
-        request = mapperFacade.map(expected, OfficeListInView.class);
+        request = mapperFacade.map(expected, OfficeListFilterView.class);
         request.orgId = 2L;
         ResponseEntity dataView =
                 restTemplate.postForEntity(url + "/office/list", request, DataView.class);
@@ -139,12 +140,49 @@ public class OfficeControllerTest {
         assertNotNull(response);
         assertEquals(response.getStatusCodeValue(), 200);
 
-        DataView<List<OfficeListOutView>> result = (DataView<List<OfficeListOutView>>) dataView.getBody();
+        DataView<List<OfficeListItemView>> result = (DataView<List<OfficeListItemView>>) dataView.getBody();
 
         assertNotNull(result.data);
     }
 
 
+    @Test
+    public void test3GetOfficeById() {
 
+        MapperFacade mapperFacade;
+        mapperFacade = new MapperFacadeImpl(new DefaultMapperFactory.Builder().build());
+
+        System.out.println("test #3 getById:\n");
+        System.out.println("\tполучаем офис по не существующему id");
+        ResponseEntity<ErrorView> response = restTemplate.getForEntity(url + "/office/" + 2, ErrorView.class);
+        System.out.println("\t\tresponse: " + response.getBody());
+
+        assertNotNull(response);
+        assertEquals(response.getStatusCodeValue(), 200);
+        assertThat(response.getBody().error, containsString("not found"));
+
+        ////////////////////////
+        Office expected = getExpectedOffice();
+
+        System.out.println("\tполучаем офис по корректному id");
+        ParameterizedTypeReference<DataView<OfficeViewNoOrgId>> reference =
+                new ParameterizedTypeReference<DataView<OfficeViewNoOrgId>>() {
+                };
+
+        ResponseEntity<DataView<OfficeViewNoOrgId>> result =
+                restTemplate.exchange(url + "/office/" + 1, HttpMethod.GET, null, reference);
+        Assert.assertNotNull(response);
+        System.out.println("\t\tresponse: " + result.getBody());
+
+        assertNotNull(result);
+        assertEquals(result.getStatusCodeValue(), 200);
+
+        OfficeViewNoOrgId view = result.getBody().data;
+
+        assertThat(view.id, is(1l));
+        assertEquals(view.address, expected.getAddress());
+        assertEquals(view.name, expected.getName());
+        assertEquals(view.phone, expected.getPhone());
+    }
 
 }

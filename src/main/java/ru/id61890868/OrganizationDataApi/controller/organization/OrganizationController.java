@@ -2,16 +2,13 @@ package ru.id61890868.OrganizationDataApi.controller.organization;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.id61890868.OrganizationDataApi.service.organization.OrganizationService;
-import ru.id61890868.OrganizationDataApi.view.OrganizationView;
-
-import java.util.List;
+import ru.id61890868.OrganizationDataApi.view.organization.OrganizationListFilterView;
+import ru.id61890868.OrganizationDataApi.view.organization.OrganizationView;
+import ru.id61890868.OrganizationDataApi.view.response.DataView;
+import ru.id61890868.OrganizationDataApi.view.response.ResultView;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
@@ -30,68 +27,38 @@ public class OrganizationController {
 
     @ApiOperation(value = "Получить список всех организаций", httpMethod = "GET")
     @GetMapping("/")
-    public ResponseEntity<?> organizations() {
-        try {
-            List<OrganizationView> l = orgService.organizations();
-            if (l == null) {
-                throw new Exception("not found");
-            }
-            return new ResponseEntity<>(l, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>("{\"error\":,\"" + e.getMessage()
-                    + "\"}", HttpStatus.BAD_REQUEST);
-        }
+    public DataView organizations() {
+        return orgService.organizations();
+    }
 
-        //return orgService.organizations();
+    @ApiOperation(value = "Получить список всех организаций по фильтру", httpMethod = "POST")
+    @PostMapping("/list")
+    public DataView getList(@RequestBody OrganizationListFilterView filter) throws Exception {
+        return orgService.getList(filter);
     }
 
     @ApiOperation(value = "Добавить организацию", httpMethod = "POST")
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Success", response = String.class),
-            @ApiResponse(code = 404, message = "Not Found"),
-            @ApiResponse(code = 500, message = "Failure")})
     @PostMapping("/save")
-    public ResponseEntity<?> saveOrganization(@RequestBody OrganizationView org) {
-        try {
-            orgService.add(org);
-            return new ResponseEntity<>("{\"result\":\"success\"}", HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>("{\"error\":,\"" + e.getMessage()
-                    + "\"}", HttpStatus.BAD_REQUEST);
-        }
-
+    public ResultView saveOrganization(@RequestBody OrganizationView org) throws Exception {
+        return orgService.add(org);
     }
 
 
     @ApiOperation(value = "Получить организацию по id", httpMethod = "GET")
     @GetMapping("/{id:[\\d]+}")
-    public ResponseEntity<?> getOrganiationById(@PathVariable("id") long orgId) {
-        try {
-            OrganizationView o = orgService.loadById(orgId);
-            if (o == null) {
-                throw new Exception("not found");
-            }
-            return new ResponseEntity<>(o, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>("{\"error\":,\"" + e.getMessage()
-                    + "\"}", HttpStatus.BAD_REQUEST);
-        }
-
+    public DataView getOrganiationById(@PathVariable("id") long orgId) throws Exception {
+        return orgService.loadById(orgId);
     }
 
     @ApiOperation(value = "Изменить данные организации", httpMethod = "POST")
     @PostMapping("/update")
-    public ResponseEntity<?> updateOrg(@RequestBody OrganizationView orgView) {
-        try {
-            orgService.update(orgView);
-            return new ResponseEntity<>("{\"result\":\"success\"}", HttpStatus.OK);
-        } catch (Exception e) {
-            //e.printStackTrace();
-            return new ResponseEntity<>(
-                    "{\"error\":,\"" + e.getMessage()
-                            + "\"}", HttpStatus.BAD_REQUEST
-            );
-        }
+    public ResultView updateOrg(@RequestBody OrganizationView orgView) throws Exception {
+        return orgService.update(orgView);
     }
 
+    @ApiOperation(value = "Удалить организацию по id", httpMethod = "DELETE")
+    @DeleteMapping("/{id:[\\d]+}")
+    public ResultView removeOrganiationById(@PathVariable("id") long orgId) throws Exception {
+        return orgService.removeById(orgId);
+    }
 }

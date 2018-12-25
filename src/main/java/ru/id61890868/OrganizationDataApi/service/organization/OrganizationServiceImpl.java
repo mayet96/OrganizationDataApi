@@ -8,7 +8,11 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.id61890868.OrganizationDataApi.dao.organization.OrganizationDao;
 import ru.id61890868.OrganizationDataApi.model.Organization;
 import ru.id61890868.OrganizationDataApi.model.mapper.MapperFacade;
-import ru.id61890868.OrganizationDataApi.view.OrganizationView;
+import ru.id61890868.OrganizationDataApi.view.organization.OrganizationListFilterView;
+import ru.id61890868.OrganizationDataApi.view.organization.OrganizationListItemView;
+import ru.id61890868.OrganizationDataApi.view.organization.OrganizationView;
+import ru.id61890868.OrganizationDataApi.view.response.DataView;
+import ru.id61890868.OrganizationDataApi.view.response.ResultView;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -32,10 +36,11 @@ public class OrganizationServiceImpl implements OrganizationService {
      */
     @Override
     @Transactional
-    public void add(@Valid OrganizationView org) {
+    public ResultView add(@Valid OrganizationView org) throws Exception {
         Organization newOrg = new Organization(org.name, org.fullName,
                 org.inn, org.kpp, org.address, org.phone, org.isActive);
         dao.save(newOrg);
+        return new ResultView("success");
     }
 
     /**
@@ -43,9 +48,19 @@ public class OrganizationServiceImpl implements OrganizationService {
      */
     @Override
     @Transactional
-    public List<OrganizationView> organizations() {
+    public DataView organizations() {
         List<Organization> l = dao.all();
-        return mapperFacade.mapAsList(l, OrganizationView.class);
+        return new DataView<List<OrganizationView>>(
+                mapperFacade.mapAsList(l, OrganizationView.class)
+        );
+    }
+
+    @Override
+    public DataView getList(@Valid OrganizationListFilterView filter) throws Exception {
+        Organization _filter = mapperFacade.map(filter, Organization.class);
+        return new DataView<List<OrganizationListItemView>>(
+                mapperFacade.mapAsList(dao.list(_filter), OrganizationListItemView.class)
+        );
     }
 
     /**
@@ -53,8 +68,10 @@ public class OrganizationServiceImpl implements OrganizationService {
      */
     @Override
     @Transactional
-    public OrganizationView loadById(long id) {
-        return mapperFacade.map(dao.loadById(id), OrganizationView.class);
+    public DataView loadById(long id) throws Exception {
+        return new DataView<OrganizationView>(
+                mapperFacade.map(dao.loadById(id), OrganizationView.class)
+        );
     }
 
     /**
@@ -62,10 +79,22 @@ public class OrganizationServiceImpl implements OrganizationService {
      */
     @Override
     @Transactional
-    public void update(@Valid OrganizationView view) throws Exception {
+    public ResultView update(@Valid OrganizationView view) throws Exception {
         Organization upOrg = new Organization(view.id, view.name, view.fullName,
                 view.inn, view.kpp, view.address, view.phone, view.isActive);
         log.info("service: update - new Org(" + view.toString() + ")");
         dao.update(upOrg);
+        return new ResultView("success");
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @Transactional
+    public ResultView removeById(long officeId) throws Exception {
+        dao.removeById(officeId);
+        return new ResultView("success");
+    }
+
 }

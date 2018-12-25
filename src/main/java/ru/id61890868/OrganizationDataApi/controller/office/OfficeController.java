@@ -2,14 +2,12 @@ package ru.id61890868.OrganizationDataApi.controller.office;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.id61890868.OrganizationDataApi.service.office.OfficeService;
-import ru.id61890868.OrganizationDataApi.view.office.OfficeListInView;
+import ru.id61890868.OrganizationDataApi.view.office.OfficeListFilterView;
 import ru.id61890868.OrganizationDataApi.view.office.OfficeView;
 import ru.id61890868.OrganizationDataApi.view.office.OfficeViewNoOrgId;
 import ru.id61890868.OrganizationDataApi.view.response.DataView;
@@ -38,7 +36,7 @@ public class OfficeController {
 
     @ApiOperation(value = "Получить список всех офисов по фильтру", httpMethod = "POST")
     @PostMapping("/list")
-    public DataView getList(@RequestBody OfficeListInView filterView) throws Exception {
+    public DataView getList(@RequestBody OfficeListFilterView filterView) throws Exception {
         return officeService.getList(filterView);
     }
 

@@ -99,8 +99,7 @@ public class OfficeDaoImpl implements OfficeDao {
         try {
             em.persist(office);
         } catch (Exception e) {
-            e.printStackTrace();
-            throw new Exception("on save error");
+            throw new Exception("OfficeDao: on save error");
         }
 
     }

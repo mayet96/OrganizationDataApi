@@ -1,10 +1,13 @@
 package ru.id61890868.OrganizationDataApi.service.organization;
 
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
-import ru.id61890868.OrganizationDataApi.view.OrganizationView;
+import ru.id61890868.OrganizationDataApi.view.organization.OrganizationListFilterView;
+import ru.id61890868.OrganizationDataApi.view.organization.OrganizationView;
+import ru.id61890868.OrganizationDataApi.view.response.DataView;
+import ru.id61890868.OrganizationDataApi.view.response.ResultView;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @Validated
 public interface OrganizationService {
@@ -14,7 +17,8 @@ public interface OrganizationService {
      *
      * @param org
      */
-    void add(@Valid OrganizationView org);
+    @Transactional
+    ResultView add(@Valid OrganizationView org) throws Exception;
 
     /*@Transactional
     void update(@Valid OrganizationView org);*/
@@ -24,19 +28,42 @@ public interface OrganizationService {
      *
      * @return {@OrganizationView}
      */
-    List<OrganizationView> organizations();
+    @Transactional
+    DataView organizations();
+
+    /**
+     * Получить список организаций
+     * по заданному фильтру
+     *
+     * @param filter
+     * @return {@DataView<OrganizationListOutView>}
+     */
+    @Transactional
+    DataView getList(@Valid OrganizationListFilterView filter) throws Exception;
 
     /**
      * Получить организацию по id
      *
      * @return {@OrganizationView}
      */
-    OrganizationView loadById(long id);
+    @Transactional
+    DataView loadById(long id) throws Exception;
 
     /**
      * обновить организацию
      *
-     * @return {@OrganizationView}
+     * @return {@ResultView}
      */
-    void update(@Valid OrganizationView view) throws Exception;
+    @Transactional
+    ResultView update(@Valid OrganizationView view) throws Exception;
+
+    /**
+     * удалить организацию
+     *
+     * @return {@ResultView}
+     */
+    @Transactional
+    ResultView removeById(long officeId) throws Exception;
+
+
 }
