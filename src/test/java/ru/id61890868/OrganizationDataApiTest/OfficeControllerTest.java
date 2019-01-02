@@ -31,6 +31,18 @@ import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
+/**
+ * При проведении данных тестов предполагается что в БД есть офис
+ * с id = 1
+ * name: "name",
+ * adress: "address",
+ * phone: "8622315652",
+ * isActive: false
+ * <p>
+ * а так же отсутствует запись с id = 0
+ */
+
+
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = {OrganizationDataApi.class})
 @DirtiesContext
@@ -41,6 +53,8 @@ public class OfficeControllerTest {
 
     RestTemplate restTemplate = new RestTemplate();
     final String url = "http://127.0.0.1:8887/api";
+
+    private static long id;
 
 
     private Office getExpectedOffice() {
@@ -104,7 +118,7 @@ public class OfficeControllerTest {
     @Test
     public void test1GetOffice() {
 
-        System.out.println("test #1 get list(by filter):");
+        System.out.println("test #1 get list(by filter):\n");
 
         //инициализация входных данных
 
@@ -128,25 +142,40 @@ public class OfficeControllerTest {
 
         assertThat(error.error, containsString("orgId cannot be null"));
 
-
+        //////////////////////
         System.out.println("\tполучаем офис по корректному фильтру");
         request = mapperFacade.map(expected, OfficeListFilterView.class);
         request.orgId = 2L;
-        ResponseEntity dataView =
-                restTemplate.postForEntity(url + "/office/list", request, DataView.class);
 
-        System.out.println("\t\tresponse: " + dataView.getBody());
-        assertNotNull(response);
-        assertEquals(response.getStatusCodeValue(), 200);
 
-        DataView<List<OfficeListItemView>> result = (DataView<List<OfficeListItemView>>) dataView.getBody();
+        //******
+        ParameterizedTypeReference<DataView<List<OfficeListItemView>>> reference =
+                new ParameterizedTypeReference<DataView<List<OfficeListItemView>>>() {
+                };
 
-        assertNotNull(result.data);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<OfficeListFilterView> httpEntity = new HttpEntity<OfficeListFilterView>(filter, headers);
+
+        ResponseEntity<DataView<List<OfficeListItemView>>> result;
+
+
+        result = restTemplate.exchange(url + "/office/list", HttpMethod.POST, httpEntity, reference);
+
+        System.out.println("\t\tfilter: " + filter.toString());
+        System.out.println("\t\tresponse: " + result.getBody());
+
+        assertNotNull(result.getBody().data);
+        assertNotNull(result);
+        assertEquals(result.getStatusCodeValue(), 200);
+
+        id = result.getBody().data.get(1).id;
+
     }
 
 
     @Test
-    public void test3GetOfficeById() {
+    public void test2GetOfficeById() {
 
         MapperFacade mapperFacade;
         mapperFacade = new MapperFacadeImpl(new DefaultMapperFactory.Builder().build());
@@ -182,6 +211,44 @@ public class OfficeControllerTest {
         assertEquals(view.address, expected.getAddress());
         assertEquals(view.name, expected.getName());
         assertEquals(view.phone, expected.getPhone());
+    }
+
+    @Test
+    public void test3DeleteOfficeById() {
+
+        MapperFacade mapperFacade;
+        mapperFacade = new MapperFacadeImpl(new DefaultMapperFactory.Builder().build());
+
+        System.out.println("test #3 getById:\n");
+        System.out.println("\tУдаляем офис по не существующему id");
+        ResponseEntity<ErrorView> response =
+                restTemplate.exchange(url + "/office/" + 0, HttpMethod.DELETE, null, ErrorView.class);
+        //ResponseEntity<ErrorView> response = restTemplate.getForEntity(url + "/office/" + 0, ErrorView.class);
+        System.out.println("\t\tresponse: " + response.getBody());
+
+        assertNotNull(response);
+        assertEquals(response.getStatusCodeValue(), 200);
+        assertThat(response.getBody().error, containsString("not found"));
+
+        ////////////////////////
+        Office expected = getExpectedOffice();
+
+        System.out.println("\tУдаляем офис по корректному id");
+        ParameterizedTypeReference<DataView<OfficeViewNoOrgId>> reference =
+                new ParameterizedTypeReference<DataView<OfficeViewNoOrgId>>() {
+                };
+
+        ResponseEntity<ResultView> result =
+                restTemplate.exchange(url + "/office/" + id, HttpMethod.DELETE, null, ResultView.class);
+        //restTemplate.exchange(url + "/office/" + id, HttpMethod.GET, null, reference);
+        Assert.assertNotNull(response);
+        System.out.println("\t\tresponse: " + result.getBody());
+
+        assertNotNull(result);
+        assertEquals(result.getStatusCodeValue(), 200);
+
+
+        assertEquals(result.getBody().result, "success");
     }
 
 }

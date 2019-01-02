@@ -1,7 +1,6 @@
 package ru.id61890868.OrganizationDataApi.model;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity(name = "country")
 public class Country {
