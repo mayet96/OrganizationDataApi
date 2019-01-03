@@ -16,9 +16,11 @@ public interface OfficeService {
     /**
      * Добавить новый офис в БД
      *
-     * @param officeView
+     * @param officeView представление данных нового офиса
      *
-     * @return {@ResultView}
+     * @return @ResultView
+     *
+     * @throws Exception ошибка при добавлении
      */
     @Transactional
     ResultView add(@Valid OfficeView officeView) throws Exception;
@@ -26,7 +28,7 @@ public interface OfficeService {
     /**
      * Получить список офисов
      *
-     * @return {@ResultView}
+     * @return @ResultView
      */
     @Transactional
     DataView offices();
@@ -35,9 +37,10 @@ public interface OfficeService {
      * Получить список офисов
      * по заданному фильтру
      *
-     * @param filter
+     * @param filter представление данных фильтра
      *
-     * @return {@DataView<OfficeListOutView>}
+     * @return @DataView<OfficeListOutView>
+     * @throws Exception ошибка при получении по фильтру
      */
     @Transactional
     DataView getList(@Valid OfficeListFilterView filter) throws Exception;
@@ -45,9 +48,10 @@ public interface OfficeService {
     /**
      * Получить офис по id
      *
-     * @param id
+     * @param id идентификатор офиса
      *
-     * @return {@DataView}
+     * @return @DataView
+     * @throws Exception ошибка при получении по id
      */
     @Transactional
     DataView loadById(long id) throws Exception;
@@ -58,9 +62,10 @@ public interface OfficeService {
     /**
      * обновить офис
      *
-     * @param view
+     * @param view представление данных обновляемого офиса
      *
-     * @return {@ResultView}
+     * @return @ResultView
+     * @throws Exception ошибка при обновлении
      */
     @Transactional
     ResultView update(@Valid OfficeViewNoOrgId view) throws Exception;
@@ -69,8 +74,9 @@ public interface OfficeService {
     /**
      * Удалить офис
      *
-     * @param officeId
-     * @return {@ResultView}
+     * @param officeId идентификатор удаляемого офиса
+     * @return @ResultView
+     * @throws Exception ошибка при удалении
      */
     @Transactional
     ResultView removeById(long officeId) throws Exception;

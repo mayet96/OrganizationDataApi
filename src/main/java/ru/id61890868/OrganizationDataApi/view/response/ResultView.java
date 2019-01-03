@@ -13,6 +13,7 @@ public class ResultView {
 
     /**
      * стандартный конструктор (статус: передать в конструктор)
+     * @param msg Сообщение результативного ответа
      */
     public ResultView(String msg) {
         this.result = msg;

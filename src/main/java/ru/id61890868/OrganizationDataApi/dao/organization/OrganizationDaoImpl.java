@@ -5,7 +5,6 @@ import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import ru.id61890868.OrganizationDataApi.dao.NotFoundException;
-import ru.id61890868.OrganizationDataApi.model.Office;
 import ru.id61890868.OrganizationDataApi.model.Organization;
 
 import javax.persistence.EntityManager;
@@ -34,10 +33,10 @@ public class OrganizationDaoImpl implements OrganizationDao {
      * {@inheritDoc}
      */
     @Override
-    public Organization loadById(Long id) throws Exception {
+    public Organization loadById(Long id) throws NotFoundException {
         Organization o = em.find(Organization.class, id);
         if (o == null) {
-            throw new Exception("OrgDao: not found");
+            throw new NotFoundException();
         }
         return o;
     }
@@ -48,16 +47,15 @@ public class OrganizationDaoImpl implements OrganizationDao {
     @Override
     public List<Organization> all() {
 
-        CriteriaBuilder qb = em.getCriteriaBuilder();
-        CriteriaQuery<Organization> c = qb.createQuery(Organization.class);
-        Root<Organization> p = c.from(Organization.class);
-        TypedQuery<Organization> q = em.createQuery(c);
-        List<Organization> l = q.getResultList();
-        return l;
+        CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+        CriteriaQuery<Organization> criteriaQuery = criteriaBuilder.createQuery(Organization.class);
+        TypedQuery<Organization> typedQuery = em.createQuery(criteriaQuery);
+        return typedQuery.getResultList();
     }
 
     @Override
     public List<Organization> list(Organization filter) throws Exception {
+
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Organization> cq = cb.createQuery(Organization.class);
         Root<Organization> root = cq.from(Organization.class);
@@ -152,6 +150,9 @@ public class OrganizationDaoImpl implements OrganizationDao {
         em.flush();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void removeById(long orgId) throws Exception {
 

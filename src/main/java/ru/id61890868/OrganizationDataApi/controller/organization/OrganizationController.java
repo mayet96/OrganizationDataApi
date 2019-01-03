@@ -46,7 +46,7 @@ public class OrganizationController {
 
     @ApiOperation(value = "Получить организацию по id", httpMethod = "GET")
     @GetMapping("/{id:[\\d]+}")
-    public DataView getOrganiationById(@PathVariable("id") long orgId) throws Exception {
+    public DataView getOrganziationById(@PathVariable("id") long orgId) throws Exception {
         return orgService.loadById(orgId);
     }
 
@@ -58,7 +58,7 @@ public class OrganizationController {
 
     @ApiOperation(value = "Удалить организацию по id", httpMethod = "DELETE")
     @DeleteMapping("/{id:[\\d]+}")
-    public ResultView removeOrganiationById(@PathVariable("id") long orgId) throws Exception {
+    public ResultView removeOrganizationById(@PathVariable("id") long orgId) throws Exception {
         return orgService.removeById(orgId);
     }
 }

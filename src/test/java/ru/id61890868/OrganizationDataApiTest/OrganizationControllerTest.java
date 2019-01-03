@@ -36,7 +36,7 @@ import static org.junit.Assert.*;
  * с id = 30
  * name: "name",
  * fullName: "full_name"
- * adress: "address",
+ * address: "address",
  * phone: "1111111111",
  * inn: "21268744562",
  * kpp: ""6544126554
@@ -54,7 +54,7 @@ import static org.junit.Assert.*;
 public class OrganizationControllerTest {
 
 
-    private RestTemplate restTemplate = new RestTemplate();
+    private final RestTemplate restTemplate = new RestTemplate();
     private final String url = "http://127.0.0.1:8887/api/organization";
 
     private static Long id;

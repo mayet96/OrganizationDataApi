@@ -3,7 +3,6 @@ package ru.id61890868.OrganizationDataApi.view.office;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -45,7 +44,7 @@ public class OfficeListFilterView {
     @Override
     public String toString() {
         return "{orgId:" + orgId + ";name:" + name
-                 + ";phone:" + phone
+                + ";phone:" + phone
                 + ";isActive:" + isActive + "}";
     }
 }

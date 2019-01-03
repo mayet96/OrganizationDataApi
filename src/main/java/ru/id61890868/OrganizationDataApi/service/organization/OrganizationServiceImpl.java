@@ -50,15 +50,18 @@ public class OrganizationServiceImpl implements OrganizationService {
     @Transactional
     public DataView organizations() {
         List<Organization> l = dao.all();
-        return new DataView<List<OrganizationView>>(
+        return new DataView<>(
                 mapperFacade.mapAsList(l, OrganizationView.class)
         );
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public DataView getList(@Valid OrganizationListFilterView filter) throws Exception {
         Organization _filter = mapperFacade.map(filter, Organization.class);
-        return new DataView<List<OrganizationListItemView>>(
+        return new DataView<>(
                 mapperFacade.mapAsList(dao.list(_filter), OrganizationListItemView.class)
         );
     }
@@ -69,7 +72,7 @@ public class OrganizationServiceImpl implements OrganizationService {
     @Override
     @Transactional
     public DataView loadById(long id) throws Exception {
-        return new DataView<OrganizationView>(
+        return new DataView<>(
                 mapperFacade.map(dao.loadById(id), OrganizationView.class)
         );
     }

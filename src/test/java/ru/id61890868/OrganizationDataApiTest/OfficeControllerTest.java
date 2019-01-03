@@ -35,7 +35,7 @@ import static org.junit.Assert.*;
  * При проведении данных тестов предполагается что в БД есть офис
  * с id = 1
  * name: "name",
- * adress: "address",
+ * address: "address",
  * phone: "8622315652",
  * isActive: false
  * <p>
@@ -50,17 +50,17 @@ import static org.junit.Assert.*;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class OfficeControllerTest {
 
-    private RestTemplate restTemplate = new RestTemplate();
+    private final RestTemplate restTemplate = new RestTemplate();
     private final String url = "http://127.0.0.1:8887/api/office";
 
     private static long id;
 
     private Office getExpectedOffice() {
-        Office expectedEnity;
-        expectedEnity = new Office(
+        Office expectedEntity;
+        expectedEntity = new Office(
                 "name", "address", "8622315652", false
         );
-        return expectedEnity;
+        return expectedEntity;
     }
 
 
@@ -176,7 +176,9 @@ public class OfficeControllerTest {
 
     }
 
-
+    /**
+     * Проверка получения офиса по id
+     */
     @Test
     public void test2GetOfficeById() {
 
@@ -215,6 +217,9 @@ public class OfficeControllerTest {
         assertEquals(view.phone, expected.getPhone());
     }
 
+    /**
+     * Проверка удаления офиса по id
+     */
     @Test
     public void test3DeleteOfficeById() {
 

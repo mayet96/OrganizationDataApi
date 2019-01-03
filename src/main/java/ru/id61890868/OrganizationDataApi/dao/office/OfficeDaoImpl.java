@@ -29,10 +29,10 @@ public class OfficeDaoImpl implements OfficeDao {
      * {@inheritDoc}
      */
     @Override
-    public Office loadById(Long id) throws Exception {
+    public Office loadById(Long id) throws NotFoundException {
         Office o = em.find(Office.class, id);
         if (o == null) {
-            throw new Exception("OfficeDao: not found");
+            throw new NotFoundException();
         }
         return o;
     }
@@ -131,6 +131,9 @@ public class OfficeDaoImpl implements OfficeDao {
         em.flush();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void removeById(long officeId) throws Exception {
 

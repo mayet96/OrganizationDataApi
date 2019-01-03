@@ -15,18 +15,19 @@ public interface OrganizationService {
     /**
      * Добавить новую организацию в БД
      *
-     * @param org
+     * @param org представление данных сохраняемой организации
+     *
+     * @return @ResultView
+     *
+     * @throws Exception ошибка при добавлении
      */
     @Transactional
     ResultView add(@Valid OrganizationView org) throws Exception;
 
-    /*@Transactional
-    void update(@Valid OrganizationView org);*/
-
     /**
      * Получить список организаций
      *
-     * @return {@OrganizationView}
+     * @return @OrganizationView
      */
     @Transactional
     DataView organizations();
@@ -35,8 +36,9 @@ public interface OrganizationService {
      * Получить список организаций
      * по заданному фильтру
      *
-     * @param filter
-     * @return {@DataView<OrganizationListOutView>}
+     * @param filter представление данных фильтра
+     * @return @DataView<OrganizationListOutView>
+     * @throws Exception ошибка при получении списка по фильтру
      */
     @Transactional
     DataView getList(@Valid OrganizationListFilterView filter) throws Exception;
@@ -44,7 +46,8 @@ public interface OrganizationService {
     /**
      * Получить организацию по id
      *
-     * @return {@OrganizationView}
+     * @return @OrganizationView
+     * @throws Exception ошибка при обновлении данных
      */
     @Transactional
     DataView loadById(long id) throws Exception;
@@ -52,7 +55,8 @@ public interface OrganizationService {
     /**
      * обновить организацию
      *
-     * @return {@ResultView}
+     * @return @ResultView
+     * @throws Exception ошибка при обновлении данных
      */
     @Transactional
     ResultView update(@Valid OrganizationView view) throws Exception;
@@ -60,7 +64,8 @@ public interface OrganizationService {
     /**
      * удалить организацию
      *
-     * @return {@ResultView}
+     * @return @ResultView
+     * @throws Exception ошибка при удалении
      */
     @Transactional
     ResultView removeById(long officeId) throws Exception;

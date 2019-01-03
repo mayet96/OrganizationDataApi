@@ -2,7 +2,6 @@ package ru.id61890868.OrganizationDataApi.model;
 
 
 import javax.persistence.*;
-import java.util.List;
 
 /**
  * Организация
@@ -58,13 +57,13 @@ public class Organization {
     /**
      * Телефон организации
      */
-    @Column(name = "phone", length = 15, nullable = true)
+    @Column(name = "phone", length = 15)
     private String phone;
 
     /**
      * Действительность
      */
-    @Column(name = "is_active", nullable = true)
+    @Column(name = "is_active")
     private Boolean isActive;
 
 

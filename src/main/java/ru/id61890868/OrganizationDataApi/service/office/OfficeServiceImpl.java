@@ -54,7 +54,7 @@ public class OfficeServiceImpl implements OfficeService {
 
         List<Office> l = dao.all();
         List<OfficeView> v = mapperFacade.mapAsList(l, OfficeView.class);
-        return new DataView<List<OfficeView>>(v);
+        return new DataView<>(v);
     }
 
     /**
@@ -63,7 +63,7 @@ public class OfficeServiceImpl implements OfficeService {
     @Override
     public DataView getList(@Valid OfficeListFilterView filter) throws Exception {
         Office _filter = mapperFacade.map(filter, Office.class);
-        return new DataView<List<OfficeListItemView>>(
+        return new DataView<>(
                 mapperFacade.mapAsList(dao.list(_filter, filter.orgId), OfficeListItemView.class)
         );
     }
@@ -76,7 +76,7 @@ public class OfficeServiceImpl implements OfficeService {
     public DataView loadById(long id) throws Exception {
         Office office = dao.loadById(id);
         OfficeViewNoOrgId view = mapperFacade.map(office, OfficeViewNoOrgId.class);
-        return new DataView<OfficeViewNoOrgId>(view);
+        return new DataView<>(view);
     }
 
     @Override
@@ -99,6 +99,9 @@ public class OfficeServiceImpl implements OfficeService {
         return new ResultView("success");
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @Transactional
     public ResultView removeById(long officeId) throws Exception {
