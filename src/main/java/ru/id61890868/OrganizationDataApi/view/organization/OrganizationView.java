@@ -15,12 +15,14 @@ public class OrganizationView {
     public Long id;
 
     @Size(max = 50)
-    @NotEmpty(message = "name cannot be null")
+    @NotNull(message = "name cannot be null")
+    @NotEmpty(message = "name cannot be empty")
     @ApiModelProperty(value = "Наименование", example = "OMEGA")
     public String name;
 
     @Size(max = 50)
     @NotNull(message = "full name cannot be null")
+    @NotEmpty(message = "fill name cannot be empty")
     @ApiModelProperty(value = "Полное наименование", example = "OMEGA Org.")
     public String fullName;
 

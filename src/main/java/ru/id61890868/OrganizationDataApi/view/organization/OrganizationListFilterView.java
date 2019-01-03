@@ -11,7 +11,8 @@ import javax.validation.constraints.Size;
 public class OrganizationListFilterView {
 
     @Size(max = 50)
-    @NotEmpty(message = "name cannot be null")
+    @NotNull(message = "name cannot be null")
+    @NotEmpty(message = "name cannot be empty")
     @ApiModelProperty(value = "Наименование", example = "OMEGA")
     public String name;
 
