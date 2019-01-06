@@ -61,6 +61,7 @@ public class OfficeServiceImpl implements OfficeService {
      * {@inheritDoc}
      */
     @Override
+    @Transactional
     public DataView getList(@Valid OfficeListFilterView filter) throws Exception {
         Office _filter = mapperFacade.map(filter, Office.class);
         return new DataView<>(
@@ -80,6 +81,7 @@ public class OfficeServiceImpl implements OfficeService {
     }
 
     @Override
+    @Transactional
     public OfficeView loadByIdTest(long id) throws Exception {
         Office office = dao.loadById(id);
         OfficeView view = mapperFacade.map(office, OfficeView.class);

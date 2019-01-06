@@ -2,6 +2,7 @@ package ru.id61890868.OrganizationDataApi.view.organization;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import ru.id61890868.OrganizationDataApi.view.OnlyDigits;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -16,21 +17,23 @@ public class OrganizationView {
 
     @Size(max = 50)
     @NotNull(message = "name cannot be null")
-    @NotEmpty(message = "name cannot be empty")
+    @NotEmpty(message = "name cannot be null")
     @ApiModelProperty(value = "Наименование", example = "OMEGA")
     public String name;
 
     @Size(max = 50)
     @NotNull(message = "full name cannot be null")
-    @NotEmpty(message = "fill name cannot be empty")
+    @NotEmpty(message = "full name cannot be null")
     @ApiModelProperty(value = "Полное наименование", example = "OMEGA Org.")
     public String fullName;
 
     @NotNull(message = "inn cannot be null")
+    @OnlyDigits(message = "inn value is not valid")
     @ApiModelProperty(value = "ИНН", example = "8912354123")
     public String inn;
 
     @NotNull(message = "kpp cannot be null")
+    @OnlyDigits(message = "kpp value is not valid")
     @ApiModelProperty(value = "КПП", example = "025496512684")
     public String kpp;
 

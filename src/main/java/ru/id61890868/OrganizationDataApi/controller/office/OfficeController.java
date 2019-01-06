@@ -44,7 +44,6 @@ public class OfficeController {
     @PostMapping("/save")
     public ResultView saveOffice(@RequestBody OfficeView officeView) throws Exception {
         return officeService.add(officeView);
-
     }
 
     @ApiOperation(value = "Получить офис по id", httpMethod = "GET")

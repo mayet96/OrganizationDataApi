@@ -15,16 +15,19 @@ public class OfficeView {
     @ApiModelProperty(value = "Уникальный идентификатор", hidden = true, example = "1")
     public Long id;
 
+
     @NotNull(message = "orgId cannot be null")
     @ApiModelProperty(value = "id владеющей организации")
     public Long orgId;
 
     @Size(max = 50)
     @NotEmpty(message = "name cannot be null")
+    @NotNull(message = "name cannot be null")
     @ApiModelProperty(value = "Наименование офиса", example = "OMEGA office")
     public String name;
 
     @Size(max = 50)
+    @NotEmpty(message = "address cannot be null")
     @NotNull(message = "address cannot be null")
     @ApiModelProperty(value = "Адрес офиса", example = "г. Смородинск, проспект Орки, дом 23")
     public String address;

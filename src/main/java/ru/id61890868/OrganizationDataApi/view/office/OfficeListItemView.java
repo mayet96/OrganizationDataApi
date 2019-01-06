@@ -4,6 +4,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
@@ -23,6 +24,7 @@ public class OfficeListItemView {
      * Наименование офиса
      */
     @Size(max = 50)
+    @NotNull(message = "name cannot be null")
     @NotEmpty(message = "name cannot be null")
     @ApiModelProperty(value = "Наименование офиса", example = "OMEGA office")
     public String name;

@@ -15,17 +15,24 @@ public class DocType {
     private Long id;
 
     /**
-     * Код документа
-     */
-    @Column(name = "code")
-    private String docCode;
-
-    /**
      * Наименование документа
      */
-    @Column(name = "name")
-    private String docName;
+    @Column(name = "name", nullable = false)
+    private String name;
 
+    /**
+     * Код документа
+     */
+    @Column(name = "code", nullable = false)
+    private String code;
+
+    public DocType(String name, String code) {
+        this.name = name;
+        this.code = code;
+    }
+
+    @Version
+    private Integer version;
 
     public DocType() {
 
@@ -35,20 +42,19 @@ public class DocType {
         return id;
     }
 
-    public String getDocCode() {
-        return docCode;
+    public String getCode() {
+        return code;
     }
 
-    public void setDocCode(String docCode) {
-        this.docCode = docCode;
+    public void setCode(String docCode) {
+        this.code = docCode;
     }
 
-    public String getDocName() {
-        return docName;
+    public String getName() {
+        return name;
     }
 
-    public void setDocName(String docName) {
-        this.docName = docName;
+    public void setName(String docName) {
+        this.name = docName;
     }
-
 }

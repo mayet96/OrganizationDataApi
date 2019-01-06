@@ -34,7 +34,7 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: country; Type: TABLE; Schema: public; Owner: postgres
+-- Name: thesaurus; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.country (
@@ -256,7 +256,7 @@ ALTER SEQUENCE public.organization_id_seq OWNED BY public.organization.id;
 
 
 --
--- Name: country id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: thesaurus id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.country ALTER COLUMN id SET DEFAULT nextval('public.country_id_seq'::regclass);
@@ -298,7 +298,7 @@ ALTER TABLE ONLY public.organization ALTER COLUMN id SET DEFAULT nextval('public
 
 
 --
--- Data for Name: country; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: thesaurus; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.country (id, name, code) FROM stdin;
@@ -405,7 +405,7 @@ SELECT pg_catalog.setval('public.organization_id_seq', 28, true);
 
 
 --
--- Name: country country_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: thesaurus country_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.country

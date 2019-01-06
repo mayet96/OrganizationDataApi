@@ -41,7 +41,7 @@ public class Employee {
      * Гражданство
      */
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "citizenship_id")
+    @JoinColumn(name = "thesaurus")
     private Country country;
 
     /**

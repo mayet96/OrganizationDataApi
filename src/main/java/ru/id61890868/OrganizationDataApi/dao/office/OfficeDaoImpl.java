@@ -101,7 +101,6 @@ public class OfficeDaoImpl implements OfficeDao {
         } catch (Exception e) {
             throw new Exception("OfficeDao: on save error");
         }
-
     }
 
     /**

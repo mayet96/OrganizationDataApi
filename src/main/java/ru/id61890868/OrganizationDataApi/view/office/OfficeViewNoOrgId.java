@@ -16,12 +16,14 @@ public class OfficeViewNoOrgId {
     public Long id;
 
     @Size(max = 50)
+    @NotNull(message = "name cannot be null")
     @NotEmpty(message = "name cannot be null")
     @ApiModelProperty(value = "Наименование офиса", example = "OMEGA office")
     public String name;
 
     @Size(max = 50)
     @NotNull(message = "address cannot be null")
+    @NotEmpty(message = "address cannot be null")
     @ApiModelProperty(value = "Адрес офиса", example = "г. Смородинск, проспект Орки, дом 23")
     public String address;
 
