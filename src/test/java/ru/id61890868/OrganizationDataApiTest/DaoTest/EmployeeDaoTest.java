@@ -17,13 +17,15 @@ import ru.id61890868.OrganizationDataApi.dao.docType.DocTypeDao;
 import ru.id61890868.OrganizationDataApi.dao.document.DocDao;
 import ru.id61890868.OrganizationDataApi.dao.employee.EmployeeDao;
 import ru.id61890868.OrganizationDataApi.dao.office.OfficeDao;
+import ru.id61890868.OrganizationDataApi.model.Country;
+import ru.id61890868.OrganizationDataApi.model.DocType;
+import ru.id61890868.OrganizationDataApi.model.Document;
 import ru.id61890868.OrganizationDataApi.model.Employee;
 
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.hamcrest.CoreMatchers.containsString;
+import static org.junit.Assert.*;
 
 
 /**
@@ -37,6 +39,9 @@ import static org.junit.Assert.assertTrue;
  * oDao.getById(1L),
  * cDao.getById(1L),
  * dDao.getById(1L)
+ * <p>
+ * а так же еще хотя бы 1 запись сотрудника у которого документ с типом
+ * "Паспорт гражданина Российской Федерации"
  */
 
 @RunWith(SpringRunner.class)
@@ -131,21 +136,70 @@ public class EmployeeDaoTest {
     @Test
     public void testGetByFilter() throws Exception {
 
-
+        //поиск по полному фильтру
+        List<Employee> l;
         Employee e = new Employee(
-                null,
+                "firstName",
                 "lastName",
                 "middleName",
                 "position",
                 "7778889996",
-                null,
+                oDao.getById(1L),
                 cDao.getById(1L),
                 dDao.getById(1L)
         );
 
-        List<Employee> l = empDao.getByFilter(e);
+        l = empDao.getByFilter(e);
+
         assertNotNull(l);
         assertTrue(l.size() > 0);
+        assertThat(l.toString(), containsString("Военный билет"));
+        System.out.println("\n result" + l + "\n");
+
+
+        //поиск по фильтру в котором есть только документ с
+        //одним(единственным заполненым полем) типом документа(и то, только одним параметром)
+        Document d = new Document();
+        d.setDocType(new DocType("Паспорт гражданина Российской Федерации", null));
+
+
+        e = new Employee(
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                d
+        );
+
+        l = empDao.getByFilter(e);
+        assertNotNull(l);
+        assertTrue(l.size() > 0);
+        assertThat(l.toString(), containsString("Паспорт гражданина Российской Федерации"));
+        System.out.println("\n result" + l + "\n");
+
+        //поиск по фильтру в котором есть только гражданство с
+        //одним(единственным заполненым полем) типом документа(и то, только одним параметром)
+
+        Country c = new Country();
+        c.setCode("052");
+        e = new Employee(
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                c,
+                null
+        );
+
+        l = empDao.getByFilter(e);
+        assertNotNull(l);
+        assertTrue(l.size() > 0);
+        assertThat(l.toString(), containsString("Барбадос"));
         System.out.println("\n result" + l + "\n");
 
     }

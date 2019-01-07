@@ -6,14 +6,13 @@ import ru.id61890868.OrganizationDataApi.dao.NotFoundException;
 import ru.id61890868.OrganizationDataApi.dao.country.CountryDao;
 import ru.id61890868.OrganizationDataApi.dao.docType.DocTypeDao;
 import ru.id61890868.OrganizationDataApi.dao.document.DocDao;
+import ru.id61890868.OrganizationDataApi.model.Country;
+import ru.id61890868.OrganizationDataApi.model.DocType;
 import ru.id61890868.OrganizationDataApi.model.Employee;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
+import javax.persistence.criteria.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -95,41 +94,92 @@ public class EmployeeDaoImpl implements EmployeeDao {
     public List<Employee> getByFilter(Employee filter) throws Exception {
 
         CriteriaBuilder cb = em.getCriteriaBuilder();
-        CriteriaQuery<Employee> cq = cb.createQuery(Employee.class);
-        Root<Employee> root = cq.from(Employee.class);
+
+        CriteriaQuery<Employee> empQuery = cb.createQuery(Employee.class);
+        Root<Employee> emp = empQuery.from(Employee.class);
+
         List<Predicate> predicates = new ArrayList<>();
 
         try {
             if (filter.getId() != null) {
-                predicates.add(cb.equal(root.get("id"), filter.getId()));
+                predicates.add(cb.equal(emp.get("id"), filter.getId()));
             }
             if (filter.getFirstName() != null) {
-                predicates.add(cb.equal(root.get("firstName"), filter.getFirstName()));
+                predicates.add(cb.equal(emp.get("firstName"), filter.getFirstName()));
             }
             if (filter.getLastName() != null) {
-                predicates.add(cb.equal(root.get("lastName"), filter.getLastName()));
+                predicates.add(cb.equal(emp.get("lastName"), filter.getLastName()));
             }
             if (filter.getMiddleName() != null) {
-                predicates.add(cb.equal(root.get("middleName"), filter.getMiddleName()));
+                predicates.add(cb.equal(emp.get("middleName"), filter.getMiddleName()));
             }
             if (filter.getPosition() != null) {
-                predicates.add(cb.equal(root.get("position"), filter.getPosition()));
+                predicates.add(cb.equal(emp.get("position"), filter.getPosition()));
             }
             if (filter.getPhone() != null) {
-                predicates.add(cb.equal(root.get("phone"), filter.getPhone()));
+                predicates.add(cb.equal(emp.get("phone"), filter.getPhone()));
             }
+            //если документ есть в фильтре
             if (filter.getDocument() != null) {
-                predicates.add(cb.equal(root.get("document"), filter.getDocument().getId()));
+                // TODO: здесь можно реализовать фильтр по полям документа
+
+                //и у документа есть типДокумента то искать будем по соответсвиям в типах
+                if (filter.getDocument().getDocType() != null) {
+
+                    Subquery<DocType> docQuery = empQuery.subquery(DocType.class);
+                    Root<Employee> doc = docQuery.correlate(emp);
+
+                    Join docTable = doc.join("document");
+                    Join docTypeTable = docTable.join("docType");
+
+                    docQuery.select(docTypeTable);
+                    //параметры поиска по типуДокумента по документу сотрудника из фильтра
+                    DocType _docType = filter.getDocument().getDocType();
+                    docQuery.where(
+                            cb.or(
+                                    cb.equal(
+                                            docTypeTable.get("code"),
+                                            _docType.getCode()
+                                    ),
+                                    cb.equal(
+                                            docTypeTable.get("name"),
+                                            _docType.getName()
+                                    )
+
+                            )
+                    );
+                    predicates.add(cb.exists(docQuery));
+                }
             }
             if (filter.getOffice() != null) {
-                predicates.add(cb.equal(root.get("office"), filter.getOffice().getId()));
+                // TODO: здесь можно реализовать фильтр полям офиса
+                predicates.add(cb.equal(emp.get("office"), filter.getOffice().getId()));
             }
             if (filter.getCountry() != null) {
-                predicates.add(cb.equal(root.get("country"), filter.getCountry().getId()));
-            }
-            cq.where(predicates.toArray(new Predicate[predicates.size()]));
+                Subquery<Country> countryQuery = empQuery.subquery(Country.class);
+                Root<Employee> country = countryQuery.correlate(emp);
+                Join countryTable = country.join("country");
 
-            TypedQuery<Employee> query = em.createQuery(cq);
+                countryQuery.select(countryTable);
+                //параметры поиска по гражданству(стране) из фильтра
+                Country _country = filter.getCountry();
+                countryQuery.where(
+                        cb.or(
+                                cb.equal(
+                                        countryTable.get("code"),
+                                        _country.getCode()
+                                ),
+                                cb.equal(
+                                        countryTable.get("name"),
+                                        _country.getName()
+                                )
+                        )
+                );
+                predicates.add(cb.exists(countryQuery));
+            }
+            empQuery.where(predicates.toArray(new Predicate[predicates.size()]));
+
+            TypedQuery<Employee> query = em.createQuery(empQuery);
             List<Employee> result = query.getResultList();
             if (result.isEmpty()) {
                 throw new NotFoundException();
@@ -138,7 +188,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
         } catch (NotFoundException e) {
             throw e;
         } catch (Exception e) {
-
+            e.printStackTrace();
             throw new Exception("incorrect filter");
         }
     }

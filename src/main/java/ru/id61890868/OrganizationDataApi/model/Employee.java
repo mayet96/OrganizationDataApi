@@ -156,9 +156,9 @@ public class Employee {
     @Override
     public String toString() {
         return String.format(
-                "{id: %s, name: %s, pos: %s, office: %s, doc: %s, phone: %s}",
+                "{id: %s, name: %s, pos: %s, office: %s, doc: %s, country: %s, phone: %s}",
                 id.toString(), firstName, position, office.getName(),
-                document.getDocType().getName(), phone
+                document.getDocType().getName(), country.getName(), phone
         );
     }
 }
