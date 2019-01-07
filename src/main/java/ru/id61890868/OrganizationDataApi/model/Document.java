@@ -27,9 +27,12 @@ public class Document {
     /**
      * Дата документа
      */
-    @Column(name = "doc_date")
+    @Column(name = "date")
     @Temporal(TemporalType.DATE)
     private Date docDate;
+
+    @Column(name = "is_identified")
+    private Boolean isIdentified;
 
     /**
      * Тип документа
@@ -40,6 +43,14 @@ public class Document {
 
     public Document() {
 
+    }
+
+    public Document(Long id, String docNumber, Date docDate, Boolean isIdentified, DocType docType) {
+        this.id = id;
+        this.docNumber = docNumber;
+        this.docDate = docDate;
+        this.isIdentified = isIdentified;
+        this.docType = docType;
     }
 
     public Long getId() {
@@ -68,5 +79,13 @@ public class Document {
 
     public void setDocType(DocType docType) {
         this.docType = docType;
+    }
+
+    public Boolean getIsIdentified() {
+        return isIdentified;
+    }
+
+    public void setIsIdentified(Boolean identified) {
+        isIdentified = identified;
     }
 }

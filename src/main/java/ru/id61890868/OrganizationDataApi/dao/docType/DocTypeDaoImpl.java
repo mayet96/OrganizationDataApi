@@ -43,7 +43,7 @@ public class DocTypeDaoImpl implements DocTypeDao {
     public DocType getById(long id) throws NotFoundException {
         DocType o = em.find(DocType.class, id);
         if (o == null) {
-            throw new NotFoundException();
+            throw new NotFoundException("DocTypeDao: type not found");
         }
         return o;
     }

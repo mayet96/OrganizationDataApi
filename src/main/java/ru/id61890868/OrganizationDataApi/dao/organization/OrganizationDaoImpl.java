@@ -109,7 +109,7 @@ public class OrganizationDaoImpl implements OrganizationDao {
         try {
             em.persist(organization);
         } catch (Exception e) {
-            throw new Exception("OrgDao: on save error");
+            throw new NotFoundException("OrgDao: organization not found");
         }
     }
 
@@ -122,9 +122,7 @@ public class OrganizationDaoImpl implements OrganizationDao {
             throw new Exception("OrgDao: id can not be null");
         }
         Organization upOrg = loadById(org.getId());
-        if (upOrg == null) {
-            throw new Exception("OrgDao: office not found");
-        }
+
         if (org.getIsActive() != null) {
             upOrg.setIsActive(org.getIsActive());
         }
@@ -158,7 +156,7 @@ public class OrganizationDaoImpl implements OrganizationDao {
 
         Organization o = em.find(Organization.class, orgId);
         if (o == null) {
-            throw new Exception("OrgDao: not found");
+            throw new NotFoundException("OrgDao: not found");
         }
         em.remove(o);
         em.flush();

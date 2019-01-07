@@ -20,7 +20,6 @@ import ru.id61890868.OrganizationDataApi.OrganizationDataApi;
 import ru.id61890868.OrganizationDataApi.model.Country;
 import ru.id61890868.OrganizationDataApi.model.DocType;
 import ru.id61890868.OrganizationDataApi.view.country.CountryView;
-import ru.id61890868.OrganizationDataApi.view.docType.DocTypeView;
 import ru.id61890868.OrganizationDataApi.view.response.DataView;
 import ru.id61890868.OrganizationDataApi.view.response.ErrorView;
 import ru.id61890868.OrganizationDataApi.view.response.ResultView;
@@ -51,7 +50,7 @@ public class CountryControllerTest {
     private final String url = "http://127.0.0.1:8887/api/countries";
 
     private Country getExpectedEntity() {
-        return new Country("name", "000");
+        return new Country("000", "CountryName");
     }
 
 
@@ -61,11 +60,11 @@ public class CountryControllerTest {
         System.out.println("test #0 save:\n");
 
         //сохраниение офиса без данных
-        System.out.println("\tсохраняем пустой экземпляр справочника");
+        System.out.println("\tсохраняем пустой экземпляр справочника:");
         DocType request = new DocType();
         ResponseEntity response = restTemplate.postForEntity(url + "/save", request, ErrorView.class);
 
-        System.out.println("\nresponse:\n\t" + response.getBody());
+        System.out.println("\t\tresponse:" + response.getBody());
 
         assertNotNull(response);
         assertEquals(response.getStatusCodeValue(), 200);
@@ -76,13 +75,13 @@ public class CountryControllerTest {
         assertThat(error.error, containsString("code can not be null"));
 
         //сохранение корректного экземпляра
-        System.out.println("\tсохраняем корректный экземпляр");
+        System.out.println("\n\tсохраняем корректный экземпляр справочника:");
 
         response = restTemplate.postForEntity(url + "/save", getExpectedEntity(), ResultView.class);
 
         assertNotNull(response);
         assertEquals(response.getStatusCodeValue(), 200);
-        System.out.println("\t\tresponse: " + response.getBody());
+        System.out.println("\t\tresponse:" + response.getBody() + "\n\n");
         ResultView result = (ResultView) response.getBody();
 
         assertNotNull(result);
@@ -112,7 +111,7 @@ public class CountryControllerTest {
 
         result = restTemplate.exchange(url + "/", HttpMethod.GET, null, reference);
 
-        System.out.println("\t\tresponse: " + result.getBody());
+        System.out.println("\t\tresponse: " + result.getBody() + "\n\n");
 
 
         assertNotNull(result);

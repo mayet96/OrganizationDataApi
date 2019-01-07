@@ -29,10 +29,10 @@ public class OfficeDaoImpl implements OfficeDao {
      * {@inheritDoc}
      */
     @Override
-    public Office loadById(Long id) throws NotFoundException {
+    public Office getById(Long id) throws NotFoundException {
         Office o = em.find(Office.class, id);
         if (o == null) {
-            throw new NotFoundException();
+            throw new NotFoundException("OfficeDao: office not found");
         }
         return o;
     }
@@ -84,7 +84,6 @@ public class OfficeDaoImpl implements OfficeDao {
         } catch (NotFoundException e) {
             throw e;
         } catch (Exception e) {
-            Logger.getLogger(this.getClass()).error(e.getStackTrace());
             throw new Exception("incorrect filter");
         }
 
@@ -111,10 +110,8 @@ public class OfficeDaoImpl implements OfficeDao {
         if (office.getId() == null) {
             throw new Exception("OfficeDao: id can not be null");
         }
-        Office upOffice = loadById(office.getId());
-        if (upOffice == null) {
-            throw new Exception("OfficeDao: office not found");
-        }
+        Office upOffice = getById(office.getId());
+
         if (office.getIsActive() != null) {
             upOffice.setIsActive(office.getIsActive());
         }
@@ -136,10 +133,7 @@ public class OfficeDaoImpl implements OfficeDao {
     @Override
     public void removeById(long officeId) throws Exception {
 
-        Office o = em.find(Office.class, officeId);
-        if (o == null) {
-            throw new Exception("OfficeDao: not found");
-        }
+        Office o = getById(officeId);
         em.remove(o);
         em.flush();
     }

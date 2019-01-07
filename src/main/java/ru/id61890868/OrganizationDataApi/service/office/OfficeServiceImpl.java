@@ -75,7 +75,7 @@ public class OfficeServiceImpl implements OfficeService {
     @Override
     @Transactional
     public DataView loadById(long id) throws Exception {
-        Office office = dao.loadById(id);
+        Office office = dao.getById(id);
         OfficeViewNoOrgId view = mapperFacade.map(office, OfficeViewNoOrgId.class);
         return new DataView<>(view);
     }
@@ -83,7 +83,7 @@ public class OfficeServiceImpl implements OfficeService {
     @Override
     @Transactional
     public OfficeView loadByIdTest(long id) throws Exception {
-        Office office = dao.loadById(id);
+        Office office = dao.getById(id);
         OfficeView view = mapperFacade.map(office, OfficeView.class);
         view.orgId = office.getOrganization().getId();
         return view;

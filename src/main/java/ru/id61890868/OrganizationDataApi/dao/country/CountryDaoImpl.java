@@ -44,7 +44,7 @@ public class CountryDaoImpl implements CountryDao {
     public Country getById(long id) throws NotFoundException {
         Country c = em.find(Country.class, id);
         if (c == null) {
-            throw new NotFoundException();
+            throw new NotFoundException("CountryDao: country not found");
         }
         return c;
     }

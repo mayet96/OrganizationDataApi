@@ -14,7 +14,7 @@ public interface OfficeDao {
      * @return Office
      * @throws NotFoundException офис не найден
      */
-    Office loadById(Long id) throws NotFoundException;
+    Office getById(Long id) throws NotFoundException;
 
 
     /**

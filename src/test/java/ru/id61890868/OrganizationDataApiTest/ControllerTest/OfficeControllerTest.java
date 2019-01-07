@@ -34,7 +34,7 @@ import static org.junit.Assert.*;
 /**
  * При проведении данных тестов предполагается что в БД есть офис
  * с id = 1
- * name: "name",
+ * name: "officeName",
  * address: "address",
  * phone: "8622315652",
  * isActive: false
@@ -58,7 +58,7 @@ public class OfficeControllerTest {
     private Office getExpectedOffice() {
         Office expectedEntity;
         expectedEntity = new Office(
-                "name", "address", "8622315652", false
+                "officeName", "address", "8622315652", false
         );
         return expectedEntity;
     }

@@ -10,7 +10,7 @@ import javax.persistence.*;
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @Version
     private Integer version;
@@ -18,7 +18,7 @@ public class Employee {
     @Column(name = "first_name", nullable = false, length = 50)
     private String firstName;
 
-    @Column(name = "last_name", nullable = false, length = 50)
+    @Column(name = "second_name", nullable = false, length = 50)
     private String lastName;
 
     @Column(name = "middle_name", length = 50)
@@ -27,8 +27,9 @@ public class Employee {
     @Column(name = "position", nullable = false)
     private String position;
 
-    @Column(name = "is_identified")
-    private Boolean isIdentified;
+    @Column(name = "phone", length = 15, nullable = true)
+    private String phone;
+
 
     /**
      * Связь с таблицей офисов
@@ -41,31 +42,52 @@ public class Employee {
      * Гражданство
      */
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "thesaurus")
+    @JoinColumn(name = "country_id")
     private Country country;
 
     /**
      * Документ
      */
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "document_id", unique = true)
+    @JoinColumn(name = "doc_id")
     private Document document;
 
     public Employee() {
 
     }
 
-    public Employee(String firstName, String lastName, String position, Boolean isIdentified) {
+    public Employee(String firstName, String lastName,
+                    String middleName, String position,
+                    String phone, Office office, Country country,
+                    Document document) {
+
         this.firstName = firstName;
         this.lastName = lastName;
+        this.middleName = middleName;
         this.position = position;
-        this.isIdentified = isIdentified;
+        this.phone = phone;
+        this.office = office;
+        this.country = country;
+        this.document = document;
     }
 
-    public Integer getId() {
+    public Employee(Long id, String firstName, String lastName,
+                    String middleName, String position, String phone,
+                    Office office, Country country, Document document) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.middleName = middleName;
+        this.position = position;
+        this.phone = phone;
+        this.office = office;
+        this.country = country;
+        this.document = document;
+    }
+
+    public Long getId() {
         return id;
     }
-
 
     public String getFirstName() {
         return firstName;
@@ -99,14 +121,6 @@ public class Employee {
         this.position = position;
     }
 
-    public Boolean getIdentified() {
-        return isIdentified;
-    }
-
-    public void setIdentified(Boolean identified) {
-        isIdentified = identified;
-    }
-
     public Office getOffice() {
         return office;
     }
@@ -129,5 +143,22 @@ public class Employee {
 
     public void setDocument(Document document) {
         this.document = document;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    @Override
+    public String toString() {
+        return String.format(
+                "{id: %s, name: %s, pos: %s, office: %s, doc: %s, phone: %s}",
+                id.toString(), firstName, position, office.getName(),
+                document.getDocType().getName(), phone
+        );
     }
 }
