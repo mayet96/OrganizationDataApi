@@ -196,11 +196,11 @@ public class OfficeControllerTest {
         Office expected = getExpectedOffice();
 
         System.out.println("\tполучаем офис по корректному id");
-        ParameterizedTypeReference<DataView<OfficeViewNoOrgId>> reference =
-                new ParameterizedTypeReference<DataView<OfficeViewNoOrgId>>() {
+        ParameterizedTypeReference<DataView<OfficeView>> reference =
+                new ParameterizedTypeReference<DataView<OfficeView>>() {
                 };
 
-        ResponseEntity<DataView<OfficeViewNoOrgId>> result =
+        ResponseEntity<DataView<OfficeView>> result =
                 restTemplate.exchange(url + "/" + 1, HttpMethod.GET, null, reference);
         Assert.assertNotNull(response);
         System.out.println("\t\tresponse: " + result.getBody());
@@ -209,7 +209,7 @@ public class OfficeControllerTest {
         assertNotNull(result.getBody());
         assertEquals(result.getStatusCodeValue(), 200);
 
-        OfficeViewNoOrgId view = result.getBody().data;
+        OfficeView view = result.getBody().data;
 
         assertThat(view.id, is(1L));
         assertEquals(view.address, expected.getAddress());

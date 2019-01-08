@@ -30,6 +30,9 @@ public class OfficeDaoImpl implements OfficeDao {
      */
     @Override
     public Office getById(Long id) throws NotFoundException {
+        if (id == null) {
+            throw new NullPointerException("OfficeDao: id is incorrect or null");
+        }
         Office o = em.find(Office.class, id);
         if (o == null) {
             throw new NotFoundException("OfficeDao: office not found");

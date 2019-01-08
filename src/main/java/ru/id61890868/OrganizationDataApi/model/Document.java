@@ -37,7 +37,7 @@ public class Document {
     /**
      * Тип документа
      */
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "doc_type", nullable = false)
     private DocType docType;
 
@@ -45,12 +45,16 @@ public class Document {
 
     }
 
-    public Document(Long id, String docNumber, Date docDate, Boolean isIdentified, DocType docType) {
-        this.id = id;
+    public Document(String docNumber, Date docDate, Boolean isIdentified, DocType docType) {
         this.docNumber = docNumber;
         this.docDate = docDate;
         this.isIdentified = isIdentified;
         this.docType = docType;
+    }
+
+    public Document(Long id, String docNumber, Date docDate, Boolean isIdentified, DocType docType) {
+        this(docNumber, docDate, isIdentified, docType);
+        this.id = id;
     }
 
     public Long getId() {

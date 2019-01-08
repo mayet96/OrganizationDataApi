@@ -4,9 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import ru.id61890868.OrganizationDataApi.dao.NotFoundException;
 import ru.id61890868.OrganizationDataApi.model.Country;
-import ru.id61890868.OrganizationDataApi.model.Office;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -47,6 +47,30 @@ public class CountryDaoImpl implements CountryDao {
             throw new NotFoundException("CountryDao: country not found");
         }
         return c;
+    }
+
+    @Override
+    public Country getByCode(String filter) throws NotFoundException {
+
+        if (filter == null || filter.isEmpty()) {
+            throw new NullPointerException();
+        }
+
+        CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+        CriteriaQuery<Country> criteriaQuery = criteriaBuilder.createQuery(Country.class);
+        Root<Country> root = criteriaQuery.from(Country.class);
+        criteriaQuery.where(criteriaBuilder.equal(root.get("code"), filter));
+        TypedQuery<Country> query = em.createQuery(criteriaQuery);
+
+        Country result;
+
+        try {
+            result = query.getSingleResult();
+        } catch (NoResultException e) {
+            throw new NotFoundException("DocTypeDao: DocTypeNotFound");
+        }
+
+        return result;
     }
 
     @Override

@@ -12,8 +12,8 @@ import javax.validation.constraints.Size;
 public class OfficeViewNoOrgId {
 
     //@NotNull(message = "id cannot be null")
-    @ApiModelProperty(value = "Уникальный идентификатор", hidden = true, example = "1")
-    public Long id;
+    //@ApiModelProperty(value = "Уникальный идентификатор", hidden = true, example = "1")
+    //public Long id;
 
     @Size(max = 50)
     @NotNull(message = "name cannot be null")
@@ -35,9 +35,8 @@ public class OfficeViewNoOrgId {
 
     @Override
     public String toString() {
-        return "{id:" + id + ";name:" + name
+        return "{name:" + name
                 + ";address:" + address + ";phone:" + phone
                 + ";isActive:" + isActive + "}";
     }
-
 }

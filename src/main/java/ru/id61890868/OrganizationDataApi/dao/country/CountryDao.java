@@ -10,6 +10,8 @@ public interface CountryDao {
 
     Country getById(long id) throws NotFoundException;
 
+    Country getByCode(String filter) throws NotFoundException;
+
     List<Country> getAll() throws Exception;
 
     void save(Country o) throws Exception;

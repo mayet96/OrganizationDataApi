@@ -54,7 +54,7 @@ public interface OfficeService {
      * @throws Exception ошибка при получении по id
      */
     @Transactional
-    DataView loadById(long id) throws Exception;
+    DataView getById(long id) throws Exception;
 
     @Transactional
     OfficeView loadByIdTest(long id) throws Exception;
@@ -68,7 +68,7 @@ public interface OfficeService {
      * @throws Exception ошибка при обновлении
      */
     @Transactional
-    ResultView update(@Valid OfficeViewNoOrgId view) throws Exception;
+    ResultView update(@Valid OfficeView view) throws Exception;
 
 
     /**

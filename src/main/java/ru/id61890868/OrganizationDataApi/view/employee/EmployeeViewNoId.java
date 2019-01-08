@@ -9,11 +9,9 @@ import javax.validation.constraints.Size;
 import java.util.Date;
 
 @ApiModel(description = "Сотрудник")
-public class EmployeeView {
+public class EmployeeViewNoId {
 
-    @NotNull(message = "id cannot be null")
-    @ApiModelProperty(value = "Уникальный идентификатор", hidden = true, example = "1")
-    public Long id;
+
     /**
      * Имя сотрудника
      */
@@ -84,14 +82,14 @@ public class EmployeeView {
      */
     public Boolean isIdentified;
 
+
     @Override
     public String toString() {
         return String.format(
-                "id: %d, firstName: %s, secondName: %s, middleName: %s, position: %s," +
-                        "phone: %s, docNum: %s, sitzCode: %s",
-                id, firstName, secondName, middleName, position, phone, docNumber,
-                citizenshipCode, isIdentified
+                "firstName: %s, secondName: %s, middleName: %s, position: %s," +
+                        "phone: %s, docNum: %s, docDate: \"%s\", sitzCode: %s, identif: %s",
+                firstName, secondName, middleName, position, phone, docNumber, docDate.toString(),
+                citizenshipCode, isIdentified.toString()
         );
     }
-
 }

@@ -56,11 +56,11 @@ public class EmployeeDaoImpl implements EmployeeDao {
     }
 
     @Override
-    public void update(Employee o) throws Exception {
-        if (o.getId() == null) {
+    public void update(Employee o, Long id) throws Exception {
+        if (id == null) {
             throw new Exception("EmployeeDao: id can not be null");
         }
-        Employee upEmp = getById(o.getId());
+        Employee upEmp = getById(id);
 
         if (o.getFirstName() != null) {
             upEmp.setFirstName(o.getFirstName());

@@ -8,9 +8,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
 
-@ApiModel(description = "Сотрудник")
-public class EmployeeView {
-
+@ApiModel(description = "Данные сотрудника включая наименования доков и гражданства")
+public class EmployeeViewWithNames {
     @NotNull(message = "id cannot be null")
     @ApiModelProperty(value = "Уникальный идентификатор", hidden = true, example = "1")
     public Long id;
@@ -63,6 +62,10 @@ public class EmployeeView {
      */
     public String docCode;
 
+    /**
+     * Наименование документа
+     */
+    public String docName;
 
     /**
      * Номер документа
@@ -73,6 +76,11 @@ public class EmployeeView {
      * Дата документа
      */
     public Date docDate;
+
+    /**
+     * Наименование страны
+     */
+    public String citizenshipName;
 
     /**
      * Код страны
@@ -88,10 +96,9 @@ public class EmployeeView {
     public String toString() {
         return String.format(
                 "id: %d, firstName: %s, secondName: %s, middleName: %s, position: %s," +
-                        "phone: %s, docNum: %s, sitzCode: %s",
-                id, firstName, secondName, middleName, position, phone, docNumber,
+                        "phone: %s, docName: %s, docNum: %s, sitzCode: %s",
+                id, firstName, secondName, middleName, position, phone, docName, docNumber,
                 citizenshipCode, isIdentified
         );
     }
-
 }

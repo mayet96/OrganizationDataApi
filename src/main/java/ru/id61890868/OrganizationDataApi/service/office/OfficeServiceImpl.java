@@ -74,9 +74,9 @@ public class OfficeServiceImpl implements OfficeService {
      */
     @Override
     @Transactional
-    public DataView loadById(long id) throws Exception {
+    public DataView getById(long id) throws Exception {
         Office office = dao.getById(id);
-        OfficeViewNoOrgId view = mapperFacade.map(office, OfficeViewNoOrgId.class);
+        OfficeView view = mapperFacade.map(office, OfficeView.class);
         return new DataView<>(view);
     }
 
@@ -94,7 +94,7 @@ public class OfficeServiceImpl implements OfficeService {
      */
     @Override
     @Transactional
-    public ResultView update(@Valid OfficeViewNoOrgId view) throws Exception {
+    public ResultView update(@Valid OfficeView view) throws Exception {
         Office upOffice = new Office(view.id, view.name, view.address,
                 view.phone, view.isActive);
         dao.update(upOffice);

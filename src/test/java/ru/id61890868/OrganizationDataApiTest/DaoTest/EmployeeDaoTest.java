@@ -12,6 +12,7 @@ import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 import ru.id61890868.OrganizationDataApi.OrganizationDataApi;
+import ru.id61890868.OrganizationDataApi.dao.NotFoundException;
 import ru.id61890868.OrganizationDataApi.dao.country.CountryDao;
 import ru.id61890868.OrganizationDataApi.dao.docType.DocTypeDao;
 import ru.id61890868.OrganizationDataApi.dao.document.DocDao;
@@ -21,6 +22,9 @@ import ru.id61890868.OrganizationDataApi.model.Country;
 import ru.id61890868.OrganizationDataApi.model.DocType;
 import ru.id61890868.OrganizationDataApi.model.Document;
 import ru.id61890868.OrganizationDataApi.model.Employee;
+import ru.id61890868.OrganizationDataApi.model.mapper.MapperFacade;
+import ru.id61890868.OrganizationDataApi.view.employee.EmployeeListFilterView;
+import ru.id61890868.OrganizationDataApi.view.employee.EmployeeView;
 
 import java.util.List;
 
@@ -67,6 +71,9 @@ public class EmployeeDaoTest {
 
     @Autowired
     private PlatformTransactionManager transactionManager;
+
+    @Autowired
+    private MapperFacade mapperFacade;
 
 
     @Test
@@ -127,7 +134,7 @@ public class EmployeeDaoTest {
                 dDao.getById(1L)
         );
 
-        empDao.update(e);
+        empDao.update(e, e.getId());
 
 
         transactionManager.rollback(transaction);
@@ -202,6 +209,39 @@ public class EmployeeDaoTest {
         assertThat(l.toString(), containsString("Барбадос"));
         System.out.println("\n result" + l + "\n");
 
+    }
+
+    @Test
+    public void mapperTest() throws NotFoundException {
+        Employee e = new Employee(
+                1L,
+                "firstName",
+                "lastName",
+                "middleName",
+                "position",
+                "7778889996",
+                oDao.getById(1L),
+                cDao.getById(1L),
+                dDao.getById(1L)
+        );
+
+        EmployeeView view = mapperFacade.map(e, EmployeeView.class);
+        assertNotNull(view);
+        System.out.println("\n\nview:\n\t " + view.toString() + "\n");
+        Employee employee = mapperFacade.map(view, Employee.class);
+        assertNotNull(employee);
+
+        EmployeeListFilterView view1 = mapperFacade.map(e, EmployeeListFilterView.class);
+        assertNotNull(view1);
+        System.out.println("\n\nview1:\n\t " + view1.toString() + "\n");
+
+        Country c = mapperFacade.map(e, Country.class);
+        assertNotNull(c);
+        System.out.println("\n\ncountry:\n\t " + c.getName() + "/" + c.getCode() + "\n");
+
+        Document d = mapperFacade.map(e, Document.class);
+        assertNotNull(c);
+        System.out.println("\n\ndoc:\n\t " + d.getDocType().getName() + "/" + d.getDocNumber() + "\n");
     }
 
 }

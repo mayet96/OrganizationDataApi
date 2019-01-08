@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 import ru.id61890868.OrganizationDataApi.service.office.OfficeService;
 import ru.id61890868.OrganizationDataApi.view.office.OfficeListFilterView;
 import ru.id61890868.OrganizationDataApi.view.office.OfficeView;
-import ru.id61890868.OrganizationDataApi.view.office.OfficeViewNoOrgId;
 import ru.id61890868.OrganizationDataApi.view.response.DataView;
 import ru.id61890868.OrganizationDataApi.view.response.ResultView;
 
@@ -49,20 +48,21 @@ public class OfficeController {
     @ApiOperation(value = "Получить офис по id", httpMethod = "GET")
     @GetMapping("/{id:[\\d]+}")
     public DataView getOfficeById(@PathVariable("id") long officeId) throws Exception {
-        return officeService.loadById(officeId);
+        return officeService.getById(officeId);
 
     }
 
 
     @ApiOperation(value = "Изменить данные офиса", httpMethod = "POST")
     @PostMapping("/update")
-    public ResultView updateOffice(@RequestBody OfficeViewNoOrgId view) throws Exception {
+    public ResultView updateOffice(@RequestBody OfficeView view) throws Exception {
         return officeService.update(view);
 
     }
 
 
-    @ApiOperation(value = "Получить организацию по id", httpMethod = "GET")
+    @Deprecated
+    @ApiOperation(value = "Получить офис по id(тест)", httpMethod = "GET")
     @GetMapping("/test/{id:[\\d]+}")
     public ResponseEntity<?> test(@PathVariable("id") long officeId) throws Exception {
         return new ResponseEntity<>((officeService.loadByIdTest(officeId)), HttpStatus.OK);

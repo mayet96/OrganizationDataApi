@@ -41,14 +41,14 @@ public class Employee {
     /**
      * Гражданство
      */
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "country_id")
     private Country country;
 
     /**
      * Документ
      */
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "doc_id")
     private Document document;
 
@@ -153,12 +153,4 @@ public class Employee {
         this.phone = phone;
     }
 
-    @Override
-    public String toString() {
-        return String.format(
-                "{id: %s, name: %s, pos: %s, office: %s, doc: %s, country: %s, phone: %s}",
-                id.toString(), firstName, position, office.getName(),
-                document.getDocType().getName(), country.getName(), phone
-        );
-    }
 }

@@ -49,6 +49,25 @@ public class DocTypeDaoImpl implements DocTypeDao {
     }
 
     @Override
+    public DocType getByCode(String filter) throws NotFoundException {
+
+        if (filter == null || filter.isEmpty()) {
+            throw new NullPointerException();
+        }
+
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<DocType> cq = cb.createQuery(DocType.class);
+        Root<DocType> root = cq.from(DocType.class);
+        cq.where(cb.equal(root.get("code"), filter));
+        TypedQuery<DocType> query = em.createQuery(cq);
+        DocType result = query.getSingleResult();
+        if (result == null) {
+            throw new NotFoundException("DocTypeDao: DocTypeNotFound");
+        }
+        return result;
+    }
+
+    @Override
     public void save(DocType o) throws Exception {
 
         try {

@@ -10,6 +10,8 @@ public interface DocTypeDao {
 
     DocType getById(long id) throws NotFoundException;
 
+    DocType getByCode(String filter) throws NotFoundException;
+
     List<DocType> getAll() throws Exception;
 
     void save(DocType o) throws Exception;

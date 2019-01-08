@@ -11,7 +11,7 @@ public interface EmployeeDao {
 
     Employee getById(Long id) throws NotFoundException;
 
-    void update(Employee o) throws Exception;
+    void update(Employee oo, Long id) throws Exception;
 
     List<Employee> getByFilter(Employee filter) throws Exception;
 
