@@ -25,6 +25,9 @@ public class DocTypeDaoImpl implements DocTypeDao {
     }
 
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<DocType> getAll() throws Exception {
 
@@ -39,6 +42,9 @@ public class DocTypeDaoImpl implements DocTypeDao {
     }
 
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public DocType getById(long id) throws NotFoundException {
         DocType o = em.find(DocType.class, id);
@@ -48,6 +54,9 @@ public class DocTypeDaoImpl implements DocTypeDao {
         return o;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public DocType getByCode(String filter) throws NotFoundException {
 
@@ -67,6 +76,9 @@ public class DocTypeDaoImpl implements DocTypeDao {
         return result;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void save(DocType o) throws Exception {
 

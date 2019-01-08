@@ -52,6 +52,9 @@ public class OfficeDaoImpl implements OfficeDao {
         return q.getResultList();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<Office> list(Office filter, Long orgId) throws Exception {
 

@@ -25,6 +25,9 @@ public class CountryDaoImpl implements CountryDao {
     }
 
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<Country> getAll() throws Exception {
 
@@ -40,6 +43,9 @@ public class CountryDaoImpl implements CountryDao {
     }
 
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Country getById(long id) throws NotFoundException {
         Country c = em.find(Country.class, id);
@@ -49,6 +55,9 @@ public class CountryDaoImpl implements CountryDao {
         return c;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Country getByCode(String filter) throws NotFoundException {
 
@@ -73,6 +82,9 @@ public class CountryDaoImpl implements CountryDao {
         return result;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void save(Country o) throws Exception {
         try {

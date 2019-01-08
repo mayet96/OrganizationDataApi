@@ -37,6 +37,9 @@ public class EmployeeDaoImpl implements EmployeeDao {
     }
 
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void save(Employee o) throws Exception {
         try {
@@ -46,6 +49,9 @@ public class EmployeeDaoImpl implements EmployeeDao {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Employee getById(Long id) throws NotFoundException {
         Employee o = em.find(Employee.class, id);
@@ -55,6 +61,9 @@ public class EmployeeDaoImpl implements EmployeeDao {
         return o;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void update(Employee o, Long id) throws Exception {
         if (id == null) {
@@ -90,6 +99,9 @@ public class EmployeeDaoImpl implements EmployeeDao {
         em.flush();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<Employee> getByFilter(Employee filter) throws Exception {
 
@@ -145,7 +157,6 @@ public class EmployeeDaoImpl implements EmployeeDao {
                                             docTypeTable.get("name"),
                                             _docType.getName()
                                     )
-
                             )
                     );
                     predicates.add(cb.exists(docQuery));
@@ -193,7 +204,9 @@ public class EmployeeDaoImpl implements EmployeeDao {
         }
     }
 
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void removeById(Long id) throws NotFoundException {
 

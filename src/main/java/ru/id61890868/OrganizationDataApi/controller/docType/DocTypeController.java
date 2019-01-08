@@ -1,4 +1,4 @@
-package ru.id61890868.OrganizationDataApi.controller.dotType;
+package ru.id61890868.OrganizationDataApi.controller.docType;
 
 
 import io.swagger.annotations.Api;
