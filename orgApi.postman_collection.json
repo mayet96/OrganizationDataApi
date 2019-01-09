@@ -1,0 +1,1189 @@
+{
+  "info": {
+    "_postman_id": "0ef00e91-baf1-4dfd-ba3d-cc0b37b9879b",
+    "name": "orgApi",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "org",
+      "item": [
+        {
+          "name": "save",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n\t\"name\": \"Normandia\",\n\t\"fullName\": \"Normandia org.\",\n\t\"inn\": \"4234522355\",\n\t\"kpp\": \"8777777777\",\n\t\"address\": \"гор. Огромный, проспект Дорог, д1\",\n\t\"phone\": \"+79998887744\",\n\t\"isActive\": \"false\"\n}"
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8887/api/organization/save?",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8887",
+              "path": [
+                "api",
+                "organization",
+                "save"
+              ],
+              "query": [
+                {
+                  "key": "name",
+                  "value": "OMEGA",
+                  "disabled": true
+                },
+                {
+                  "key": "fullName",
+                  "value": "OMEGA org.",
+                  "disabled": true
+                },
+                {
+                  "key": "inn",
+                  "value": "1234556789",
+                  "disabled": true
+                },
+                {
+                  "key": "kpp",
+                  "value": "98745214551",
+                  "disabled": true
+                },
+                {
+                  "key": "address",
+                  "value": "г. Город, Уличный проспект, д12",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "update",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"id\": 29,\n    \"name\": \"Normandia\",\n    \"fullName\": \"Normandia org.\",\n    \"inn\": \"4234522355\",\n    \"kpp\": \"8777777777\",\n    \"address\": \"гор. Огромный, проспект Дорог, д1\",\n    \"phone\": \"+79998887744\",\n    \"isActive\": true\n}"
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8887/api/organization/update?",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8887",
+              "path": [
+                "api",
+                "organization",
+                "update"
+              ],
+              "query": [
+                {
+                  "key": "name",
+                  "value": "OMEGA",
+                  "disabled": true
+                },
+                {
+                  "key": "fullName",
+                  "value": "OMEGA org.",
+                  "disabled": true
+                },
+                {
+                  "key": "inn",
+                  "value": "1234556789",
+                  "disabled": true
+                },
+                {
+                  "key": "kpp",
+                  "value": "98745214551",
+                  "disabled": true
+                },
+                {
+                  "key": "address",
+                  "value": "г. Город, Уличный проспект, д12",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get(by id)",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8887/api/organization/29?",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8887",
+              "path": [
+                "api",
+                "organization",
+                "29"
+              ],
+              "query": [
+                {
+                  "key": "name",
+                  "value": "OMEGA",
+                  "disabled": true
+                },
+                {
+                  "key": "fullName",
+                  "value": "OMEGA org.",
+                  "disabled": true
+                },
+                {
+                  "key": "inn",
+                  "value": "1234556789",
+                  "disabled": true
+                },
+                {
+                  "key": "kpp",
+                  "value": "98745214551",
+                  "disabled": true
+                },
+                {
+                  "key": "address",
+                  "value": "г. Город, Уличный проспект, д12",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get(by filter)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n\t\"name\": \"PETA3\"\n}"
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8887/api/organization/list?",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8887",
+              "path": [
+                "api",
+                "organization",
+                "list"
+              ],
+              "query": [
+                {
+                  "key": "name",
+                  "value": "OMEGA",
+                  "disabled": true
+                },
+                {
+                  "key": "fullName",
+                  "value": "OMEGA org.",
+                  "disabled": true
+                },
+                {
+                  "key": "inn",
+                  "value": "1234556789",
+                  "disabled": true
+                },
+                {
+                  "key": "kpp",
+                  "value": "98745214551",
+                  "disabled": true
+                },
+                {
+                  "key": "address",
+                  "value": "г. Город, Уличный проспект, д12",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE(by id)",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8887/api/organization/12?",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8887",
+              "path": [
+                "api",
+                "organization",
+                "12"
+              ],
+              "query": [
+                {
+                  "key": "name",
+                  "value": "OMEGA",
+                  "disabled": true
+                },
+                {
+                  "key": "fullName",
+                  "value": "OMEGA org.",
+                  "disabled": true
+                },
+                {
+                  "key": "inn",
+                  "value": "1234556789",
+                  "disabled": true
+                },
+                {
+                  "key": "kpp",
+                  "value": "98745214551",
+                  "disabled": true
+                },
+                {
+                  "key": "address",
+                  "value": "г. Город, Уличный проспект, д12",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get(all)",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n\t\"fullName\": \"HETA3 org.\",\n\t\"inn\": \"12322421\",\n\t\"kpp\": \"93521574\",\n\t\"address\": \"гор. Город, проспект Проспектов, д8\",\n\t\"phone\": \"+8885223354\",\n\t\"isActive\": \"false\"\n}"
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8887/api/organization/?",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8887",
+              "path": [
+                "api",
+                "organization",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "name",
+                  "value": "OMEGA",
+                  "disabled": true
+                },
+                {
+                  "key": "fullName",
+                  "value": "OMEGA org.",
+                  "disabled": true
+                },
+                {
+                  "key": "inn",
+                  "value": "1234556789",
+                  "disabled": true
+                },
+                {
+                  "key": "kpp",
+                  "value": "98745214551",
+                  "disabled": true
+                },
+                {
+                  "key": "address",
+                  "value": "г. Город, Уличный проспект, д12",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "office",
+      "item": [
+        {
+          "name": "save",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n\t\"name\":\"ALPHA office_5\",\n\t\"address\":\"г. Зеленый д 27\",\n\t\"phone\":\"8651264529\",\n\t\"isActive\":\"true\",\n\t\"orgId\":\"2\"\n}"
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8887/api/office/save?",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8887",
+              "path": [
+                "api",
+                "office",
+                "save"
+              ],
+              "query": [
+                {
+                  "key": "name",
+                  "value": "OMEGA office1",
+                  "disabled": true
+                },
+                {
+                  "key": "address",
+                  "value": "г. Сахарный д.27",
+                  "disabled": true
+                },
+                {
+                  "key": "phone",
+                  "value": "87421325245",
+                  "disabled": true
+                },
+                {
+                  "key": "isActive",
+                  "value": "true",
+                  "disabled": true
+                },
+                {
+                  "key": "orgId",
+                  "value": "2",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "update",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"id\": 16,\n    \"name\": \"ALPHA1 office_4\",\n    \"address\": \"г. Красный д 27\",\n    \"phone\": \"8351223129\",\n    \"isActive\": false\n}"
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8887/api/office/update?",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8887",
+              "path": [
+                "api",
+                "office",
+                "update"
+              ],
+              "query": [
+                {
+                  "key": "name",
+                  "value": "OMEGA",
+                  "disabled": true
+                },
+                {
+                  "key": "fullName",
+                  "value": "OMEGA org.",
+                  "disabled": true
+                },
+                {
+                  "key": "inn",
+                  "value": "1234556789",
+                  "disabled": true
+                },
+                {
+                  "key": "kpp",
+                  "value": "98745214551",
+                  "disabled": true
+                },
+                {
+                  "key": "address",
+                  "value": "г. Город, Уличный проспект, д12",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get(by filter)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"orgId\": \"2\",\n    \"phone\": \"8622315652\"\n}"
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8887/api/office/list?",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8887",
+              "path": [
+                "api",
+                "office",
+                "list"
+              ],
+              "query": [
+                {
+                  "key": "name",
+                  "value": "OMEGA",
+                  "disabled": true
+                },
+                {
+                  "key": "fullName",
+                  "value": "OMEGA org.",
+                  "disabled": true
+                },
+                {
+                  "key": "inn",
+                  "value": "1234556789",
+                  "disabled": true
+                },
+                {
+                  "key": "kpp",
+                  "value": "98745214551",
+                  "disabled": true
+                },
+                {
+                  "key": "address",
+                  "value": "г. Город, Уличный проспект, д12",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get(by id)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8887/api/office/1",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8887",
+              "path": [
+                "api",
+                "office",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE(by id)",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8887/api/office/28",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8887",
+              "path": [
+                "api",
+                "office",
+                "28"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get(by id) Test",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8887/api/office/test/8",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8887",
+              "path": [
+                "api",
+                "office",
+                "test",
+                "8"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get(all)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8887/api/office/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8887",
+              "path": [
+                "api",
+                "office",
+                ""
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "employee",
+      "item": [
+        {
+          "name": "save",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"firstName\": \"Алексей\",\n    \"secondName\": \"Романов\",\n    \"middleName\": \"Александрович\",\n    \"office\": \"1\",\n    \"position\": \"manager\",\n    \"phone\": \"9874552122\",\n    \"docCode\": \"07\",\n    \"docNumber\": \"630120\",\n    \"docDate\": \"2006-11-31\",\n    \"citizenshipCode\": \"643\",\n    \"isIdentified\": \"true\"\n}"
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8887/api/user/save?",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8887",
+              "path": [
+                "api",
+                "user",
+                "save"
+              ],
+              "query": [
+                {
+                  "key": "name",
+                  "value": "OMEGA office1",
+                  "disabled": true
+                },
+                {
+                  "key": "address",
+                  "value": "г. Сахарный д.27",
+                  "disabled": true
+                },
+                {
+                  "key": "phone",
+                  "value": "87421325245",
+                  "disabled": true
+                },
+                {
+                  "key": "isActive",
+                  "value": "true",
+                  "disabled": true
+                },
+                {
+                  "key": "orgId",
+                  "value": "2",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "update",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n\t\"id\":\"8\",\n    \"firstName\": \"Алексей*\",\n    \"secondName\": \"Романов*\",\n    \"middleName\": \"Александрович*\",\n    \"office\": \"5\",\n    \"position\": \"manager*\",\n    \"phone\": \"9874552122\",\n    \"docCode\": \"21\",\n    \"docNumber\": \"44466630120\",\n    \"docDate\": \"2006-11-25\",\n    \"citizenshipCode\": \"643\",\n    \"isIdentified\": \"false\"\n}"
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8887/api/user/update?",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8887",
+              "path": [
+                "api",
+                "user",
+                "update"
+              ],
+              "query": [
+                {
+                  "key": "name",
+                  "value": "OMEGA",
+                  "disabled": true
+                },
+                {
+                  "key": "fullName",
+                  "value": "OMEGA org.",
+                  "disabled": true
+                },
+                {
+                  "key": "inn",
+                  "value": "1234556789",
+                  "disabled": true
+                },
+                {
+                  "key": "kpp",
+                  "value": "98745214551",
+                  "disabled": true
+                },
+                {
+                  "key": "address",
+                  "value": "г. Город, Уличный проспект, д12",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get(by filter)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n\n    \"office\": \"1\"\n}"
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8887/api/user/list?",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8887",
+              "path": [
+                "api",
+                "user",
+                "list"
+              ],
+              "query": [
+                {
+                  "key": "name",
+                  "value": "OMEGA",
+                  "disabled": true
+                },
+                {
+                  "key": "fullName",
+                  "value": "OMEGA org.",
+                  "disabled": true
+                },
+                {
+                  "key": "inn",
+                  "value": "1234556789",
+                  "disabled": true
+                },
+                {
+                  "key": "kpp",
+                  "value": "98745214551",
+                  "disabled": true
+                },
+                {
+                  "key": "address",
+                  "value": "г. Город, Уличный проспект, д12",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get(by id)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8887/api/user/8",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8887",
+              "path": [
+                "api",
+                "user",
+                "8"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE(by id)",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8887/api/user/10",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8887",
+              "path": [
+                "api",
+                "user",
+                "10"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "country",
+      "item": [
+        {
+          "name": "get(by id)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8887/api/countries/1",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8887",
+              "path": [
+                "api",
+                "countries",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "save",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n\t\"name\":\"Пуэрто-Рико\",\n\t\"code\":\" 630\"\n}"
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8887/api/countries/save?",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8887",
+              "path": [
+                "api",
+                "countries",
+                "save"
+              ],
+              "query": [
+                {
+                  "key": "name",
+                  "value": "OMEGA office1",
+                  "disabled": true
+                },
+                {
+                  "key": "address",
+                  "value": "г. Сахарный д.27",
+                  "disabled": true
+                },
+                {
+                  "key": "phone",
+                  "value": "87421325245",
+                  "disabled": true
+                },
+                {
+                  "key": "isActive",
+                  "value": "true",
+                  "disabled": true
+                },
+                {
+                  "key": "orgId",
+                  "value": "2",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get(all)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8887/api/countries/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8887",
+              "path": [
+                "api",
+                "countries",
+                ""
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "docType",
+      "item": [
+        {
+          "name": "get(by id)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8887/api/docs/1",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8887",
+              "path": [
+                "api",
+                "docs",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "save",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n\t\"name\":\"Паспорт гражданина Российской Федерации\",\n\t\"code\":\"21\"\n}"
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8887/api/docs/save?",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8887",
+              "path": [
+                "api",
+                "docs",
+                "save"
+              ],
+              "query": [
+                {
+                  "key": "name",
+                  "value": "OMEGA office1",
+                  "disabled": true
+                },
+                {
+                  "key": "address",
+                  "value": "г. Сахарный д.27",
+                  "disabled": true
+                },
+                {
+                  "key": "phone",
+                  "value": "87421325245",
+                  "disabled": true
+                },
+                {
+                  "key": "isActive",
+                  "value": "true",
+                  "disabled": true
+                },
+                {
+                  "key": "orgId",
+                  "value": "2",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get(all)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8887/api/docs/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8887",
+              "path": [
+                "api",
+                "docs",
+                ""
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
