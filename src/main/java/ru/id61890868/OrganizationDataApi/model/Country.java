@@ -21,6 +21,9 @@ public class Country {
     @Column(name = "id", columnDefinition = "serial")
     private Long id;
 
+    @Version
+    private Integer version;
+
     /**
      * Код страны
      */
@@ -32,9 +35,6 @@ public class Country {
      */
     @Column(name = "name", length = 50, nullable = false)
     private String name;
-
-    @Version
-    private Integer version;
 
     public Country() {
 

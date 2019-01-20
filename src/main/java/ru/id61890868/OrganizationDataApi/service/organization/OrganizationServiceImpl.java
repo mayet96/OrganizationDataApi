@@ -22,10 +22,10 @@ import java.util.List;
 @Service
 public class OrganizationServiceImpl implements OrganizationService {
 
-    private static final Logger log = LoggerFactory.getLogger("OrganizationServiceImpl");
+    final static private Logger log = LoggerFactory.getLogger("OrganizationServiceImpl");
 
-    private OrganizationDao dao;
-    private MapperFacade mapperFacade;
+    final private OrganizationDao dao;
+    final private MapperFacade mapperFacade;
 
     @Autowired
     public OrganizationServiceImpl(OrganizationDao dao, MapperFacade mapperFacade){

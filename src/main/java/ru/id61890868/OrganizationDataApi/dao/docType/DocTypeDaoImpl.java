@@ -16,7 +16,7 @@ import java.util.List;
 public class DocTypeDaoImpl implements DocTypeDao {
 
 
-    private final EntityManager em;
+    final private EntityManager em;
 
     @Autowired
     public DocTypeDaoImpl(EntityManager em) {

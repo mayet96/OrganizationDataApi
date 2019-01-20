@@ -16,7 +16,7 @@ import java.util.List;
 @Service
 public class CountryServiceImpl implements CountryService {
 
-    private CountryDao dao;
+    final private CountryDao dao;
     final private MapperFacade mapperFacade;
 
 

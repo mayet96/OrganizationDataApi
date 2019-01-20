@@ -17,7 +17,7 @@ import java.util.List;
 public class CountryDaoImpl implements CountryDao {
 
 
-    private final EntityManager em;
+    final private EntityManager em;
 
     @Autowired
     public CountryDaoImpl(EntityManager em) {

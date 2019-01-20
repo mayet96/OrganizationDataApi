@@ -25,7 +25,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 public class CountryController {
 
 
-    private final CountryService countryService;
+    final private CountryService countryService;
 
     @Autowired
     public CountryController(CountryService countryService) {

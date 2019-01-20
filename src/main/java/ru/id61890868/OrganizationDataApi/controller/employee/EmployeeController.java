@@ -30,7 +30,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RequestMapping(value = "/api/user", produces = APPLICATION_JSON_VALUE)
 public class EmployeeController {
 
-    private final EmployeeService service;
+    final private EmployeeService service;
 
     @Autowired
     public EmployeeController(EmployeeService service) {

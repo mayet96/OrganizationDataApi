@@ -22,7 +22,7 @@ import java.util.List;
 public class EmployeeDaoImpl implements EmployeeDao {
 
 
-    private EntityManager em;
+    final private EntityManager em;
 
     @Autowired
     public EmployeeDaoImpl(EntityManager em) {

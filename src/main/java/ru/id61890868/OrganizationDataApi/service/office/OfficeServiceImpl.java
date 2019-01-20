@@ -20,9 +20,9 @@ import java.util.List;
 @Service
 public class OfficeServiceImpl implements OfficeService {
 
-    private OfficeDao dao;
-    private MapperFacade mapperFacade;
-    private OrganizationDao organizationDao;
+    final private OfficeDao dao;
+    final private MapperFacade mapperFacade;
+    final private OrganizationDao organizationDao;
 
     @Autowired
     public OfficeServiceImpl(OfficeDao dao, MapperFacade mapperFacade, OrganizationDao organizationDao) {

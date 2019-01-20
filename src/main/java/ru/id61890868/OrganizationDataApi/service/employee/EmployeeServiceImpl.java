@@ -26,11 +26,11 @@ import java.util.List;
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
-    private EmployeeDao employeeDao;
-    private CountryDao countryDao;
-    private DocTypeDao docTypeDao;
-    private MapperFacade mapper;
-    private OfficeDao officeDao;
+    final private EmployeeDao employeeDao;
+    final private CountryDao countryDao;
+    final private DocTypeDao docTypeDao;
+    final private MapperFacade mapper;
+    final private OfficeDao officeDao;
 
     @Autowired
     public EmployeeServiceImpl(EmployeeDao emplDao, CountryDao cDao, DocTypeDao dtDao,

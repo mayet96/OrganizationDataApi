@@ -25,7 +25,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 public class DocTypeController {
 
 
-    private final DocTypeService service;
+    final private DocTypeService service;
 
     @Autowired
     public DocTypeController(DocTypeService service) {

@@ -21,6 +21,9 @@ public class DocType {
     @Column(name = "id", columnDefinition = "serial")
     private Long id;
 
+    @Version
+    private Integer version;
+
     /**
      * Наименование документа
      */
@@ -38,8 +41,6 @@ public class DocType {
         this.code = code;
     }
 
-    @Version
-    private Integer version;
 
     public DocType() {
 

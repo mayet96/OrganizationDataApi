@@ -16,7 +16,7 @@ import java.util.List;
 @Service
 public class DocTypeServiceImpl implements DocTypeService {
 
-    private DocTypeDao dao;
+    final private DocTypeDao dao;
     final private MapperFacade mapperFacade;
 
 

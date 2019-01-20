@@ -20,7 +20,7 @@ import java.util.List;
  */
 @Service
 public class MapperFacadeImpl implements MapperFacade {
-    private final MapperFactory mapperFactory;
+    final private MapperFactory mapperFactory;
 
     @Autowired
     public MapperFacadeImpl(MapperFactory mapperFactory) {
