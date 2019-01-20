@@ -29,7 +29,9 @@ import ru.id61890868.OrganizationDataApi.view.employee.EmployeeView;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.containsString;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 
 /**
@@ -158,10 +160,11 @@ public class EmployeeDaoTest {
 
         l = empDao.getByFilter(e);
 
+
         assertNotNull(l);
+        System.out.println("\n result" + l + "\n");
         assertTrue(l.size() > 0);
         assertThat(l.toString(), containsString("Военный билет"));
-        System.out.println("\n result" + l + "\n");
 
 
         //поиск по фильтру в котором есть только документ с

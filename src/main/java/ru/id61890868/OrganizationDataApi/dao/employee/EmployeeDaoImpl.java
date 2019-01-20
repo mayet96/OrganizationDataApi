@@ -3,16 +3,18 @@ package ru.id61890868.OrganizationDataApi.dao.employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import ru.id61890868.OrganizationDataApi.dao.NotFoundException;
-import ru.id61890868.OrganizationDataApi.dao.country.CountryDao;
-import ru.id61890868.OrganizationDataApi.dao.docType.DocTypeDao;
-import ru.id61890868.OrganizationDataApi.dao.document.DocDao;
 import ru.id61890868.OrganizationDataApi.model.Country;
 import ru.id61890868.OrganizationDataApi.model.DocType;
 import ru.id61890868.OrganizationDataApi.model.Employee;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
-import javax.persistence.criteria.*;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Join;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+import javax.persistence.criteria.Subquery;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,19 +22,11 @@ import java.util.List;
 public class EmployeeDaoImpl implements EmployeeDao {
 
 
-    private DocDao docDao;
-
-    private CountryDao countryDao;
-
-    private DocTypeDao docTypeDao;
-
     private EntityManager em;
 
     @Autowired
-    public EmployeeDaoImpl(DocDao docDao, CountryDao countryDao, DocTypeDao docTypeDao, EntityManager em) {
-        this.docDao = docDao;
-        this.countryDao = countryDao;
-        this.docTypeDao = docTypeDao;
+    public EmployeeDaoImpl(EntityManager em) {
+
         this.em = em;
     }
 
@@ -45,7 +39,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
         try {
             em.persist(o);
         } catch (Exception e) {
-            throw new Exception("EmployeeDao: on save error");
+            throw new Exception("EmployeeDao: on save error", e);
         }
     }
 
@@ -199,8 +193,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
         } catch (NotFoundException e) {
             throw e;
         } catch (Exception e) {
-            e.printStackTrace();
-            throw new Exception("incorrect filter");
+            throw new Exception("incorrect filter", e);
         }
     }
 

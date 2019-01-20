@@ -1,7 +1,16 @@
 package ru.id61890868.OrganizationDataApi.model;
 
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Version;
 
 /**
  * Сотрудник
@@ -27,7 +36,7 @@ public class Employee {
     @Column(name = "position", nullable = false)
     private String position;
 
-    @Column(name = "phone", length = 15, nullable = true)
+    @Column(name = "phone", length = 15)
     private String phone;
 
 
@@ -153,4 +162,13 @@ public class Employee {
         this.phone = phone;
     }
 
+    @Override
+    public String toString() {
+
+        //используется для идентификации экземпляра и компонентов объекта в тестах
+        return String.format(
+                "firstName: %s, pos: %s, officeName %s, countryName: %s, docTypeName: %s",
+                firstName, position, office.getName(), country.getName(), document.getDocType().getName()
+        );
+    }
 }

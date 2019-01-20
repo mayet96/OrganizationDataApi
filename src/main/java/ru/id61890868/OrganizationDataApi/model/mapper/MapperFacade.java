@@ -1,8 +1,5 @@
 package ru.id61890868.OrganizationDataApi.model.mapper;
 
-import ru.id61890868.OrganizationDataApi.model.Employee;
-import ru.id61890868.OrganizationDataApi.view.employee.EmployeeView;
-
 import java.util.List;
 
 /**
@@ -34,28 +31,13 @@ public interface MapperFacade {
     /**
      * Преобразование коллекции оъектов
      *
-     * @param source            исходная коллекция
-     * @param destinationClass  класс, в который надо преобразовать объект
-     * @param <S>               тип исходного объекта
-     * @param <D>               тип объекта, в который надо преобразовать исходный объект
+     * @param source           исходная коллекция
+     * @param destinationClass класс, в который надо преобразовать объект
+     * @param <S>              тип исходного объекта
+     * @param <D>              тип объекта, в который надо преобразовать исходный объект
      * @return лист объектов класса D с данными из листа source
      */
     <S, D> List<D> mapAsList(Iterable<S> source, Class<D> destinationClass);
 
-    /**
-     * Преобразование Employee to EmployeeView
-     *
-     * @param employee Входные данные
-     * @return EmployeeView
-     */
-    EmployeeView EmplToView(Employee employee);
-
-    /**
-     * Кастомное преобразование UserView к User
-     *
-     * @param view Входные данные
-     * @return Employee
-     */
-    Employee ViewToEmpl(EmployeeView view);
 
 }

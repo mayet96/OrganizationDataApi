@@ -2,15 +2,16 @@ package ru.id61890868.OrganizationDataApi.service.employee;
 
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
-import ru.id61890868.OrganizationDataApi.model.Employee;
 import ru.id61890868.OrganizationDataApi.view.employee.EmployeeListFilterView;
+import ru.id61890868.OrganizationDataApi.view.employee.EmployeeListItemView;
 import ru.id61890868.OrganizationDataApi.view.employee.EmployeeView;
 import ru.id61890868.OrganizationDataApi.view.employee.EmployeeViewNoId;
-import ru.id61890868.OrganizationDataApi.view.office.OfficeView;
+import ru.id61890868.OrganizationDataApi.view.employee.EmployeeViewWithNames;
 import ru.id61890868.OrganizationDataApi.view.response.DataView;
 import ru.id61890868.OrganizationDataApi.view.response.ResultView;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Validated
 public interface EmployeeService {
@@ -33,7 +34,7 @@ public interface EmployeeService {
      * @throws Exception ошибка при получении по id
      */
     @Transactional
-    DataView getById(long id) throws Exception;
+    DataView<EmployeeViewWithNames> getById(long id) throws Exception;
 
     /**
      * Получить список сотрудников
@@ -44,7 +45,7 @@ public interface EmployeeService {
      * @throws Exception ошибка при получении по фильтру
      */
     @Transactional
-    DataView getList(@Valid EmployeeListFilterView filter) throws Exception;
+    DataView<List<EmployeeListItemView>> getList(@Valid EmployeeListFilterView filter) throws Exception;
 
     /**
      * обновить данные сотрудника

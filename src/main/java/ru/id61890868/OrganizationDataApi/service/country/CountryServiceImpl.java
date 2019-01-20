@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.id61890868.OrganizationDataApi.dao.country.CountryDao;
-import ru.id61890868.OrganizationDataApi.dao.organization.OrganizationDao;
 import ru.id61890868.OrganizationDataApi.model.Country;
 import ru.id61890868.OrganizationDataApi.model.mapper.MapperFacade;
 import ru.id61890868.OrganizationDataApi.view.country.CountryView;
@@ -37,21 +36,21 @@ public class CountryServiceImpl implements CountryService {
 
     @Override
     @Transactional
-    public DataView loadById(long id) throws Exception {
+    public DataView<CountryView> loadById(long id) throws Exception {
 
         Country c = dao.getById(id);
         CountryView view = mapperFacade.map(c, CountryView.class);
 
-        return new DataView<>(view);
+        return new DataView<CountryView>(view);
     }
 
     @Override
     @Transactional
-    public DataView getAll() throws Exception {
+    public DataView<List<CountryView>> getAll() throws Exception {
 
         List<Country> list = dao.getAll();
         List<CountryView> listOfViews = mapperFacade.mapAsList(list, CountryView.class);
 
-        return new DataView<>(listOfViews);
+        return new DataView<List<CountryView>>(listOfViews);
     }
 }

@@ -97,7 +97,7 @@ public class OrganizationDaoImpl implements OrganizationDao {
             throw e;
         } catch (Exception e) {
             Logger.getLogger(this.getClass()).error(e.getStackTrace());
-            throw new Exception("incorrect filter");
+            throw new Exception("incorrect filter", e);
         }
     }
 
@@ -109,7 +109,7 @@ public class OrganizationDaoImpl implements OrganizationDao {
         try {
             em.persist(organization);
         } catch (Exception e) {
-            throw new NotFoundException("OrgDao: organization not found");
+            throw new NotFoundException("OrgDao: organization not found", e);
         }
     }
 

@@ -3,11 +3,13 @@ package ru.id61890868.OrganizationDataApi.service.organization;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 import ru.id61890868.OrganizationDataApi.view.organization.OrganizationListFilterView;
+import ru.id61890868.OrganizationDataApi.view.organization.OrganizationListItemView;
 import ru.id61890868.OrganizationDataApi.view.organization.OrganizationView;
 import ru.id61890868.OrganizationDataApi.view.response.DataView;
 import ru.id61890868.OrganizationDataApi.view.response.ResultView;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Validated
 public interface OrganizationService {
@@ -30,7 +32,7 @@ public interface OrganizationService {
      * @return @OrganizationView
      */
     @Transactional
-    DataView organizations();
+    DataView<List<OrganizationView>> organizations();
 
     /**
      * Получить список организаций
@@ -41,7 +43,7 @@ public interface OrganizationService {
      * @throws Exception ошибка при получении списка по фильтру
      */
     @Transactional
-    DataView getList(@Valid OrganizationListFilterView filter) throws Exception;
+    DataView<List<OrganizationListItemView>> getList(@Valid OrganizationListFilterView filter) throws Exception;
 
     /**
      * Получить организацию по id
@@ -50,7 +52,7 @@ public interface OrganizationService {
      * @throws Exception ошибка при обновлении данных
      */
     @Transactional
-    DataView loadById(long id) throws Exception;
+    DataView<OrganizationView> loadById(long id) throws Exception;
 
     /**
      * обновить организацию

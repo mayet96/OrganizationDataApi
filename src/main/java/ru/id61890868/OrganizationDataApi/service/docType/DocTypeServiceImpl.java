@@ -1,6 +1,5 @@
 package ru.id61890868.OrganizationDataApi.service.docType;
 
-import com.sun.prism.PixelFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,21 +37,21 @@ public class DocTypeServiceImpl implements DocTypeService {
 
     @Override
     @Transactional
-    public DataView loadById(long id) throws Exception {
+    public DataView<DocTypeView> loadById(long id) throws Exception {
 
         DocType o = dao.getById(id);
         DocTypeView view = mapperFacade.map(o, DocTypeView.class);
 
-        return new DataView<>(view);
+        return new DataView<DocTypeView>(view);
     }
 
     @Override
     @Transactional
-    public DataView getAll() throws Exception {
+    public DataView<List<DocTypeView>> getAll() throws Exception {
 
         List<DocType> list = dao.getAll();
         List<DocTypeView> listOfViews = mapperFacade.mapAsList(list, DocTypeView.class);
 
-        return new DataView<>(listOfViews);
+        return new DataView<List<DocTypeView>>(listOfViews);
     }
 }

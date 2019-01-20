@@ -4,8 +4,6 @@ package ru.id61890868.OrganizationDataApi.view.employee;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @ApiModel(description = "Представление элемента данных сотрудника в списке")

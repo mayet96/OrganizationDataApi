@@ -4,7 +4,6 @@ package ru.id61890868.OrganizationDataApi.dao.document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import ru.id61890868.OrganizationDataApi.dao.NotFoundException;
-import ru.id61890868.OrganizationDataApi.model.DocType;
 import ru.id61890868.OrganizationDataApi.model.Document;
 
 import javax.persistence.EntityManager;
@@ -39,7 +38,7 @@ public class DocDaoImpl implements DocDao {
         try {
             em.persist(o);
         } catch (Exception e) {
-            throw new Exception("docDao: on save error");
+            throw new Exception("docDao: on save error", e);
         }
     }
 

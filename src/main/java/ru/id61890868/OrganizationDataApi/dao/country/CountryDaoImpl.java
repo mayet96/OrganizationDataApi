@@ -31,15 +31,21 @@ public class CountryDaoImpl implements CountryDao {
     @Override
     public List<Country> getAll() throws Exception {
 
-        CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
-        CriteriaQuery<Country> criteriaQuery = criteriaBuilder.createQuery(Country.class);
-        Root<Country> root = criteriaQuery.from(Country.class);
+        try {
+            CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+            CriteriaQuery<Country> criteriaQuery = criteriaBuilder.createQuery(Country.class);
+            Root<Country> root = criteriaQuery.from(Country.class);
 
-        criteriaQuery.select(root);
+            criteriaQuery.select(root);
 
-        TypedQuery<Country> query = em.createQuery(criteriaQuery);
+            TypedQuery<Country> query = em.createQuery(criteriaQuery);
+            return query.getResultList();
+        } catch (Exception e) {
+            throw new Exception(" CountryDao: error", e);
+        }
 
-        return query.getResultList();
+
+
     }
 
 
@@ -76,7 +82,7 @@ public class CountryDaoImpl implements CountryDao {
         try {
             result = query.getSingleResult();
         } catch (NoResultException e) {
-            throw new NotFoundException("DocTypeDao: DocTypeNotFound");
+            throw new NotFoundException("DocTypeDao: DocTypeNotFound", e);
         }
 
         return result;
@@ -90,7 +96,7 @@ public class CountryDaoImpl implements CountryDao {
         try {
             em.persist(o);
         } catch (Exception e) {
-            throw new Exception("country dao: on save error");
+            throw new Exception("country dao: on save error", e);
         }
     }
 }

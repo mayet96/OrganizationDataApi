@@ -8,10 +8,9 @@ import ru.id61890868.OrganizationDataApi.dao.organization.OrganizationDao;
 import ru.id61890868.OrganizationDataApi.model.Office;
 import ru.id61890868.OrganizationDataApi.model.Organization;
 import ru.id61890868.OrganizationDataApi.model.mapper.MapperFacade;
-import ru.id61890868.OrganizationDataApi.view.office.OfficeListItemView;
 import ru.id61890868.OrganizationDataApi.view.office.OfficeListFilterView;
+import ru.id61890868.OrganizationDataApi.view.office.OfficeListItemView;
 import ru.id61890868.OrganizationDataApi.view.office.OfficeView;
-import ru.id61890868.OrganizationDataApi.view.office.OfficeViewNoOrgId;
 import ru.id61890868.OrganizationDataApi.view.response.DataView;
 import ru.id61890868.OrganizationDataApi.view.response.ResultView;
 
@@ -50,11 +49,11 @@ public class OfficeServiceImpl implements OfficeService {
      */
     @Override
     @Transactional
-    public DataView offices() {
+    public DataView<List<OfficeView>> offices() {
 
         List<Office> l = dao.all();
         List<OfficeView> v = mapperFacade.mapAsList(l, OfficeView.class);
-        return new DataView<>(v);
+        return new DataView<List<OfficeView>>(v);
     }
 
     /**
@@ -62,9 +61,9 @@ public class OfficeServiceImpl implements OfficeService {
      */
     @Override
     @Transactional
-    public DataView getList(@Valid OfficeListFilterView filter) throws Exception {
+    public DataView<List<OfficeListItemView>> getList(@Valid OfficeListFilterView filter) throws Exception {
         Office _filter = mapperFacade.map(filter, Office.class);
-        return new DataView<>(
+        return new DataView<List<OfficeListItemView>>(
                 mapperFacade.mapAsList(dao.list(_filter, filter.orgId), OfficeListItemView.class)
         );
     }
@@ -74,10 +73,10 @@ public class OfficeServiceImpl implements OfficeService {
      */
     @Override
     @Transactional
-    public DataView getById(long id) throws Exception {
+    public DataView<OfficeView> getById(long id) throws Exception {
         Office office = dao.getById(id);
         OfficeView view = mapperFacade.map(office, OfficeView.class);
-        return new DataView<>(view);
+        return new DataView<OfficeView>(view);
     }
 
     @Override

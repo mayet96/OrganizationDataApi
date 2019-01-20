@@ -7,7 +7,11 @@ import org.springframework.stereotype.Service;
 import ru.id61890868.OrganizationDataApi.model.Country;
 import ru.id61890868.OrganizationDataApi.model.Document;
 import ru.id61890868.OrganizationDataApi.model.Employee;
-import ru.id61890868.OrganizationDataApi.view.employee.*;
+import ru.id61890868.OrganizationDataApi.view.employee.EmployeeListFilterView;
+import ru.id61890868.OrganizationDataApi.view.employee.EmployeeListItemView;
+import ru.id61890868.OrganizationDataApi.view.employee.EmployeeView;
+import ru.id61890868.OrganizationDataApi.view.employee.EmployeeViewNoId;
+import ru.id61890868.OrganizationDataApi.view.employee.EmployeeViewWithNames;
 
 import java.util.List;
 
@@ -150,14 +154,4 @@ public class MapperFacadeImpl implements MapperFacade {
         return mapperFactory.getMapperFacade().mapAsList(source, destinationClass);
     }
 
-    @Override
-    public EmployeeView EmplToView(Employee employee) {
-
-        return mapperFactory.getMapperFacade().map(employee, EmployeeView.class);
-    }
-
-    @Override
-    public Employee ViewToEmpl(EmployeeView view) {
-        return null;
-    }
 }

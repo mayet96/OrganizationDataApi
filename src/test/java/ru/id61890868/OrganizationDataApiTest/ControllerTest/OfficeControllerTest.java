@@ -8,7 +8,11 @@ import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.*;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,7 +24,6 @@ import ru.id61890868.OrganizationDataApi.model.mapper.MapperFacadeImpl;
 import ru.id61890868.OrganizationDataApi.view.office.OfficeListFilterView;
 import ru.id61890868.OrganizationDataApi.view.office.OfficeListItemView;
 import ru.id61890868.OrganizationDataApi.view.office.OfficeView;
-import ru.id61890868.OrganizationDataApi.view.office.OfficeViewNoOrgId;
 import ru.id61890868.OrganizationDataApi.view.response.DataView;
 import ru.id61890868.OrganizationDataApi.view.response.ErrorView;
 import ru.id61890868.OrganizationDataApi.view.response.ResultView;
@@ -29,7 +32,10 @@ import java.util.List;
 
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 /**
  * При проведении данных тестов предполагается что в БД есть офис

@@ -1,5 +1,6 @@
 package ru.id61890868.OrganizationDataApi.service.organization;
 
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,7 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.id61890868.OrganizationDataApi.dao.organization.OrganizationDao;
 import ru.id61890868.OrganizationDataApi.model.Organization;
-import ru.id61890868.OrganizationDataApi.model.mapper.*;
+
+import ru.id61890868.OrganizationDataApi.model.mapper.MapperFacade;
 import ru.id61890868.OrganizationDataApi.view.organization.OrganizationListFilterView;
 import ru.id61890868.OrganizationDataApi.view.organization.OrganizationListItemView;
 import ru.id61890868.OrganizationDataApi.view.organization.OrganizationView;
@@ -48,9 +50,9 @@ public class OrganizationServiceImpl implements OrganizationService {
      */
     @Override
     @Transactional
-    public DataView organizations() {
+    public DataView<List<OrganizationView>> organizations() {
         List<Organization> l = dao.all();
-        return new DataView<>(
+        return new DataView<List<OrganizationView>>(
                 mapperFacade.mapAsList(l, OrganizationView.class)
         );
     }
@@ -59,9 +61,9 @@ public class OrganizationServiceImpl implements OrganizationService {
      * {@inheritDoc}
      */
     @Override
-    public DataView getList(@Valid OrganizationListFilterView filter) throws Exception {
+    public DataView<List<OrganizationListItemView>> getList(@Valid OrganizationListFilterView filter) throws Exception {
         Organization _filter = mapperFacade.map(filter, Organization.class);
-        return new DataView<>(
+        return new DataView<List<OrganizationListItemView>>(
                 mapperFacade.mapAsList(dao.list(_filter), OrganizationListItemView.class)
         );
     }
@@ -71,8 +73,8 @@ public class OrganizationServiceImpl implements OrganizationService {
      */
     @Override
     @Transactional
-    public DataView loadById(long id) throws Exception {
-        return new DataView<>(
+    public DataView<OrganizationView> loadById(long id) throws Exception {
+        return new DataView<OrganizationView>(
                 mapperFacade.map(dao.loadById(id), OrganizationView.class)
         );
     }

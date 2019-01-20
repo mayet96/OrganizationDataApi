@@ -1,6 +1,5 @@
 package ru.id61890868.OrganizationDataApi.dao.office;
 
-import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import ru.id61890868.OrganizationDataApi.dao.NotFoundException;
@@ -90,7 +89,7 @@ public class OfficeDaoImpl implements OfficeDao {
         } catch (NotFoundException e) {
             throw e;
         } catch (Exception e) {
-            throw new Exception("incorrect filter");
+            throw new Exception("incorrect filter", e);
         }
 
     }
@@ -104,7 +103,7 @@ public class OfficeDaoImpl implements OfficeDao {
         try {
             em.persist(office);
         } catch (Exception e) {
-            throw new Exception("OfficeDao: on save error");
+            throw new Exception("OfficeDao: on save error", e);
         }
     }
 

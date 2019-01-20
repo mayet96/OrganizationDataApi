@@ -3,12 +3,23 @@ package ru.id61890868.OrganizationDataApi.controller.organization;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import ru.id61890868.OrganizationDataApi.service.organization.OrganizationService;
 import ru.id61890868.OrganizationDataApi.view.organization.OrganizationListFilterView;
+import ru.id61890868.OrganizationDataApi.view.organization.OrganizationListItemView;
 import ru.id61890868.OrganizationDataApi.view.organization.OrganizationView;
 import ru.id61890868.OrganizationDataApi.view.response.DataView;
 import ru.id61890868.OrganizationDataApi.view.response.ResultView;
+
+import java.util.List;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
@@ -27,13 +38,15 @@ public class OrganizationController {
 
     @ApiOperation(value = "Получить список всех организаций", httpMethod = "GET")
     @GetMapping("/")
-    public DataView organizations() {
+    public DataView<List<OrganizationView>> organizations() {
         return orgService.organizations();
     }
 
     @ApiOperation(value = "Получить список всех организаций по фильтру", httpMethod = "POST")
     @PostMapping("/list")
-    public DataView getList(@RequestBody OrganizationListFilterView filter) throws Exception {
+    public DataView<List<OrganizationListItemView>> getList(
+            @RequestBody OrganizationListFilterView filter
+    ) throws Exception {
         return orgService.getList(filter);
     }
 
@@ -46,7 +59,7 @@ public class OrganizationController {
 
     @ApiOperation(value = "Получить организацию по id", httpMethod = "GET")
     @GetMapping("/{id:[\\d]+}")
-    public DataView getOrganziationById(@PathVariable("id") long orgId) throws Exception {
+    public DataView<OrganizationView> getOrganziationById(@PathVariable("id") long orgId) throws Exception {
         return orgService.loadById(orgId);
     }
 

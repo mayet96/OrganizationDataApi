@@ -3,7 +3,6 @@ package ru.id61890868.OrganizationDataApi.dao.docType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import ru.id61890868.OrganizationDataApi.dao.NotFoundException;
-import ru.id61890868.OrganizationDataApi.model.Country;
 import ru.id61890868.OrganizationDataApi.model.DocType;
 
 import javax.persistence.EntityManager;
@@ -31,14 +30,19 @@ public class DocTypeDaoImpl implements DocTypeDao {
     @Override
     public List<DocType> getAll() throws Exception {
 
-        CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
-        CriteriaQuery<DocType> criteriaQuery = criteriaBuilder.createQuery(DocType.class);
-        Root<DocType> root = criteriaQuery.from(DocType.class);
+        try {
+            CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+            CriteriaQuery<DocType> criteriaQuery = criteriaBuilder.createQuery(DocType.class);
+            Root<DocType> root = criteriaQuery.from(DocType.class);
 
-        criteriaQuery.select(root);
+            criteriaQuery.select(root);
 
-        TypedQuery<DocType> query = em.createQuery(criteriaQuery);
-        return query.getResultList();
+            TypedQuery<DocType> query = em.createQuery(criteriaQuery);
+            return query.getResultList();
+        } catch (Exception e) {
+            throw new Exception(" DocTypeDao: error", e);
+        }
+
     }
 
 
@@ -85,7 +89,7 @@ public class DocTypeDaoImpl implements DocTypeDao {
         try {
             em.persist(o);
         } catch (Exception e) {
-            throw new Exception("docTypeDao: on save error");
+            throw new Exception("docTypeDao: on save error", e);
         }
     }
 }

@@ -1,6 +1,13 @@
 package ru.id61890868.OrganizationDataApi.model;
 
-import javax.persistence.*;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Version;
 
 @Entity
 @Table(name = "country")
@@ -17,7 +24,7 @@ public class Country {
     /**
      * Код страны
      */
-    @Column(name = "code", nullable = false)
+    @Column(name = "code", length = 10, nullable = false)
     private String code;
 
     /**

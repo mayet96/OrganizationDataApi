@@ -1,7 +1,15 @@
 package ru.id61890868.OrganizationDataApi.model;
 
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Version;
 
 /**
  * Офис
@@ -37,13 +45,13 @@ public class Office {
     /**
      * Телефон офиса
      */
-    @Column(name = "phone", length = 15, nullable = true)
+    @Column(name = "phone", length = 15)
     private String phone;
 
     /**
      * Действительность
      */
-    @Column(name = "is_active", nullable = true)
+    @Column(name = "is_active")
     private Boolean isActive;
 
     /**

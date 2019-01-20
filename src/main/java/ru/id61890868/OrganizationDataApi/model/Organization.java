@@ -1,7 +1,13 @@
 package ru.id61890868.OrganizationDataApi.model;
 
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Version;
 
 /**
  * Организация
@@ -38,13 +44,13 @@ public class Organization {
     /**
      * ИНН
      */
-    @Column(name = "inn", nullable = false)
+    @Column(name = "inn", length = 50, nullable = false)
     private String inn;
 
     /**
      * КПП
      */
-    @Column(name = "kpp", nullable = false)
+    @Column(name = "kpp", length = 50, nullable = false)
     private String kpp;
 
 

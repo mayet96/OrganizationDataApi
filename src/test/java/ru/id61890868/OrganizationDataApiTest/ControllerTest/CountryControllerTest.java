@@ -27,9 +27,10 @@ import ru.id61890868.OrganizationDataApi.view.response.ResultView;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.containsString;
-import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 /**
  * При проведении данных тестов предполагается что в БД есть страна

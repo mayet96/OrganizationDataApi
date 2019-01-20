@@ -3,12 +3,13 @@ package ru.id61890868.OrganizationDataApi.service.office;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 import ru.id61890868.OrganizationDataApi.view.office.OfficeListFilterView;
+import ru.id61890868.OrganizationDataApi.view.office.OfficeListItemView;
 import ru.id61890868.OrganizationDataApi.view.office.OfficeView;
-import ru.id61890868.OrganizationDataApi.view.office.OfficeViewNoOrgId;
 import ru.id61890868.OrganizationDataApi.view.response.DataView;
 import ru.id61890868.OrganizationDataApi.view.response.ResultView;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Validated
 public interface OfficeService {
@@ -17,9 +18,7 @@ public interface OfficeService {
      * Добавить новый офис в БД
      *
      * @param officeView представление данных нового офиса
-     *
      * @return @ResultView
-     *
      * @throws Exception ошибка при добавлении
      */
     @Transactional
@@ -31,30 +30,28 @@ public interface OfficeService {
      * @return @ResultView
      */
     @Transactional
-    DataView offices();
+    DataView<List<OfficeView>> offices();
 
     /**
      * Получить список офисов
      * по заданному фильтру
      *
      * @param filter представление данных фильтра
-     *
      * @return @DataView<OfficeListOutView>
      * @throws Exception ошибка при получении по фильтру
      */
     @Transactional
-    DataView getList(@Valid OfficeListFilterView filter) throws Exception;
+    DataView<List<OfficeListItemView>> getList(@Valid OfficeListFilterView filter) throws Exception;
 
     /**
      * Получить офис по id
      *
      * @param id идентификатор офиса
-     *
      * @return @DataView
      * @throws Exception ошибка при получении по id
      */
     @Transactional
-    DataView getById(long id) throws Exception;
+    DataView<OfficeView> getById(long id) throws Exception;
 
     @Transactional
     OfficeView loadByIdTest(long id) throws Exception;
@@ -63,7 +60,6 @@ public interface OfficeService {
      * обновить офис
      *
      * @param view представление данных обновляемого офиса
-     *
      * @return @ResultView
      * @throws Exception ошибка при обновлении
      */
